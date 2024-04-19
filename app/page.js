@@ -1,95 +1,45 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+import Hero from "@/components/Hero";
+import AppNav from "@/components/Navbar";
+import LockIcon from "@/icons/LockIcon";
+import { Row, Col, Container } from 'reactstrap'
+import './page.module.css'
+import Content from "@/components/Content";
+import { RightIcon } from "@/icons/RightIcon";
+import { CardIcon } from "@/icons/CardIcon";
 
 export default function Home() {
   return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>app/page.js</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{" "}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
+    <main>
+      <div className="main">
+        <AppNav />
+        <Hero />
+      </div>
+      <Container>
+        <Row style={{marginTop: "100px", marginBottom: "100px"}}>
+          <h1 style={{textAlign: "center", marginBottom: "100px"}}>How <span style={{textDecoration:"underline"}}>We</span> Work</h1>
+          <Col md={6} sm={12} lg={4} content="center">
+            <Content 
+              icon={<LockIcon />} 
+              title="SIGN UP" 
+              body="Create a quick account. Joining ZimbaCash couldn't be more simple, just enter your email and password." 
             />
-          </a>
-        </div>
-      </div>
-
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore starter templates for Next.js.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
+          </Col>
+          <Col md={6} sm={12} lg={4} content="center">
+            <Content
+              icon={<RightIcon />}
+              title="SUBMIT APPLICATION"
+              body="Complete a simple, secure 3 to 5 min online application, no paperwork or phone calls - and get a decision on minutes."
+            />
+          </Col>
+          <Col md={6} sm={12} lg={4} content="center">
+            <Content
+              icon={<CardIcon />}
+              title="GET YOUR MONEY"
+              body="Receive your money within minutes. We offer a number of different payment options to suit all clients."
+            />
+          </Col>
+        </Row>
+      </Container>
     </main>
   );
 }
