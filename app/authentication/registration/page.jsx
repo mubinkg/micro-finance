@@ -5,7 +5,7 @@ export default function Page() {
     return (
         <div>
             <hr />
-            <h5 style={{ textTransform: "uppercase", textAlign: "center", color: "#62d0ab" }}>Loan app</h5>
+            <h5 style={{ textTransform: "uppercase", textAlign: "center", color: "#62d0ab" }}>Zimba Cash</h5>
             <hr />
             <div style={{
                 display: "flex",
@@ -14,8 +14,7 @@ export default function Page() {
                 alignContent: "center",
                 height: "90vh"
             }}>
-                <div className='container' style={{ maxWidth: "500px", display: "flex", flexDirection: "column", justifyContent: "center", alignContent: "center", }}>
-                    <p className='my-2'>Emergency Loans: Life happens, use borrowed money wisely</p>
+                <div style={{ width: "400px", display: "flex", flexDirection: "column", justifyContent: "center", alignContent: "center", }}>
                     <h2 style={{ textAlign: "center", textTransform: "uppercase" }}>Registration</h2>
                     <div style={{ width: "100%", marginTop: "40px" }} >
                         <Label for="exampleEmail">
