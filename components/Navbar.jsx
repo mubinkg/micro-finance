@@ -23,7 +23,7 @@ function AppNav(args) {
   return (
     <div>
       <Navbar {...args} style={{color: "white"}}>
-        <NavbarBrand href="/">ZIMBA CASH</NavbarBrand>
+        <NavbarBrand href="/"><span style={{color:"white"}}>ZIMBA</span> <span style={{color:"#62d0ab"}}>CASH</span></NavbarBrand>
         <NavbarToggler onClick={toggle} style={{color:"white", background:"white"}}/>
         <Collapse isOpen={isOpen} navbar>
           <Nav className="me-auto" navbar style={{color: "white"}}>
