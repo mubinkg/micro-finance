@@ -1,6 +1,6 @@
 'use client'
 import { InputLable } from '@/components/InputLabel'
-import { Input, Label, Button } from 'reactstrap'
+import { Input, Label, Button , Row, Col} from 'reactstrap'
 
 export default function Page() {
     return (
@@ -15,12 +15,12 @@ export default function Page() {
                 alignContent: "center",
                 minHeight: "90vh"
             }}>
-                <div className='container' style={{ maxWidth: "500px", display: "flex", flexDirection: "column", justifyContent: "center", alignContent: "center", }}>
+                <div className='container' style={{ maxWidth: "800px", display: "flex", flexDirection: "column", justifyContent: "center", alignContent: "center", }}>
                     <p className='my-2'>Emergency Loans: Life happens, use borrowed money wisely</p>
-                    <div className='mb-2' style={{ width: "100%", display: "flex", gap: "10px" }}>
-                        <InputLable label="FIRST NAME" placeholder="First name" />
-                        <InputLable label="LAST NAME" placeholder="Last name" />
-                    </div>
+                    <Row>
+                        <Col lg={6} md={12}><InputLable label="FIRST NAME" placeholder="First name" /></Col>
+                        <Col lg={6} md={12}><InputLable label="LAST NAME" placeholder="Last name" /></Col>
+                    </Row>
                     <InputLable label="CURRENT ADDRESS" placeholder="Current address" />
                     <div style={{ width: "100%", marginTop: "10px" }} >
                         <Input placeholder='Address line 2' />
