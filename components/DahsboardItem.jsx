@@ -1,6 +1,6 @@
 import RightArrow from "@/icons/Arrow";
 
-export function DashboardItem({icon, title}) {
+export function DashboardItem({icon, title, url}) {
     return (
         <div style={{ border: "2px solid #45148f" }}>
             <div style={{ backgroundColor: "#45148f", display: "flex", justifyContent: "space-between", alignItems: "center" }} className='p-3'>
@@ -12,7 +12,7 @@ export function DashboardItem({icon, title}) {
             </div>
             <div style={{ display: "flex", padding: "10px", justifyContent: "space-between", alignItems: "center" }}>
                 <h5 style={{ fontWeight: "bolder" }}>View More</h5>
-                <RightArrow />
+                <RightArrow url={url}/>
             </div>
         </div>
     )

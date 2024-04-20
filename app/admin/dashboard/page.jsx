@@ -12,16 +12,16 @@ export default function Page() {
             <hr />
             <Row className='g-4'>
                 <Col lg={3}>
-                    <DashboardItem title="Loan Applications" icon={<DocumentIcon/>}/>
+                    <DashboardItem title="Loan Applications" icon={<DocumentIcon/>} url='/admin/dashboard/'/>
                 </Col>
                 <Col lg={3}>
-                    <DashboardItem title="Applicants/User" icon={<GroupIcon/>}/>
+                    <DashboardItem title="Applicants/User" icon={<GroupIcon/>} url='/admin/applicants/'/>
                 </Col>
                 <Col lg={3}>
-                    <DashboardItem title="History" icon={<GroupIcon/>}/>
+                    <DashboardItem title="History" icon={<GroupIcon/>} url='/admin/history/'/>
                 </Col>
                 <Col lg={3}>
-                    <DashboardItem title="Bank Details" icon={<CartIcon/>}/>
+                    <DashboardItem title="Bank Details" icon={<CartIcon/>} url="#"/>
                 </Col>
             </Row>
             <DataTable/>

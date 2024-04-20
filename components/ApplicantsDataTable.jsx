@@ -1,6 +1,8 @@
+'Date, First Name, Last Name, phone, Email, Last Active Date'
+
 import { Table } from 'reactstrap'
 
-export default function DataTable() {
+export default function ApplicantsDataTable() {
     return (
         <Table hover className='mt-4'>
             <thead>
@@ -15,13 +17,10 @@ export default function DataTable() {
                         Last Name
                     </th>
                     <th>
-                        ISSN
+                        Email
                     </th>
                     <th>
-                        Amount
-                    </th>
-                    <th>
-                        Status
+                        Last Active Date
                     </th>
                 </tr>
             </thead>
@@ -37,13 +36,10 @@ export default function DataTable() {
                         Khan
                     </td>
                     <td>
-                        222-445-3437
+                        user@gmail.com
                     </td>
                     <td>
-                        $120
-                    </td>
-                    <td>
-                        active
+                        2/2/1998
                     </td>
                 </tr>
                 <tr>
@@ -57,13 +53,10 @@ export default function DataTable() {
                         Khan
                     </td>
                     <td>
-                        222-445-3437
+                        user@gmail.com
                     </td>
                     <td>
-                        $120
-                    </td>
-                    <td>
-                        active
+                        2/2/1998
                     </td>
                 </tr>
                 <tr>
@@ -77,13 +70,10 @@ export default function DataTable() {
                         Khan
                     </td>
                     <td>
-                        222-445-3437
+                        user@gmail.com
                     </td>
                     <td>
-                        $120
-                    </td>
-                    <td>
-                        active
+                        2/2/1998
                     </td>
                 </tr>
                 <tr>
@@ -97,13 +87,10 @@ export default function DataTable() {
                         Khan
                     </td>
                     <td>
-                        222-445-3437
+                        user@gmail.com
                     </td>
                     <td>
-                        $120
-                    </td>
-                    <td>
-                        active
+                        2/2/1998
                     </td>
                 </tr>
                 <tr>
@@ -117,13 +104,10 @@ export default function DataTable() {
                         Khan
                     </td>
                     <td>
-                        222-445-3437
+                        user@gmail.com
                     </td>
                     <td>
-                        $120
-                    </td>
-                    <td>
-                        active
+                        2/2/1998
                     </td>
                 </tr>
                 <tr>
@@ -137,13 +121,10 @@ export default function DataTable() {
                         Khan
                     </td>
                     <td>
-                        222-445-3437
+                        user@gmail.com
                     </td>
                     <td>
-                        $120
-                    </td>
-                    <td>
-                        active
+                        2/2/1998
                     </td>
                 </tr>
                 <tr>
@@ -157,13 +138,10 @@ export default function DataTable() {
                         Khan
                     </td>
                     <td>
-                        222-445-3437
+                        user@gmail.com
                     </td>
                     <td>
-                        $120
-                    </td>
-                    <td>
-                        active
+                        2/2/1998
                     </td>
                 </tr>
                 <tr>
@@ -177,13 +155,10 @@ export default function DataTable() {
                         Khan
                     </td>
                     <td>
-                        222-445-3437
+                        user@gmail.com
                     </td>
                     <td>
-                        $120
-                    </td>
-                    <td>
-                        active
+                        2/2/1998
                     </td>
                 </tr>
             </tbody>

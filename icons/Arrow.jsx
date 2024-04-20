@@ -1,4 +1,10 @@
-export default function RightArrow() {
+'use client'
+
+import { useRouter } from "next/navigation"
+
+export default function RightArrow({url}) {
+    const router = useRouter()
+
     return (
         <svg
             height="20px"
@@ -10,6 +16,8 @@ export default function RightArrow() {
             viewBox="0 0 512 512"
             xmlSpace="preserve"
             fill="#000000"
+            onClick={()=>router.push(url)}
+            style={{cursor: "pointer"}}
         >
             <g id="SVGRepo_bgCarrier" strokeWidth={0} />
             <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round" />
