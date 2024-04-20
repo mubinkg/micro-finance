@@ -1,5 +1,7 @@
 'use client'
 import { Input, Label, Button } from 'reactstrap'
+import Swal from 'sweetalert2'
+
 
 export default function Page() {
     return (
@@ -22,7 +24,11 @@ export default function Page() {
                         </Label>
                         <Input />
                     </div>
-                    <Button style={{ background: "#68069d" }} className='mt-4'>SIGN UP</Button>
+                    <Button style={{ background: "#68069d" }} className='mt-4' onClick={()=>Swal.fire({
+                        title: "Registration",
+                        text: "Please check your email to complete the sign up process. Check spam folder, if needed. Thank you!",
+                        icon: "success"
+                    })}>SIGN UP</Button>
                 </div>
             </div>
         </div>
