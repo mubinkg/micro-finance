@@ -1,6 +1,6 @@
 'use client'
 import { InputLable } from '@/components/InputLabel'
-import { Input, Label, Button , Row, Col} from 'reactstrap'
+import { Input, Label, Button, Row, Col } from 'reactstrap'
 
 export default function Page() {
     return (
@@ -49,6 +49,10 @@ export default function Page() {
                             <Button style={{ background: "#62d0ab", border: 'none', outline: "none", borderRadius: "50px" }}>Back Side</Button>
                         </div>
                     </div>
+                    <div className='mt-4' style={{ width: "100%", display: "flex", gap: "10px", justifyContent: "space-between", alignContent: "center", alignItems: "center" }}>
+                        <Label>RECENT PAYSTUBS</Label>
+                        <Button style={{ background: "#62d0ab", border: 'none', outline: "none", borderRadius: "50px" }}>Choose a file</Button>
+                    </div>
                     <Label className='my-2'>REFERENCE 1</Label>
                     <div style={{ width: "100%", display: "flex", gap: "10px" }}>
                         <Input placeholder="First name" />
@@ -71,7 +75,28 @@ export default function Page() {
                         <Input placeholder="0" />
                         <Button style={{ background: "#62d0ab", border: 'none', outline: "none", borderRadius: "50px" }}>11/04/2024</Button>
                     </div>
-                    <div className='mt-3' style={{display: 'flex', gap: "9px", justifyContent: "center"}}>
+                    <Label className='my-2 text-center mt-2'>CHOOSE HOW WE PAY</Label>
+                    <div style={{ width: "100%", display: "flex", flexDirection: "column" }}>
+                        <div style={{ display: 'flex', gap: "9px" }}>
+                            <Input
+                                type="checkbox"
+                                onChange={(e) => console.log(e.target.checked)}
+                            />
+                            <p>Mobile Banking (enter email or phone)</p>
+                        </div>
+                        <div style={{ display: 'flex', gap: "9px" }}>
+                            <Input
+                                type="checkbox"
+                                onChange={(e) => console.log(e.target.checked)}
+                            />
+                            <p>Cash App (enter $cashtag or username)</p>
+                        </div>
+                        <Input
+                            placeholder='Enter details of your prefered payment method'
+                            onChange={(e) => console.log(e.target.checked)}
+                        />
+                    </div>
+                    <div className='mt-3' style={{ display: 'flex', gap: "9px", justifyContent: "center" }}>
                         <Input
                             type="checkbox"
                             onChange={(e) => console.log(e.target.checked)}

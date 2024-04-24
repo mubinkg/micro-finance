@@ -1,0 +1,20 @@
+server {
+  listen 80; # Adjust if using a different port
+  server_name your_domain_name www.your_domain_name; # Replace with your domain
+
+  # Serve static assets directly from the Next.js build folder
+  location / {
+    root /path/to/your/nextjs/build; # Replace with your build folder path
+    index index.html index.htm;
+    try_files $uri $uri/ /index.html;
+  }
+
+  # Proxy all other requests to the Next.js server running on port 3000 (default)
+  location / {
+    proxy_pass http://localhost:3000; # Adjust port if your Next.js server runs on a different port
+    proxy_set_header Host $host;
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_cache_bypass $http_upgrade;
+  }
+}
