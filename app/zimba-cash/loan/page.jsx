@@ -39,7 +39,7 @@ export default function Page() {
                     <InputLable label="DRIVER'S LICENSE/ID" placeholder="Driver's lisence/id" />
                     <InputLable label="SSN" placeholder="XXX-XXX-XXX" />
                     <div className='mt-4' style={{ width: "100%", display: "flex", gap: "10px", justifyContent: "space-between", alignContent: "center", alignItems: "center" }}>
-                        <Label>DRIVER'S LICENSE / ID</Label>
+                        <Label>DRIVERS LICENSE / ID</Label>
                         <Button style={{ background: "#62d0ab", border: 'none', outline: "none", borderRadius: "50px" }}>Choose a file</Button>
                     </div>
                     <div className='mt-4' style={{ width: "100%", display: "flex", gap: "10px", justifyContent: "space-between", alignContent: "center", alignItems: "center" }}>
