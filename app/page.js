@@ -1,11 +1,11 @@
-import Hero from "@/components/Hero";
-import AppNav from "@/components/Navbar";
-import LockIcon from "@/icons/LockIcon";
+import Hero from "../components/Hero";
+import AppNav from "../components/Navbar";
+import LockIcon from "../icons/LockIcon";
 import { Row, Col, Container } from 'reactstrap'
 import './page.module.css'
-import Content from "@/components/Content";
-import { RightIcon } from "@/icons/RightIcon";
-import { CardIcon } from "@/icons/CardIcon";
+import Content from "../components/Content";
+import { RightIcon } from "../icons/RightIcon";
+import { CardIcon } from "../icons/CardIcon";
 
 export default function Home() {
   return (

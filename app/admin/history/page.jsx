@@ -1,7 +1,6 @@
-import ApplicantsDataTable from '@/components/ApplicantsDataTable'
-import { DashboardItem } from '@/components/DahsboardItem'
-import HistoryItem from '@/components/HistoryItem'
-import DocumentIcon from '@/icons/DocumentIcon'
+import { DashboardItem } from '../../../components/DahsboardItem'
+import HistoryItem from '../../../components/HistoryItem'
+import DocumentIcon from '../../../icons/DocumentIcon'
 import { Container, Row, Col } from 'reactstrap'
 
 export default function Page() {

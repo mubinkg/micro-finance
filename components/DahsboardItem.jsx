@@ -1,4 +1,4 @@
-import RightArrow from "@/icons/Arrow";
+import RightArrow from "../icons/Arrow";
 
 export function DashboardItem({icon, title, url}) {
     return (

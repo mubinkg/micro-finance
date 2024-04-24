@@ -1,8 +1,8 @@
-import { DashboardItem } from '@/components/DahsboardItem'
-import DataTable from '@/components/DataTable'
-import CartIcon from '@/icons/CartIcon'
-import DocumentIcon from '@/icons/DocumentIcon'
-import GroupIcon from '@/icons/GroupIcon'
+import { DashboardItem } from '../../../components/DahsboardItem'
+import DataTable from '../../../components/DataTable'
+import CartIcon from '../../../icons/CartIcon'
+import DocumentIcon from '../../../icons/DocumentIcon'
+import GroupIcon from '../../../icons/GroupIcon'
 import { Container, Row, Col } from 'reactstrap'
 
 export default function Page() {

@@ -1,5 +1,5 @@
 'use client'
-import { InputLable } from '@/components/InputLabel'
+import { InputLable } from '../../../components/InputLabel'
 import { Input, Label, Button, Row, Col } from 'reactstrap'
 
 export default function Page() {
