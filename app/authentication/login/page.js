@@ -1,7 +1,16 @@
 'use client'
+import { useState } from 'react'
 import { Input, Label, Button } from 'reactstrap'
 
 export default function Page() {
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+
+    const signinHandler = ()=>{
+        setPassword('')
+        setEmail('')
+    }
+
     return (
         <div>
             <hr/>
@@ -14,21 +23,21 @@ export default function Page() {
                 alignContent: "center",
                 height: "90vh"
             }}>
-                <div style={{ width: "400px", display: "flex", flexDirection: "column", justifyContent: "center", alignContent: "center", }}>
+                <div style={{ width: "360px", display: "flex", flexDirection: "column", justifyContent: "center", alignContent: "center", }}>
                     <h2 style={{ textAlign: "center", textTransform: "uppercase" }}>log in</h2>
                     <div style={{ width: "100%", marginTop: "40px" }} >
-                        <Label for="exampleEmail">
+                        <p for="exampleEmail" className='text-center'>
                             EMAIL
-                        </Label>
-                        <Input />
+                        </p>
+                        <Input value={email} onChange={(e)=>setEmail(e.target.value)}/>
                     </div>
-                    <div style={{ width: "100%", marginTop: "10px" }} >
-                        <Label for="exampleEmail">
+                    <div style={{ width: "100%", marginTop: "20px" }} >
+                        <p for="exampleEmail" className='text-center'>
                             PASSWORD
-                        </Label>
-                        <Input />
+                        </p>
+                        <Input value={password} onChange={(e)=>setPassword(e.target.value)}/>
                     </div>
-                    <Button style={{ background: "#68069d" }} className='mt-4'>SIGN IN</Button>
+                    <Button onClick={signinHandler} style={{ background: "#68069d" }} className='mt-4'>SIGN IN</Button>
                     <div style={{ display: "flex", justifyContent: "space-between", marginTop: "5px" }}>
                         <p>Forget your password?</p>
                         <p>Sign Up</p>

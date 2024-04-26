@@ -1,4 +1,6 @@
 
+'use client'
+
 import { Table } from 'reactstrap'
 import {getDateTime} from '../utils/dateTime'
 
@@ -44,9 +46,12 @@ export default function ApplicantsDataTable({ data }) {
                                 {getDateTime(d?.updatedAt?.toString())}
                             </td>
                         </tr>
-                    )):"No Data Found"
+                    )):""
                 }
             </tbody>
+            {
+                data?"": <p>No Data Found.</p>
+            }
         </Table>
     )
 }
