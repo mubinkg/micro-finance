@@ -1,8 +1,8 @@
-'Date, First Name, Last Name, phone, Email, Last Active Date'
 
 import { Table } from 'reactstrap'
+import {getDateTime} from '../utils/dateTime'
 
-export default function ApplicantsDataTable() {
+export default function ApplicantsDataTable({ data }) {
     return (
         <Table hover className='mt-4'>
             <thead>
@@ -25,142 +25,27 @@ export default function ApplicantsDataTable() {
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>
-                        02/02/1999
-                    </td>
-                    <td>
-                        Mark
-                    </td>
-                    <td>
-                        Khan
-                    </td>
-                    <td>
-                        user@gmail.com
-                    </td>
-                    <td>
-                        2/2/1998
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        02/02/1999
-                    </td>
-                    <td>
-                        Mark
-                    </td>
-                    <td>
-                        Khan
-                    </td>
-                    <td>
-                        user@gmail.com
-                    </td>
-                    <td>
-                        2/2/1998
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        02/02/1999
-                    </td>
-                    <td>
-                        Mark
-                    </td>
-                    <td>
-                        Khan
-                    </td>
-                    <td>
-                        user@gmail.com
-                    </td>
-                    <td>
-                        2/2/1998
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        02/02/1999
-                    </td>
-                    <td>
-                        Mark
-                    </td>
-                    <td>
-                        Khan
-                    </td>
-                    <td>
-                        user@gmail.com
-                    </td>
-                    <td>
-                        2/2/1998
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        02/02/1999
-                    </td>
-                    <td>
-                        Mark
-                    </td>
-                    <td>
-                        Khan
-                    </td>
-                    <td>
-                        user@gmail.com
-                    </td>
-                    <td>
-                        2/2/1998
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        02/02/1999
-                    </td>
-                    <td>
-                        Mark
-                    </td>
-                    <td>
-                        Khan
-                    </td>
-                    <td>
-                        user@gmail.com
-                    </td>
-                    <td>
-                        2/2/1998
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        02/02/1999
-                    </td>
-                    <td>
-                        Mark
-                    </td>
-                    <td>
-                        Khan
-                    </td>
-                    <td>
-                        user@gmail.com
-                    </td>
-                    <td>
-                        2/2/1998
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        02/02/1999
-                    </td>
-                    <td>
-                        Mark
-                    </td>
-                    <td>
-                        Khan
-                    </td>
-                    <td>
-                        user@gmail.com
-                    </td>
-                    <td>
-                        2/2/1998
-                    </td>
-                </tr>
+                {
+                    data && data?.length ? data.map(d => (
+                        <tr key={d?._id}>
+                            <td>
+                                {getDateTime(d?.createdAt?.toString())}
+                            </td>
+                            <td>
+                                {d?.firstName}
+                            </td>
+                            <td>
+                                {d?.lastName}
+                            </td>
+                            <td>
+                                {d?.email}
+                            </td>
+                            <td>
+                                {getDateTime(d?.updatedAt?.toString())}
+                            </td>
+                        </tr>
+                    )):"No Data Found"
+                }
             </tbody>
         </Table>
     )
