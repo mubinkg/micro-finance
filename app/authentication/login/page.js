@@ -1,14 +1,20 @@
 'use client'
 import { useState } from 'react'
 import { Input, Label, Button } from 'reactstrap'
+import {postData} from '../../../utils/axiosUtils'
 
 export default function Page() {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
     const signinHandler = ()=>{
-        setPassword('')
-        setEmail('')
+        postData('user/signin', {email, password}).then(res=>{
+            console.log(res)
+            setPassword('')
+            setEmail('')
+        }).catch(err=>{
+            console.log(err)
+        })
     }
 
     return (
