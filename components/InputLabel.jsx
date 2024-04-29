@@ -4,7 +4,7 @@ import { Input, Label } from 'reactstrap'
 export function InputLable({label, placeholder}) {
     return (
         <div className='mt-2'>
-            <Label for="exampleEmail">
+            <Label>
                 {label}
             </Label>
             <Input placeholder={placeholder} />

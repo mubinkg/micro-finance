@@ -56,19 +56,19 @@ export default function Page() {
                 <div style={{ width: "360px", display: "flex", flexDirection: "column", justifyContent: "center", alignContent: "center", }}>
                     <h2 style={{ textAlign: "center", textTransform: "uppercase" }}>Registration</h2>
                     <div style={{ width: "100%", marginTop: "40px" }} >
-                        <p for="exampleEmail" className='text-center'>
+                        <p  className='text-center'>
                             First Name
                         </p>
                         <Input value={firstName} onChange={(e) => setFirstName(e.target.value)} />
                     </div>
                     <div style={{ width: "100%", marginTop: '20px' }} >
-                        <p for="exampleEmail" className='text-center'>
+                        <p className='text-center'>
                             Last Name
                         </p>
                         <Input value={lastName} onChange={(e) => setLastName(e.target.value)} />
                     </div>
                     <div style={{ width: "100%", marginTop: '20px' }} >
-                        <p for="exampleEmail" className='text-center'>
+                        <p  className='text-center'>
                             Email
                         </p>
                         <Input value={email} onChange={(e) => setEmail(e.target.value)} />

@@ -28,7 +28,7 @@ export default function Home() {
           </Col>
           <Col md={6} sm={12} lg={4} content="center">
             <Content
-              url="/authentication/login"
+              url="/zimba-cash/loan"
               icon={<RightIcon />}
               title="SUBMIT APPLICATION"
               body="Complete a simple, secure 3 to 5 min online application, no paperwork or phone calls - and get a decision on minutes."
