@@ -3,6 +3,7 @@ import { useState } from 'react'
 import { Input, Label, Button } from 'reactstrap'
 import {postData} from '../../../utils/axiosUtils'
 import { useRouter } from 'next/navigation'
+import {setItem} from '../../../utils/storageUtils'
 
 export default function Page() {
     const [email, setEmail] = useState('')
@@ -11,6 +12,7 @@ export default function Page() {
 
     const signinHandler = ()=>{
         postData('user/signin', {email, password}).then(res=>{
+            setItem('user', JSON.stringify(res.user))
             router.push('/zimba-cash/loan')
             setPassword('')
             setEmail('')
@@ -34,13 +36,13 @@ export default function Page() {
                 <div style={{ width: "360px", display: "flex", flexDirection: "column", justifyContent: "center", alignContent: "center", }}>
                     <h2 style={{ textAlign: "center", textTransform: "uppercase" }}>log in</h2>
                     <div style={{ width: "100%", marginTop: "40px" }} >
-                        <p for="exampleEmail" className='text-center'>
+                        <p  className='text-center'>
                             EMAIL
                         </p>
                         <Input value={email} onChange={(e)=>setEmail(e.target.value)}/>
                     </div>
                     <div style={{ width: "100%", marginTop: "20px" }} >
-                        <p for="exampleEmail" className='text-center'>
+                        <p className='text-center'>
                             PASSWORD
                         </p>
                         <Input value={password} onChange={(e)=>setPassword(e.target.value)}/>
