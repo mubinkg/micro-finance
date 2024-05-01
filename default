@@ -2,8 +2,8 @@ server {
     listen 80;
     server_name kocart.com; # Set your domain or IP address
 
-    location /api/graphql {
-        proxy_pass http://localhost:3001; # Forward requests to your Nest.js application
+    location /api {
+        proxy_pass http://localhost:3001/; # Forward requests to your Nest.js application
         proxy_http_version 1.1;
         proxy_set_header Upgrade $http_upgrade;
         proxy_set_header Connection 'upgrade';
