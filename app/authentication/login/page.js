@@ -5,7 +5,7 @@ import {postData} from '../../../utils/axiosUtils'
 import { useRouter } from 'next/navigation'
 import {setItem} from '../../../utils/storageUtils'
 
-const prod_url = "http://35.208.204.126/api/graphql/user/signin"
+const prod_url = "http://16.171.47.81/api/graphql/user/signin"
 const local_url = "http://localhost:3000/api/login"
 
 export default function Page() {
