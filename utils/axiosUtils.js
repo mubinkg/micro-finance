@@ -1,7 +1,7 @@
 import axios from "axios"
 
 const LOCAL_SERVER = 'http://localhost:3001'
-const PROD_SERVER = 'http://localhost:3001'
+const PROD_SERVER = 'http://16.171.47.81/api/graphql'
 const BASE_URL = PROD_SERVER
 
 const publicRequest = axios.create({ baseURL: BASE_URL });
