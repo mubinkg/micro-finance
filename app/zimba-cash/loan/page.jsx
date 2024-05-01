@@ -158,7 +158,7 @@ export default function Page() {
                             control={control}
                             name='driverLicense'
                             render={({ field }) => (
-                                <Input {...field} placeholder="Driver's lisence/id" />
+                                <Input {...field} placeholder="Drivers lisence/id" />
                             )}
                         />
                     </div>
