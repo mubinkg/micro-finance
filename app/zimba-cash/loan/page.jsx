@@ -1,22 +1,41 @@
 'use client'
 import { useForm, Controller } from 'react-hook-form'
-import { InputLable } from '../../../components/InputLabel'
 import { Input, Label, Button, Row, Col } from 'reactstrap'
+import {postData} from '../../../utils/axiosUtils'
 
 export default function Page() {
-    const { handleSubmit, watch, setValue, control } = useForm({
+    const { handleSubmit, register, control, watch } = useForm({
         defaultValues: {
             firstName: "",
             lastName: "",
             currentAddress: "",
             city: '',
             state: "",
-            zipCode: ""
+            zipCode: "",
+            cellPhone: "",
+            email: "",
+            driverLicense: "",
+            ssn: "",
+            referenceOneFirstName: ""
         }
     })
 
     function submitHandler(values) {
-        console.log(values)
+        const formData = new FormData()
+
+        for (const [key, value] of Object.entries(values)) {
+            if(key === 'driverLicenseImage' || key === 'checkFront' || key === "checkBack" || key === "paystubs"){
+                formData.append(key,value[0])
+            }else{
+                formData.append(key, value)
+            }
+        }
+        formData.append('paymentMethod', "TEst")
+        postData('loan', formData).then(res=>{
+            console.log(res)
+        }).catch(err=>{
+            console.log(err)
+        })
     }
 
     return (
@@ -61,7 +80,7 @@ export default function Page() {
                     </Row>
                     <div className='mt-2'>
                         <Label>
-                        CURRENT ADDRESS
+                            CURRENT ADDRESS
                         </Label>
                         <Controller
                             control={control}
@@ -107,45 +126,153 @@ export default function Page() {
                             )}
                         />
                     </div>
-                    <InputLable label="CELL PHONE" placeholder="Cell phone" />
-                    <InputLable label="Email" placeholder="Email address" />
-                    <InputLable label="DRIVER'S LICENSE/ID" placeholder="Driver's lisence/id" />
-                    <InputLable label="SSN" placeholder="XXX-XXX-XXX" />
-                    <div className='mt-4' style={{ width: "100%", display: "flex", gap: "10px", justifyContent: "space-between", alignContent: "center", alignItems: "center" }}>
-                        <Label>DRIVERS LICENSE / ID</Label>
-                        <Button style={{ background: "#62d0ab", border: 'none', outline: "none", borderRadius: "50px" }}>Choose a file</Button>
+                    <div className='mt-2'>
+                        <Label>
+                            CELL PHONE
+                        </Label>
+                        <Controller
+                            control={control}
+                            name='cellPhone'
+                            render={({ field }) => (
+                                <Input {...field} placeholder='Cell phone' />
+                            )}
+                        />
+                    </div>
+                    <div className='mt-2'>
+                        <Label>
+                            Email
+                        </Label>
+                        <Controller
+                            control={control}
+                            name='email'
+                            render={({ field }) => (
+                                <Input {...field} placeholder='Email address' />
+                            )}
+                        />
+                    </div>
+                    <div className='mt-2'>
+                        <Label>
+                            DRIVER'S LICENSE/ID
+                        </Label>
+                        <Controller
+                            control={control}
+                            name='driverLicense'
+                            render={({ field }) => (
+                                <Input {...field} placeholder="Driver's lisence/id" />
+                            )}
+                        />
+                    </div>
+                    <div className='mt-2'>
+                        <Label>
+                            SSN
+                        </Label>
+                        <Controller
+                            control={control}
+                            name='ssn'
+                            render={({ field }) => (
+                                <Input {...field} placeholder="XXX-XXX-XXX" />
+                            )}
+                        />
                     </div>
                     <div className='mt-4' style={{ width: "100%", display: "flex", gap: "10px", justifyContent: "space-between", alignContent: "center", alignItems: "center" }}>
+                        <Label>DRIVERS LICENSE / ID</Label>
+                        <label style={{ cursor: "pointer", padding: '5px 10px', color: "white", background: "#62d0ab", border: 'none', outline: "none", borderRadius: "50px" }}>
+                            <input type="file" {...register('driverLicenseImage')} style={{ display: 'none' }} />
+                            Choose a File
+                        </label>
+                        {watch('driverLicenseImage')?.length ? <img width={250} height="auto"  src={URL.createObjectURL(watch('driverLicenseImage')[0])}/> : ""}
+                    </div>
+                    <div className='mt-4' style={{ width: "100%", display: "flex", justifyContent: "space-between", alignContent: "center", alignItems: "center" }}>
                         <Label>CHECK</Label>
                         <div style={{ display: 'flex', gap: "10px" }}>
-                            <Button style={{ background: "#62d0ab", border: 'none', outline: "none", borderRadius: "50px" }}>Front Side</Button>
-                            <Button style={{ background: "#62d0ab", border: 'none', outline: "none", borderRadius: "50px" }}>Back Side</Button>
+                            <label style={{ cursor: "pointer", padding: '5px 10px', color: "white", background: "#62d0ab", border: 'none', outline: "none", borderRadius: "50px" }}>
+                                <input {...register('checkFront')} type="file" style={{ display: 'none' }} />
+                                Front Side
+                            </label>
+                            <label style={{ cursor: "pointer", padding: '5px 10px', color: "white", background: "#62d0ab", border: 'none', outline: "none", borderRadius: "50px" }}>
+                                <input {...register('checkBack')} type="file" style={{ display: 'none' }} />
+                                Back Side
+                            </label>
                         </div>
+                        {watch('checkFront')?.length ? <img width={150} height="auto"  src={URL.createObjectURL(watch('checkFront')[0])}/> : ""}
+                        {watch('checkBack')?.length ? <img width={150} height="auto"  src={URL.createObjectURL(watch('checkBack')[0])}/> : ""}
                     </div>
                     <div className='mt-4' style={{ width: "100%", display: "flex", gap: "10px", justifyContent: "space-between", alignContent: "center", alignItems: "center" }}>
                         <Label>RECENT PAYSTUBS</Label>
-                        <Button style={{ background: "#62d0ab", border: 'none', outline: "none", borderRadius: "50px" }}>Choose a file</Button>
+                        <label style={{ cursor: "pointer", padding: '5px 10px', color: "white", background: "#62d0ab", border: 'none', outline: "none", borderRadius: "50px" }}>
+                            <input {...register('paystubs')} type="file" style={{ display: 'none' }} />
+                            Choose a File
+                        </label>
+                        {watch('paystubs')?.length ? <img width={250} height="auto"  src={URL.createObjectURL(watch('paystubs')[0])}/> : ""}
                     </div>
                     <Label className='my-2'>REFERENCE 1</Label>
                     <div style={{ width: "100%", display: "flex", gap: "10px" }}>
-                        <Input placeholder="First name" />
-                        <Input placeholder="Last name" />
-                        <Input placeholder="Phone" />
+                        <Controller
+                            control={control}
+                            name='referenceOneFirstName'
+                            render={({ field }) => (
+                                <Input {...field} placeholder="First Name" />
+                            )}
+                        />
+                        <Controller
+                            control={control}
+                            name='referenceOneLastName'
+                            render={({ field }) => (
+                                <Input {...field} placeholder="Last Name" />
+                            )}
+                        />
+                        <Controller
+                            control={control}
+                            name='referenceOnePhone'
+                            render={({ field }) => (
+                                <Input {...field} placeholder="Phone" />
+                            )}
+                        />
                     </div>
                     <Label className='my-2'>REFERENCE 2</Label>
                     <div style={{ width: "100%", display: "flex", gap: "10px" }}>
-                        <Input placeholder="First name" />
-                        <Input placeholder="Last name" />
-                        <Input placeholder="Phone" />
+                        <Controller
+                            control={control}
+                            name='referenceTwoFirstName'
+                            render={({ field }) => (
+                                <Input {...field} placeholder="First Name" />
+                            )}
+                        />
+                        <Controller
+                            control={control}
+                            name='referenceTwoLastName'
+                            render={({ field }) => (
+                                <Input {...field} placeholder="Last Name" />
+                            )}
+                        />
+                        <Controller
+                            control={control}
+                            name='referenceTwoPhone'
+                            render={({ field }) => (
+                                <Input {...field} placeholder="Phone" />
+                            )}
+                        />
                     </div>
                     <Label className='my-2'>AMOUNT REQUESTED</Label>
                     <div style={{ width: "100%", display: "flex", gap: "10px" }}>
-                        <Input placeholder="0" />
+                        <Controller
+                            control={control}
+                            name='amountRequested'
+                            render={({ field }) => (
+                                <Input {...field} placeholder="0" />
+                            )}
+                        />
                         <Button style={{ background: "#62d0ab", border: 'none', outline: "none", borderRadius: "50px" }}>11/04/2024</Button>
                     </div>
                     <Label className='my-2'>AMOUNT DUE</Label>
                     <div style={{ width: "100%", display: "flex", gap: "10px" }}>
-                        <Input placeholder="0" />
+                        <Controller
+                            control={control}
+                            name='amountDue'
+                            render={({ field }) => (
+                                <Input {...field} placeholder="0" />
+                            )}
+                        />
                         <Button style={{ background: "#62d0ab", border: 'none', outline: "none", borderRadius: "50px" }}>11/04/2024</Button>
                     </div>
                     <Label className='my-2 text-center mt-2'>CHOOSE HOW WE PAY</Label>
