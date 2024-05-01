@@ -4,7 +4,7 @@ export async function POST(request) {
     try {
         const { password, email } = await request.json()
 
-        const prod_url = "http://35.208.204.126/api/graphql/user/signin"
+        const prod_url = "http://16.171.47.81/api/user/signin"
         const local_url = "http://localhost:3001/user/signin"
 
         const res = await axios.post(prod_url, {
