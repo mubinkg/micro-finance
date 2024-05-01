@@ -1,8 +1,24 @@
 'use client'
+import { useForm, Controller } from 'react-hook-form'
 import { InputLable } from '../../../components/InputLabel'
 import { Input, Label, Button, Row, Col } from 'reactstrap'
 
 export default function Page() {
+    const { handleSubmit, watch, setValue, control } = useForm({
+        defaultValues: {
+            firstName: "",
+            lastName: "",
+            currentAddress: "",
+            city: '',
+            state: "",
+            zipCode: ""
+        }
+    })
+
+    function submitHandler(values) {
+        console.log(values)
+    }
+
     return (
         <div>
             <hr />
@@ -18,21 +34,78 @@ export default function Page() {
                 <div className='container' style={{ maxWidth: "800px", display: "flex", flexDirection: "column", justifyContent: "center", alignContent: "center", }}>
                     <p className='my-2'>Emergency Loans: Life happens, use borrowed money wisely</p>
                     <Row>
-                        <Col lg={6} md={12}><InputLable label="FIRST NAME" placeholder="First name" /></Col>
-                        <Col lg={6} md={12}><InputLable label="LAST NAME" placeholder="Last name" /></Col>
+                        <Col lg={6} md={12}>
+                            <Label>
+                                FIRST NAME
+                            </Label>
+                            <Controller
+                                control={control}
+                                name='firstName'
+                                render={({ field }) => (
+                                    <Input {...field} placeholder='First Name' />
+                                )}
+                            />
+                        </Col>
+                        <Col lg={6} md={12}>
+                            <Label>
+                                LAST NAME
+                            </Label>
+                            <Controller
+                                control={control}
+                                name='lastName'
+                                render={({ field }) => (
+                                    <Input {...field} placeholder='Last name' />
+                                )}
+                            />
+                        </Col>
                     </Row>
-                    <InputLable label="CURRENT ADDRESS" placeholder="Current address" />
-                    <div style={{ width: "100%", marginTop: "10px" }} >
-                        <Input placeholder='Address line 2' />
+                    <div className='mt-2'>
+                        <Label>
+                        CURRENT ADDRESS
+                        </Label>
+                        <Controller
+                            control={control}
+                            name='currentAddress'
+                            render={({ field }) => (
+                                <Input {...field} placeholder='Current address' />
+                            )}
+                        />
                     </div>
                     <div style={{ width: "100%", marginTop: "10px" }} >
-                        <Input placeholder='City' />
+                        <Controller
+                            control={control}
+                            name='currentAddress2'
+                            render={({ field }) => (
+                                <Input {...field} placeholder='Address line 2' />
+                            )}
+                        />
                     </div>
                     <div style={{ width: "100%", marginTop: "10px" }} >
-                        <Input placeholder='State' />
+                        <Controller
+                            control={control}
+                            name='city'
+                            render={({ field }) => (
+                                <Input {...field} placeholder='City' />
+                            )}
+                        />
                     </div>
                     <div style={{ width: "100%", marginTop: "10px" }} >
-                        <Input placeholder='Zip Code' />
+                        <Controller
+                            control={control}
+                            name='state'
+                            render={({ field }) => (
+                                <Input {...field} placeholder='State' />
+                            )}
+                        />
+                    </div>
+                    <div style={{ width: "100%", marginTop: "10px" }} >
+                        <Controller
+                            control={control}
+                            name='zipCode'
+                            render={({ field }) => (
+                                <Input {...field} placeholder='Zip Code' />
+                            )}
+                        />
                     </div>
                     <InputLable label="CELL PHONE" placeholder="Cell phone" />
                     <InputLable label="Email" placeholder="Email address" />
@@ -104,7 +177,13 @@ export default function Page() {
                         <p>Check Box to Agree Terms ans Conditions</p>
                     </div>
                     <Button style={{ background: "#62d0ab" }} className='mt-4'>Save</Button>
-                    <Button style={{ background: "#68069d" }} className='my-4'>Submit</Button>
+                    <Button
+                        style={{ background: "#68069d" }}
+                        className='my-4'
+                        onClick={handleSubmit(submitHandler)}
+                    >
+                        Submit
+                    </Button>
                 </div>
             </div>
         </div>
