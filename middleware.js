@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server'
  
 // This function can be marked `async` if using `await` inside
 export function middleware(request) {
-    const token = (request.cookies.get('token'))
+    const token = (request.cookies.get('access_token'))
     
     const {pathname} = request.nextUrl
 

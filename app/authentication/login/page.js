@@ -5,17 +5,20 @@ import {postData} from '../../../utils/axiosUtils'
 import { useRouter } from 'next/navigation'
 import {setItem} from '../../../utils/storageUtils'
 
+const prod_url = "http://35.208.204.126/api/graphql/user/signin"
+const local_url = "http://localhost:3000/api/login"
+
 export default function Page() {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const router = useRouter()
 
     const signinHandler = ()=>{
-        postData('user/signin', {email, password}).then(res=>{
+        postData(local_url, {email, password}).then(res=>{
             setItem('user', JSON.stringify(res.user))
-            router.push('/zimba-cash/loan')
             setPassword('')
             setEmail('')
+            router.push('/zimba-cash/loan')
         }).catch(err=>{
             console.log(err)
         })
