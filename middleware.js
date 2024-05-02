@@ -19,9 +19,16 @@ export function middleware(request) {
         var decoded = jwt.decode(token.value);
         const userRole = decoded?.role || 'user';
         if(userRole === 'admin'){
-            return NextResponse.redirect(new URL('/admin/dashboard', request.url))
+            if(pathname === '/authentication/login') return NextResponse.redirect(new URL('/admin/dashboard', request.url))
+            if(!pathname.startsWith('/admin')){
+                return NextResponse.redirect(new URL('/admin/dashboard', request.url))
+            }
+            if(pathname === '/'){
+                return NextResponse.redirect(new URL('/admin/dashboard', request.url))
+            }
+        }else{
+            if(pathname === '/authentication/login') return  NextResponse.redirect(new URL('/', request.url))
         }
-        if(pathname === '/authentication/login') return  NextResponse.redirect(new URL('/', request.url))
     }
     
     return NextResponse.next()
@@ -29,5 +36,5 @@ export function middleware(request) {
  
 // See "Matching Paths" below to learn more
 export const config = {
-    matcher: [ '/authentication/:path*', '/admin/:path*', '/zimba-cash/loan/:path*'],
+    matcher: [ '/authentication/:path*', '/admin/:path*', '/zimba-cash/loan/:path*','/'],
 }
