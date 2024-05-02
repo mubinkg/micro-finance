@@ -7,7 +7,7 @@ export async function POST(request) {
         const prod_url = "http://16.171.47.81/api/user/signin"
         const local_url = "http://localhost:3001/user/signin"
 
-        const res = await axios.post(prod_url, {
+        const res = await axios.post(local_url, {
             email,
             password
         })
@@ -25,7 +25,6 @@ export async function POST(request) {
                 status: 400
             })
         }
-        console.log(token)
 
         return new Response(JSON.stringify(res.data), {
             status: 200,
