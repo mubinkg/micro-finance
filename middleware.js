@@ -8,6 +8,10 @@ export function middleware(request) {
     
     const {pathname} = request.nextUrl
 
+    if(!token && pathname === '/'){
+        return NextResponse.next()
+    }
+
     if(!token && (pathname === '/authentication/login' || pathname === '/authentication/registration')){
         return NextResponse.next()
     }
