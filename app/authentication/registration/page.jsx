@@ -43,9 +43,7 @@ export default function Page() {
 
     return (
         <div>
-            <hr />
-            <h5 style={{ textTransform: "uppercase", textAlign: "center", color: "#62d0ab" }}>Zimba Cash</h5>
-            <hr />
+            <AppNav/>
             <div style={{
                 display: "flex",
                 justifyContent: "center",

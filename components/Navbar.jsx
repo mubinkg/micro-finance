@@ -1,44 +1,26 @@
 'use client'
-import React, { useState } from 'react';
-import {
-  Collapse,
-  Navbar,
-  NavbarToggler,
-  NavbarBrand,
-  Nav,
-  NavItem,
-  NavLink,
-  UncontrolledDropdown,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem,
-  NavbarText,
-} from 'reactstrap';
 
-function AppNav(args) {
-  const [isOpen, setIsOpen] = useState(false);
+import Container from 'react-bootstrap/Container';
+import Nav from 'react-bootstrap/Nav';
+import Navbar from 'react-bootstrap/Navbar';
 
-  const toggle = () => setIsOpen(!isOpen);
-
+function AppNav() {
   return (
-    <div>
-      <Navbar {...args} style={{color: "white"}}>
-        <NavbarBrand href="/"><span style={{color:"white"}}>ZIMBA</span> <span style={{color:"#62d0ab"}}>CASH</span></NavbarBrand>
-        <NavbarToggler onClick={toggle} style={{color:"white", background:"white"}}/>
-        <Collapse isOpen={isOpen} navbar>
-          <Nav className="me-auto" navbar style={{color: "white"}}>
-            <NavItem>
-              <NavLink href="/components/">Components</NavLink>
-            </NavItem>
-            <NavItem>
-              <NavLink >
-                GitHub
-              </NavLink>
-            </NavItem>
+    <Navbar expand="lg">
+      <Container>
+        <Navbar.Brand href="#home">
+          
+        </Navbar.Brand>
+        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Collapse id="basic-navbar-nav">
+          <Nav className="justify-content-end" style={{ width: "100%" }}>
+            <Nav.Link href="#home">History</Nav.Link>
+            <Nav.Link href="#link">Contact</Nav.Link>
+            <Nav.Link href="#link">Logout</Nav.Link>
           </Nav>
-        </Collapse>
-      </Navbar>
-    </div>
+        </Navbar.Collapse>
+        </Container>
+    </Navbar>
   );
 }
 

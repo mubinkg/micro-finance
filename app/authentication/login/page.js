@@ -4,6 +4,7 @@ import { Input, Label, Button } from 'reactstrap'
 import {postData} from '../../../utils/axiosUtils'
 import { useRouter } from 'next/navigation'
 import {setItem} from '../../../utils/storageUtils'
+import AppNav from '../../../components/Navbar'
 
 const prod_url = "http://16.171.47.81/api/user/signin"
 const local_url = "http://localhost:3000/api/login"
@@ -26,9 +27,7 @@ export default function Page() {
 
     return (
         <div>
-            <hr/>
-            <h5 style={{textTransform: "uppercase", textAlign: "center", color: "#62d0ab"}}>Zimba Cash</h5>
-            <hr/>
+            <AppNav/>
             <div style={{
                 display: "flex",
                 justifyContent: "center",
