@@ -11,9 +11,11 @@ import {getData} from '../../../utils/axiosUtils'
 
 export default function Page() {
     const [loans, setLoans] = useState([])
+    const [count, setCount] = useState(0)
     useEffect(()=>{
         getData('/loan/').then(res=>{
             setLoans(res.loans)
+            setCount(res.count)
         })
     }, [])
 
@@ -23,7 +25,7 @@ export default function Page() {
             <hr />
             <Row className='g-4'>
                 <Col lg={3}>
-                    <DashboardItem title="Loan Applications" icon={<DocumentIcon/>} url='/admin/dashboard/'/>
+                    <DashboardItem count={count} title="Loan Applications" icon={<DocumentIcon/>} url='/admin/dashboard/'/>
                 </Col>
                 <Col lg={3}>
                     <DashboardItem title="Applicants/User" icon={<GroupIcon/>} url='/admin/applicants/'/>

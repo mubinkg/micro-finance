@@ -1,9 +1,7 @@
 'use client'
 
-import { useRouter } from "next/navigation"
 
-export default function RightArrow({url}) {
-    const router = useRouter()
+export default function RightArrow() {
 
     return (
         <svg
@@ -16,7 +14,6 @@ export default function RightArrow({url}) {
             viewBox="0 0 512 512"
             xmlSpace="preserve"
             fill="#000000"
-            onClick={()=>router.push(url)}
             style={{cursor: "pointer"}}
         >
             <g id="SVGRepo_bgCarrier" strokeWidth={0} />
