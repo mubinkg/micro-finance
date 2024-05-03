@@ -28,8 +28,8 @@ function AppNav() {
   }
 
   const logOutHandler = ()=>{
-    getData('http://localhost:3000/api/logout')
-    router.push('/')
+    getData('http://localhost:3000/api/logout');
+    window.location = '/';
     removeItem('user')
   }
 

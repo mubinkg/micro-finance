@@ -19,7 +19,7 @@ export default function Page() {
             setItem('user', JSON.stringify(res.user))
             setPassword('')
             setEmail('')
-            router.push('/zimba-cash/loan')
+            window.location = ('/zimba-cash/loan')
         }).catch(err=>{
             console.log(err)
         })
@@ -50,9 +50,9 @@ export default function Page() {
                         <Input value={password} onChange={(e)=>setPassword(e.target.value)}/>
                     </div>
                     <Button onClick={signinHandler} style={{ background: "#68069d" }} className='mt-4'>SIGN IN</Button>
-                    <div style={{ display: "flex", justifyContent: "space-between", marginTop: "5px" }}>
-                        <p onClick={()=>router.push('/authentication/forget-password')}>Forget your password?</p>
-                        <p onClick={()=>router.push('/authentication/registration')}>Sign Up</p>
+                    <div style={{ display: "flex", justifyContent: "space-between", marginTop: "10px" }}>
+                        <p style={{cursor: "pointer"}} onClick={()=>router.push('/authentication/forget-password')}>Forget your password?</p>
+                        <p style={{cursor: "pointer"}} onClick={()=>router.push('/authentication/registration')}>Sign Up</p>
                     </div>
                 </div>
             </div>

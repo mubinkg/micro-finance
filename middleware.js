@@ -7,18 +7,7 @@ export function middleware(request) {
     const token = (request.cookies.get('access_token'))
     
     const {pathname} = request.nextUrl
-
-    if(!token && pathname === '/'){
-        return NextResponse.next()
-    }
-
-    if(!token && (pathname === '/authentication/login' || pathname === '/authentication/registration' || pathname === '/authentication/forget-password')){
-        return NextResponse.next()
-    }
-
-    if(!token && pathname !== '/authentication/login' ){
-        return NextResponse.redirect(new URL('/authentication/login', request.url))
-    }
+    
     if(token){
         var decoded = jwt.decode(token.value);
         const userRole = decoded?.role || 'user';
@@ -31,7 +20,21 @@ export function middleware(request) {
                 return NextResponse.redirect(new URL('/admin/dashboard', request.url))
             }
         }else{
-            if(pathname === '/authentication/login') return  NextResponse.redirect(new URL('/', request.url))
+            if(pathname === '/authentication/login' || pathname === '/authentication/registration') {
+                return  NextResponse.redirect(new URL('/', request.url))
+            }
+        }
+    }else{
+        if(pathname === '/'){
+            return NextResponse.next()
+        }
+    
+        if((pathname === '/authentication/login' || pathname === '/authentication/registration' || pathname === '/authentication/forget-password')){
+            return NextResponse.next()
+        }
+    
+        if(pathname !== '/authentication/login' ){
+            return NextResponse.redirect(new URL('/authentication/login', request.url))
         }
     }
     
@@ -40,5 +43,5 @@ export function middleware(request) {
  
 // See "Matching Paths" below to learn more
 export const config = {
-    matcher: [ '/authentication/:path*', '/admin/:path*', '/zimba-cash/loan/:path*','/'],
+    matcher: [ '/authentication/:path*', '/admin/:path*', '/zimba-cash/:path*','/'],
 }

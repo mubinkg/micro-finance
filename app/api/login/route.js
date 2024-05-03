@@ -36,7 +36,6 @@ export async function POST(request) {
             }
         })
     } catch (err) {
-        console.log(err)
         return new Response(JSON.stringify({
             'message': 'Error on sing in'
         }), {
