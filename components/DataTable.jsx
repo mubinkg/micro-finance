@@ -1,6 +1,11 @@
-import { Table } from 'reactstrap'
+'use client'
 
-export default function DataTable() {
+import { Table } from 'reactstrap'
+import { useRouter } from 'next/navigation'
+
+export default function DataTable({ data }) {
+    const router = useRouter()
+    
     return (
         <Table hover className='mt-4'>
             <thead>
@@ -26,166 +31,30 @@ export default function DataTable() {
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>
-                        02/02/1999
-                    </td>
-                    <td>
-                        Mark
-                    </td>
-                    <td>
-                        Khan
-                    </td>
-                    <td>
-                        222-445-3437
-                    </td>
-                    <td>
-                        $120
-                    </td>
-                    <td>
-                        active
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        02/02/1999
-                    </td>
-                    <td>
-                        Mark
-                    </td>
-                    <td>
-                        Khan
-                    </td>
-                    <td>
-                        222-445-3437
-                    </td>
-                    <td>
-                        $120
-                    </td>
-                    <td>
-                        active
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        02/02/1999
-                    </td>
-                    <td>
-                        Mark
-                    </td>
-                    <td>
-                        Khan
-                    </td>
-                    <td>
-                        222-445-3437
-                    </td>
-                    <td>
-                        $120
-                    </td>
-                    <td>
-                        active
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        02/02/1999
-                    </td>
-                    <td>
-                        Mark
-                    </td>
-                    <td>
-                        Khan
-                    </td>
-                    <td>
-                        222-445-3437
-                    </td>
-                    <td>
-                        $120
-                    </td>
-                    <td>
-                        active
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        02/02/1999
-                    </td>
-                    <td>
-                        Mark
-                    </td>
-                    <td>
-                        Khan
-                    </td>
-                    <td>
-                        222-445-3437
-                    </td>
-                    <td>
-                        $120
-                    </td>
-                    <td>
-                        active
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        02/02/1999
-                    </td>
-                    <td>
-                        Mark
-                    </td>
-                    <td>
-                        Khan
-                    </td>
-                    <td>
-                        222-445-3437
-                    </td>
-                    <td>
-                        $120
-                    </td>
-                    <td>
-                        active
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        02/02/1999
-                    </td>
-                    <td>
-                        Mark
-                    </td>
-                    <td>
-                        Khan
-                    </td>
-                    <td>
-                        222-445-3437
-                    </td>
-                    <td>
-                        $120
-                    </td>
-                    <td>
-                        active
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        02/02/1999
-                    </td>
-                    <td>
-                        Mark
-                    </td>
-                    <td>
-                        Khan
-                    </td>
-                    <td>
-                        222-445-3437
-                    </td>
-                    <td>
-                        $120
-                    </td>
-                    <td>
-                        active
-                    </td>
-                </tr>
+                {
+                    data?.map((d) => (
+                        <tr key={d._id} style={{cursor: "pointer"}} onClick={()=>router.push('/admin/loan-details')}>
+                            <td>
+                            {d.createdAt}
+                            </td>
+                            <td>
+                                {d.firstName}
+                            </td>
+                            <td>
+                                {d.lastName}
+                            </td>
+                            <td>
+                                {d.ssn}
+                            </td>
+                            <td>
+                                {d.amount}
+                            </td>
+                            <td>
+                                {d.status}
+                            </td>
+                        </tr>
+                    ))
+                }
             </tbody>
         </Table>
     )
