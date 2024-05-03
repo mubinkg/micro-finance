@@ -11,7 +11,7 @@ export default function Page() {
     const [data, setData] = useState({})
     
     async function getUserData(){
-        getData().then(res=>{
+        getData('user').then(res=>{
             setData(res.data)
         }).catch()
     }
