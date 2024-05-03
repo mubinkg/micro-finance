@@ -12,7 +12,7 @@ export function middleware(request) {
         return NextResponse.next()
     }
 
-    if(!token && (pathname === '/authentication/login' || pathname === '/authentication/registration')){
+    if(!token && (pathname === '/authentication/login' || pathname === '/authentication/registration' || pathname === '/authentication/forget-password')){
         return NextResponse.next()
     }
 

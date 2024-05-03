@@ -7,12 +7,11 @@ import AppNav from '../../../components/Navbar'
 
 
 export default function Page() {
-    const [firstName, setFirstName] = useState('')
-    const [lastName, setLastName] = useState('')
+
     const [email, setEmail] = useState('')
 
     const signupHandler = () => {
-        if (!email || !firstName || !lastName) {
+        if (!email) {
             Swal.fire({
                 title: "Registration",
                 text: "Please give all the input values.",
@@ -21,11 +20,7 @@ export default function Page() {
         }
         postData('/user/registration', {
             email,
-            firstName,
-            lastName
         }).then(data=>{
-            setLastName('')
-            setFirstName('')
             setEmail('')
             
             Swal.fire({
@@ -53,26 +48,14 @@ export default function Page() {
                 height: "90vh"
             }}>
                 <div style={{ width: "360px", display: "flex", flexDirection: "column", justifyContent: "center", alignContent: "center", }}>
-                    <h2 style={{ textAlign: "center", textTransform: "uppercase" }}>Registration</h2>
-                    <div style={{ width: "100%", marginTop: "40px" }} >
-                        <p  className='text-center'>
-                            First Name
-                        </p>
-                        <Input value={firstName} onChange={(e) => setFirstName(e.target.value)} />
-                    </div>
-                    <div style={{ width: "100%", marginTop: '20px' }} >
-                        <p className='text-center'>
-                            Last Name
-                        </p>
-                        <Input value={lastName} onChange={(e) => setLastName(e.target.value)} />
-                    </div>
+                    <h2 style={{ textAlign: "center", textTransform: "uppercase" }}>Reset Password</h2>
                     <div style={{ width: "100%", marginTop: '20px' }} >
                         <p  className='text-center'>
                             Email
                         </p>
                         <Input value={email} onChange={(e) => setEmail(e.target.value)} />
                     </div>
-                    <Button style={{ background: "#68069d" }} className='mt-4' onClick={signupHandler}>SIGN UP</Button>
+                    <Button style={{ background: "#68069d" }} className='mt-4' onClick={signupHandler}>Reset</Button>
                 </div>
             </div>
         </div>
