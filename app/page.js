@@ -1,18 +1,19 @@
 import Hero from "../components/Hero";
-import AppNav from "../components/Navbar";
 import LockIcon from "../icons/LockIcon";
 import { Row, Col, Container } from 'reactstrap'
 import './page.module.css'
 import Content from "../components/Content";
 import { RightIcon } from "../icons/RightIcon";
 import { CardIcon } from "../icons/CardIcon";
+import Image from 'next/image'
+import mailLogo from '../public/l-5-t.png'
 
 export default function Home() {
 
   return (
     <main>
       <div className="main">
-        <AppNav />
+        <Image className="m-4" style={{cursor: 'pointer'}} src={mailLogo} width={200}/>
         <Hero />
       </div>
       <Container>
