@@ -10,6 +10,10 @@ import { useEffect, useState } from 'react';
 import { getData } from '../utils/axiosUtils';
 import { removeItem } from '../utils/storageUtils';
 
+
+const prod_url = "http://54.236.12.28/api/logout"
+const local_url = "http://localhost:3000/api/logout"
+
 function AppNav() {
   const [isAuth, setAuth] = useState(false)
   useEffect(() => {
@@ -28,7 +32,7 @@ function AppNav() {
   }
 
   const logOutHandler = ()=>{
-    getData('http://localhost:3000/api/logout');
+    getData(prod_url);
     window.location = '/';
     removeItem('user')
   }
@@ -36,7 +40,7 @@ function AppNav() {
   return (
     <Navbar expand="lg">
       <Container>
-        <Navbar.Brand href="#home" onClick={() => routerHandler('/')}>
+        <Navbar.Brand onClick={() => routerHandler('/')}>
           <Image src={logo} width={100} />
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -45,15 +49,15 @@ function AppNav() {
             {
               isAuth ? (
                 <>
-                  <Nav.Link href="#home">History</Nav.Link>
-                  <Nav.Link href="#link">Contact</Nav.Link>
-                  <Nav.Link href="#link" onClick={logOutHandler}>Logout</Nav.Link>
+                  <Nav.Link >History</Nav.Link>
+                  <Nav.Link>Contact</Nav.Link>
+                  <Nav.Link onClick={logOutHandler}>Logout</Nav.Link>
                 </>
               ) : (
                 <>
-                  <Nav.Link href="#home">Contact</Nav.Link>
-                  <Nav.Link href="#link" onClick={()=>routerHandler('/authentication/login')}>Login</Nav.Link>
-                  <Nav.Link href="#link" onClick={()=>routerHandler('/authentication/registration')}>Register</Nav.Link>
+                  <Nav.Link >Contact</Nav.Link>
+                  <Nav.Link onClick={()=>routerHandler('/authentication/login')}>Login</Nav.Link>
+                  <Nav.Link onClick={()=>routerHandler('/authentication/registration')}>Register</Nav.Link>
                 </>
               )
             }

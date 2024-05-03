@@ -5,9 +5,6 @@ import Swal from 'sweetalert2'
 import {postData} from '../../../utils/axiosUtils'
 import AppNav from '../../../components/Navbar'
 
-const prod_url = "http://54.236.12.28/api/logout"
-const local_url = "http://localhost:3000/api/logout"
-
 export default function Page() {
     const [firstName, setFirstName] = useState('')
     const [lastName, setLastName] = useState('')
@@ -21,7 +18,7 @@ export default function Page() {
                 icon: "error"
             })
         }
-        postData(prod_url, {
+        postData('user/registration',prod_url, {
             email,
             firstName,
             lastName
