@@ -2,7 +2,7 @@ server {
     listen 80;
     
     location /images/ {
-        root /path/to/micro-finance-backend/upload;
+        root /micro-finance-backend/upload;
         autoindex off; # Optional: Disable directory listing
     }
 
