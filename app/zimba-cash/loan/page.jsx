@@ -50,7 +50,7 @@ export default function Page() {
                 minHeight: "90vh"
             }}>
                 <div className='container' style={{ maxWidth: "800px", display: "flex", flexDirection: "column", justifyContent: "center", alignContent: "center", }}>
-                    <p className='my-2'>Emergency Loans: Life happens, use borrowed money wisely</p>
+                    <h5 style={{textAlign:"center"}} className='my-4'>Emergency Loans: Life happens, use borrowed money wisely</h5>
                     <Row>
                         <Col lg={6} md={12}>
                             <Label>
