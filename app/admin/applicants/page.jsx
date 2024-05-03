@@ -5,17 +5,18 @@ import ApplicantsDataTable from '../../../components/ApplicantsDataTable'
 import { DashboardItem } from '../../../components/DahsboardItem'
 import DocumentIcon from '../../../icons/DocumentIcon'
 import { Container, Row, Col } from 'reactstrap'
+import {getData} from '../../../utils/axiosUtils'
 
 export default function Page() {
     const [data, setData] = useState({})
     
-    async function getData(){
-        const res = await fetch('/user/')
-        const userData = await res.json()
-        setData(userData)
+    async function getUserData(){
+        getData().then(res=>{
+            setData(res.data)
+        }).catch()
     }
     useEffect(()=>{
-        getData()
+        getUserData()
     },[])
 
     return (
