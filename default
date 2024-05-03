@@ -19,5 +19,10 @@ server {
         proxy_cache_bypass $http_upgrade;
     }
 
+    location /images/ {
+        root /path/to/micro-finance-backend/upload;
+        autoindex off; # Optional: Disable directory listing
+    }
+
     # Additional Nginx configurations if needed
 }
