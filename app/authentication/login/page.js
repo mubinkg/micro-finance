@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation'
 import {setItem} from '../../../utils/storageUtils'
 import AppNav from '../../../components/Navbar'
 
-const prod_url = "http://16.171.47.81/api/user/signin"
+const prod_url = "http://54.236.12.28/api/login"
 const local_url = "http://localhost:3000/api/login"
 
 export default function Page() {
@@ -15,7 +15,7 @@ export default function Page() {
     const router = useRouter()
 
     const signinHandler = ()=>{
-        postData(local_url, {email, password}).then(res=>{
+        postData(prod_url, {email, password}).then(res=>{
             setItem('user', JSON.stringify(res.user))
             setPassword('')
             setEmail('')

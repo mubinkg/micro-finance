@@ -4,10 +4,10 @@ export async function POST(request) {
     try {
         const { password, email } = await request.json()
 
-        const prod_url = "http://16.171.47.81/api/user/signin"
+        const prod_url = "http://54.236.12.28/backend/api/user/signin"
         const local_url = "http://localhost:3001/user/signin"
 
-        const res = await axios.post(local_url, {
+        const res = await axios.post(prod_url, {
             email,
             password
         })

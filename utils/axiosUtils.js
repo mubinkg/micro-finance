@@ -1,10 +1,10 @@
 import axios from "axios"
 
-const LOCAL_SERVER = 'http://localhost:3001'
-const PROD_SERVER = 'http://16.171.47.81/api/'
+const local_url = 'http://localhost:3001'
+const prod_url = 'http://54.236.12.28/backend/api/'
 const BASE_URL = LOCAL_SERVER
 
-const publicRequest = axios.create({ baseURL: BASE_URL });
+const publicRequest = axios.create({ baseURL: prod_url });
 publicRequest.interceptors.response.use(
   (res) => res.data,
   (error) => {
