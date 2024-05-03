@@ -2,6 +2,7 @@
 import { useForm, Controller } from 'react-hook-form'
 import { Input, Label, Button, Row, Col } from 'reactstrap'
 import {postData} from '../../../utils/axiosUtils'
+import AppNav from '../../../components/Navbar'
 
 export default function Page() {
     const { handleSubmit, register, control, watch } = useForm({
@@ -40,9 +41,7 @@ export default function Page() {
 
     return (
         <div>
-            <hr />
-            <h5 style={{ textTransform: "uppercase", textAlign: "center", color: "#62d0ab" }}>Loan app</h5>
-            <hr />
+            <AppNav/>
             <div style={{
                 display: "flex",
                 justifyContent: "center",
