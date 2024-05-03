@@ -13,12 +13,24 @@ import logo from '../../../public/L-5.jpg'
 import Image from 'next/image'
 
 
+const prod_url = "http://54.236.12.28/api/logout"
+const local_url = "http://localhost:3000/api/logout"
+
 export default function Page() {
     const [loans, setLoans] = useState([])
     const [countLoan, setCountLoan] = useState(0)
     const [dashboardItem, setDashboardItem] = useState('loan')
     const [data, setData] = useState([])
     const [userCount, setUserCount] = useState(0)
+
+    const logOutHandler = ()=>{
+        getData(local_url).then(res=>{
+            window.location = '/';
+            removeItem('user')
+        }).catch(err=>{
+            console.log(err)
+        })
+      }
     
     function getUserData(){
         getData('user').then(res=>{
@@ -44,7 +56,7 @@ export default function Page() {
             <div className='d-flex justify-content-between align-items-center'>
                 <Image src={logo} width={200}/>
                 <h2>Dashboard</h2>
-                <Button>Logout</Button>
+                <Button onClick={logOutHandler}>Logout</Button>
             </div>
             <hr />
             <Row className='g-4'>

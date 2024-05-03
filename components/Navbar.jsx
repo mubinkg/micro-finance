@@ -27,14 +27,17 @@ function AppNav() {
   }, []);
 
   const router = useRouter()
-  const routerHandler = (path)=>{
+  const routerHandler = (path) => {
     router.push(path)
   }
 
-  const logOutHandler = ()=>{
-    getData(local_url);
-    window.location = '/';
-    removeItem('user')
+  const logOutHandler = () => {
+    getData(local_url).then(res => {
+      window.location = '/';
+      removeItem('user')
+    }).catch(err => {
+      console.log(err)
+    })
   }
 
   return (
@@ -56,8 +59,8 @@ function AppNav() {
               ) : (
                 <>
                   <Nav.Link >Contact</Nav.Link>
-                  <Nav.Link onClick={()=>routerHandler('/authentication/login')}>Login</Nav.Link>
-                  <Nav.Link onClick={()=>routerHandler('/authentication/registration')}>Register</Nav.Link>
+                  <Nav.Link onClick={() => routerHandler('/authentication/login')}>Login</Nav.Link>
+                  <Nav.Link onClick={() => routerHandler('/authentication/registration')}>Register</Nav.Link>
                 </>
               )
             }
