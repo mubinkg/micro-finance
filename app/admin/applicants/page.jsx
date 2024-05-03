@@ -12,7 +12,7 @@ export default function Page() {
     
     async function getUserData(){
         getData('user').then(res=>{
-            setData(res.data)
+            setData(res)
         }).catch()
     }
     useEffect(()=>{
