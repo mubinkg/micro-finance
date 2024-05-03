@@ -1,6 +1,6 @@
 'use client'
 import { useSearchParams, useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useState,Suspense } from "react";
 import { getData } from "../../../utils/axiosUtils";
 import { Container, Row, Col, Button } from 'reactstrap'
 import bg from '../../../public/bg.jpg'
@@ -11,6 +11,7 @@ export default function LoanDetils() {
     const searchParams = useSearchParams();
     const router = useRouter()
     const [data, setData] = useState({})
+    
     useEffect(() => {
         getData('/loan/' + searchParams.get('id')).then(res => {
             setData(res)
@@ -18,7 +19,7 @@ export default function LoanDetils() {
     }, [searchParams.get('id')])
 
     return (
-        <div>
+        <Suspense fallback={<div>Loading...</div>}>
             <Container>
                 <div className="d-flex justify-content-between my-4">
                     <h2>Loan Details</h2>
@@ -54,6 +55,6 @@ export default function LoanDetils() {
                     </Col>
                 </Row>
             </Container>
-        </div>
+        </Suspense>
     )
 }

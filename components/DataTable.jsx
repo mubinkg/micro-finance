@@ -3,12 +3,12 @@
 import { Table } from 'reactstrap'
 import { useRouter } from 'next/navigation'
 
+
 export default function DataTable({ data }) {
     const router = useRouter()
     const createQueryString = (name, value) => {
         const params = new URLSearchParams();
         params.set(name, value);
-    
         return params.toString();
     };
     
