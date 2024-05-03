@@ -32,7 +32,7 @@ function AppNav() {
   }
 
   const logOutHandler = ()=>{
-    getData(prod_url);
+    getData(local_url);
     window.location = '/';
     removeItem('user')
   }

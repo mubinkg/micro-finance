@@ -23,6 +23,10 @@ export function middleware(request) {
             if(pathname === '/authentication/login' || pathname === '/authentication/registration') {
                 return  NextResponse.redirect(new URL('/', request.url))
             }
+
+            if(pathname.startsWith('/admin')){
+                return NextResponse.redirect(new URL('/', request.url))
+            }
         }
     }else{
         if(pathname === '/'){
