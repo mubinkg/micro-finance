@@ -6,9 +6,11 @@ import DataTable from '../../../components/DataTable'
 import CartIcon from '../../../icons/CartIcon'
 import DocumentIcon from '../../../icons/DocumentIcon'
 import GroupIcon from '../../../icons/GroupIcon'
-import { Container, Row, Col } from 'reactstrap'
+import { Container, Row, Col ,Button} from 'reactstrap'
 import {getData} from '../../../utils/axiosUtils'
 import ApplicantsDataTable from '../../../components/ApplicantsDataTable'
+import logo from '../../../public/L-5.jpg'
+import Image from 'next/image'
 
 
 export default function Page() {
@@ -39,7 +41,11 @@ export default function Page() {
 
     return (
         <Container fluid className='mt-4'>
-            <h2>Dahsboard</h2>
+            <div className='d-flex justify-content-between align-items-center'>
+                <Image src={logo} width={200}/>
+                <h2>Dashboard</h2>
+                <Button>Logout</Button>
+            </div>
             <hr />
             <Row className='g-4'>
                 <Col lg={3}>
