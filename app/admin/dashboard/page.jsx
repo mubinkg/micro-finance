@@ -12,7 +12,7 @@ import {getData} from '../../../utils/axiosUtils'
 export default function Page() {
     const [loans, setLoans] = useState([])
     useEffect(()=>{
-        getData('loan').then(res=>{
+        getData('/loan/').then(res=>{
             setLoans(res.loans)
         })
     }, [])

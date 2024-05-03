@@ -10,7 +10,7 @@ export default function Page() {
     const [data, setData] = useState({})
     
     async function getData(){
-        const res = await fetch('http://localhost:3001/user')
+        const res = await fetch('/user/')
         const userData = await res.json()
         setData(userData)
     }
