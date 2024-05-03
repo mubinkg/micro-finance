@@ -5,6 +5,12 @@ import { useRouter } from 'next/navigation'
 
 export default function DataTable({ data }) {
     const router = useRouter()
+    const createQueryString = (name, value) => {
+        const params = new URLSearchParams();
+        params.set(name, value);
+    
+        return params.toString();
+    };
     
     return (
         <Table hover className='mt-4'>
@@ -33,7 +39,7 @@ export default function DataTable({ data }) {
             <tbody>
                 {
                     data?.map((d) => (
-                        <tr key={d._id} style={{cursor: "pointer"}} onClick={()=>router.push('/admin/loan-details')}>
+                        <tr key={d._id} style={{cursor: "pointer"}} onClick={()=>router.push('/admin/loan-details'+ "?" + createQueryString('id',d._id))}>
                             <td>
                             {d.createdAt}
                             </td>
