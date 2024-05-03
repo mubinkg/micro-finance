@@ -18,7 +18,7 @@ export default function Page() {
                 icon: "error"
             })
         }
-        postData('user/registration',prod_url, {
+        postData('/user/registration', {
             email,
             firstName,
             lastName
