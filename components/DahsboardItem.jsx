@@ -1,13 +1,11 @@
 'use client'
 
 import RightArrow from "../icons/Arrow";
-import { useRouter } from "next/navigation"
 
 
-export function DashboardItem({icon, title, url, count}) {
-    const router = useRouter()
+export function DashboardItem({icon, title, onClick, count}) {
     return (
-        <div  onClick={()=>router.push(url)} style={{ border: "2px solid #45148f", cursor:"pointer" }}>
+        <div onClick={onClick} style={{ border: "2px solid #45148f", cursor:"pointer" }}>
             <div style={{ backgroundColor: "#45148f", display: "flex", justifyContent: "space-between", alignItems: "center" }} className='p-3'>
                 {icon}
                 <div>

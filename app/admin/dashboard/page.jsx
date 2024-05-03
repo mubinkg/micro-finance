@@ -8,15 +8,33 @@ import DocumentIcon from '../../../icons/DocumentIcon'
 import GroupIcon from '../../../icons/GroupIcon'
 import { Container, Row, Col } from 'reactstrap'
 import {getData} from '../../../utils/axiosUtils'
+import ApplicantsDataTable from '../../../components/ApplicantsDataTable'
+
 
 export default function Page() {
     const [loans, setLoans] = useState([])
-    const [count, setCount] = useState(0)
-    useEffect(()=>{
+    const [countLoan, setCountLoan] = useState(0)
+    const [dashboardItem, setDashboardItem] = useState('loan')
+    const [data, setData] = useState([])
+    const [userCount, setUserCount] = useState(0)
+    
+    function getUserData(){
+        getData('user').then(res=>{
+            setData(res.users)
+            setUserCount(res.count)
+        }).catch()
+    }
+
+    function getLoanData(){
         getData('/loan/').then(res=>{
             setLoans(res.loans)
-            setCount(res.count)
+            setCountLoan(res.count)
         })
+    }
+
+    useEffect(()=>{
+        getLoanData()
+        getUserData()
     }, [])
 
     return (
@@ -25,19 +43,27 @@ export default function Page() {
             <hr />
             <Row className='g-4'>
                 <Col lg={3}>
-                    <DashboardItem count={count} title="Loan Applications" icon={<DocumentIcon/>} url='/admin/dashboard/'/>
+                    <DashboardItem onClick={()=>setDashboardItem('loan')} count={countLoan} title="Loan Applications" icon={<DocumentIcon/>}/>
                 </Col>
                 <Col lg={3}>
-                    <DashboardItem title="Applicants/User" icon={<GroupIcon/>} url='/admin/applicants/'/>
+                    <DashboardItem count={userCount} onClick={()=>setDashboardItem('user')}  title="Applicants/User" icon={<GroupIcon/>} />
                 </Col>
                 <Col lg={3}>
-                    <DashboardItem title="History" icon={<GroupIcon/>} url='/admin/history/'/>
+                    <DashboardItem onClick={()=>setDashboardItem('history')} title="History" icon={<GroupIcon/>}/>
                 </Col>
                 <Col lg={3}>
-                    <DashboardItem title="Bank Details" icon={<CartIcon/>} url="#"/>
+                    <DashboardItem onClick={()=>setDashboardItem('loan')} title="Bank Details" icon={<CartIcon/>} />
                 </Col>
             </Row>
-            <DataTable data={loans}/>
+            {
+                dashboardItem === 'loan' ? <DataTable data={loans}/> : ""
+            }
+            {
+                dashboardItem === 'user' ? <ApplicantsDataTable data={data}/> : ""
+            }
+            {
+                dashboardItem === 'history' ? <DataTable data={loans}/> : ""
+            }
         </Container>
     )
 }
