@@ -32,7 +32,7 @@ function AppNav() {
   }
 
   const logOutHandler = () => {
-    getData(local_url).then(res => {
+    getData(prod_url).then(res => {
       window.location = '/';
       removeItem('user')
     }).catch(err => {
