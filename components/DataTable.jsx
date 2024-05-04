@@ -53,7 +53,7 @@ export default function DataTable({ data }) {
                                 {d.ssn}
                             </td>
                             <td>
-                                {d.amount}
+                                {d.amountRequested}
                             </td>
                             <td>
                                 {d.status}

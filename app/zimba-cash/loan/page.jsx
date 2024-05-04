@@ -1,13 +1,15 @@
 'use client'
 import { useForm, Controller } from 'react-hook-form'
 import { Input, Label, Button, Row, Col, FormGroup } from 'reactstrap'
-import { postData } from '../../../utils/axiosUtils'
+import { postData, postDataWithAuth } from '../../../utils/axiosUtils'
 import AppNav from '../../../components/Navbar'
 import { useState } from 'react'
 import Swal from 'sweetalert2'
 import { isArray } from 'util'
+import { useRouter } from 'next/navigation'
 
 export default function Page() {
+    const router = useRouter()
     const today = new Date();
     const dd = String(today.getDate()).padStart(2, '0');
     const mm = String(today.getMonth() + 1).padStart(2, '0'); // January is 0!
@@ -52,13 +54,15 @@ export default function Page() {
                 formData.append(key, value)
             }
         }
-        postData('loan', formData).then(res => {
+        postDataWithAuth('loan', formData).then(res => {
             setLoading(false)
             reset()
             Swal.fire({
                 title: 'Request Loan',
                 text: 'Loan request accepted',
                 icon: "success"
+            }).then(()=>{
+                router.push('/zimba-cash/history')
             })
         }).catch(err => {
             let errorHtml = ''

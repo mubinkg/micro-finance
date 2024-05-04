@@ -1,4 +1,5 @@
 import axios from "axios"
+import { getToken } from "./storageUtils";
 
 const local_url = 'http://localhost:3001'
 const prod_url = 'http://54.236.12.28/backend/api/'
@@ -30,11 +31,11 @@ const privateRequest = axios.create({
   baseURL: BASE_URL,
 });
 
-// privateRequest.interceptors.request.use((req) => {
-//   req.headers.Authorization = `bearer ${getToken()}`;
-//   return req;
-// });
+privateRequest.interceptors.request.use((req) => {
+  req.headers.Authorization = `Bearer ${getToken()}`;
+  return req;
+});
 
-// export const postDataWithAuth = privateRequest.post;
-// export const getDataWtihAuth = privateRequest.get
+export const postDataWithAuth = privateRequest.post;
+export const getDataWtihAuth = privateRequest.get
 

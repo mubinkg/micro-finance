@@ -4,6 +4,13 @@ export function setItem(key, value){
     }
 }
 
+export function getToken(key){
+    if(window !== undefined){
+        return JSON.parse(localStorage.getItem('token'))
+    }
+    return ""
+}
+
 export function removeItem(key){
     if(window !== undefined){
         localStorage.removeItem(key)
