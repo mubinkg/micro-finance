@@ -49,7 +49,7 @@ export default function Page() {
         <div style={{ marginBottom: "200px" }}>
             <AppNav />
             <div style={{
-                minHeight: "90vh"
+                minHeight: "70vh"
             }}>
                 <div className='container' style={{ maxWidth: "800px", display: "flex", flexDirection: "column", justifyContent: "center", alignContent: "center", }}>
                     <h5 style={{ textAlign: "center" }} className='my-4'>Contact Us</h5>
