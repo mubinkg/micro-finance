@@ -1,14 +1,41 @@
 'use client'
 import { useForm, Controller } from 'react-hook-form'
 import { Input, Label, Button, Row, Col, FormGroup } from 'reactstrap'
-import { postData, postDataWithAuth } from '../../../utils/axiosUtils'
+import { postDataWithAuth } from '../../../utils/axiosUtils'
 import AppNav from '../../../components/Navbar'
 import { useState } from 'react'
 import Swal from 'sweetalert2'
 import { isArray } from 'util'
 import { useRouter } from 'next/navigation'
+import * as yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
+
+
 
 export default function Page() {
+    const schema = yup.object().shape({
+        firstName: yup.string().min(2).required(),
+        lastName: yup.string().min(2).required(),
+        currentAddress: yup.string().min(2).required(),
+        currentAddress2: yup.string().min(2).required(),
+        city: yup.string().min(2).required(),
+        state: yup.string().min(2).required(),
+        zipCode: yup.number().required(),
+        cellPhone: yup.number().required(),
+        email: yup.string().email().required(),
+        driverLicense: yup.string().min(2).required(),
+        ssn: yup.number().required(),
+        referenceOneFirstName: yup.string().min(2).required(),
+        referenceOneLastName: yup.string().min(2).required(),
+        referenceOnePhone: yup.number().required(),
+        referenceTwoFirstName: yup.string().min(2).required(),
+        referenceTwoLastName: yup.string().min(2).required(),
+        referenceTwoPhone: yup.number().required(),
+        amountRequested: yup.number().required(),
+        paymentDetails: yup.string().min(2).required(),
+        signature: yup.string().min(2).required(),
+    });
+
     const router = useRouter()
     const today = new Date();
     const dd = String(today.getDate()).padStart(2, '0');
@@ -19,7 +46,7 @@ export default function Page() {
 
     const [loading, setLoading] = useState(false)
     const [aggree, setAgree] = useState(false)
-    const { handleSubmit, register, control, watch, reset, setValue } = useForm({
+    const { handleSubmit, register, control, watch, reset, setValue, formState:{errors} } = useForm({
         defaultValues: {
             firstName: "",
             lastName: "",
@@ -32,27 +59,45 @@ export default function Page() {
             driverLicense: "",
             ssn: "",
             referenceOneFirstName: "",
-        }
+        },
+        resolver: yupResolver(schema),
     })
 
     function submitHandler(values) {
         if (!aggree) {
             return Swal.fire({
                 title: 'Request Loan',
-                text: 'Please select terms and conditions',
+                text: 'Please accept Terms and Conditions to proceed',
                 icon: 'error'
             })
         }
         setLoading(true)
+        
         const formData = new FormData()
-
+        let isValid = true
+        
         for (const [key, value] of Object.entries(values)) {
+            
             if (key === 'driverLicenseImage' || key === 'checkFront' || key === "checkBack" || key === "paystubs") {
+                if(!value[0]){
+                    isValid = false
+                    Swal.fire({
+                        title: 'Request Loan',
+                        icon: "error",
+                        text: `${key} image is required`
+                    })
+                }
                 formData.append(key, value[0])
             } else {
                 formData.append(key, value)
             }
         }
+
+        if(!isValid) {
+            setLoading(false)
+            return
+        }
+
         postDataWithAuth('loan', formData).then(res => {
             setLoading(false)
             reset()
@@ -65,15 +110,16 @@ export default function Page() {
             })
         }).catch(err => {
             let errorHtml = ''
+            setLoading(false)
             if(isArray(err.message)){
                 err.message.map(m => {
                     errorHtml = errorHtml + `<li>${m}</li>`
                     return m
                 })
             }else{
+                console.log(err.message)
                 errorHtml = errorHtml + `<li>${err.message}</li>`
             }
-            setLoading(false)
             Swal.fire({
                 title: 'Request Loan',
                 html: `
@@ -107,7 +153,9 @@ export default function Page() {
                                 control={control}
                                 name='firstName'
                                 render={({ field }) => (
-                                    <Input {...field} placeholder='First Name' />
+                                    <Input style={{
+                                        border: errors.firstName ? "1px solid red":""
+                                    }} {...field} placeholder='First Name' />
                                 )}
                             />
                         </Col>
@@ -119,7 +167,13 @@ export default function Page() {
                                 control={control}
                                 name='lastName'
                                 render={({ field }) => (
-                                    <Input {...field} placeholder='Last name' />
+                                    <Input 
+                                        {...field} 
+                                        placeholder='Last name' 
+                                        style={{
+                                            border: errors.lastName ? "1px solid red":""
+                                        }}
+                                    />
                                 )}
                             />
                         </Col>
@@ -132,7 +186,13 @@ export default function Page() {
                             control={control}
                             name='currentAddress'
                             render={({ field }) => (
-                                <Input {...field} placeholder='Current address' />
+                                <Input 
+                                    {...field}
+                                    style={{
+                                        border: errors.currentAddress ? "1px solid red":""
+                                    }} 
+                                    placeholder='Current address' 
+                                />
                             )}
                         />
                     </div>
@@ -141,7 +201,13 @@ export default function Page() {
                             control={control}
                             name='currentAddress2'
                             render={({ field }) => (
-                                <Input {...field} placeholder='Address line 2' />
+                                <Input 
+                                    {...field}
+                                    style={{
+                                        border: errors.currentAddress2 ? "1px solid red":""
+                                    }}
+                                    placeholder='Address line 2' 
+                                />
                             )}
                         />
                     </div>
@@ -150,7 +216,13 @@ export default function Page() {
                             control={control}
                             name='city'
                             render={({ field }) => (
-                                <Input {...field} placeholder='City' />
+                                <Input 
+                                    {...field} 
+                                    style={{
+                                        border: errors.city ? "1px solid red":""
+                                    }}
+                                    placeholder='City' 
+                                />
                             )}
                         />
                     </div>
@@ -159,7 +231,13 @@ export default function Page() {
                             control={control}
                             name='state'
                             render={({ field }) => (
-                                <Input {...field} placeholder='State' />
+                                <Input 
+                                    {...field} 
+                                    placeholder='State'
+                                    style={{
+                                        border: errors.state ? "1px solid red":""
+                                    }}
+                                 />
                             )}
                         />
                     </div>
@@ -168,7 +246,14 @@ export default function Page() {
                             control={control}
                             name='zipCode'
                             render={({ field }) => (
-                                <Input {...field} placeholder='Zip Code' />
+                                <Input
+                                    type='number'
+                                    style={{
+                                        border: errors.zipCode ? "1px solid red":""
+                                    }}
+                                    {...field} 
+                                    placeholder='Zip Code' 
+                                />
                             )}
                         />
                     </div>
@@ -180,7 +265,14 @@ export default function Page() {
                             control={control}
                             name='cellPhone'
                             render={({ field }) => (
-                                <Input {...field} placeholder='Cell phone' />
+                                <Input
+                                    type='number'
+                                    style={{
+                                        border: errors.cellPhone ? "1px solid red":""
+                                    }}
+                                    {...field} 
+                                    placeholder='Cell phone'
+                                />
                             )}
                         />
                     </div>
@@ -192,7 +284,13 @@ export default function Page() {
                             control={control}
                             name='email'
                             render={({ field }) => (
-                                <Input {...field} placeholder='Email address' />
+                                <Input 
+                                    {...field} 
+                                    style={{
+                                        border: errors.email ? "1px solid red":""
+                                    }}
+                                    placeholder='Email address' 
+                                />
                             )}
                         />
                     </div>
@@ -204,7 +302,13 @@ export default function Page() {
                             control={control}
                             name='driverLicense'
                             render={({ field }) => (
-                                <Input {...field} placeholder="Drivers lisence/id" />
+                                <Input 
+                                    {...field} 
+                                    style={{
+                                        border: errors.driverLicense ? "1px solid red":""
+                                    }}
+                                    placeholder="Drivers lisence/id" 
+                                />
                             )}
                         />
                     </div>
@@ -216,14 +320,21 @@ export default function Page() {
                             control={control}
                             name='ssn'
                             render={({ field }) => (
-                                <Input {...field} placeholder="XXX-XXX-XXX" />
+                                <Input 
+                                    {...field}
+                                    type='number'
+                                    style={{
+                                        border: errors.ssn ? "1px solid red":""
+                                    }}
+                                    placeholder="XXX-XXX-XXX" 
+                                />
                             )}
                         />
                     </div>
                     <div className='mt-4' style={{ width: "100%", display: "flex", gap: "10px", justifyContent: "space-between", alignContent: "center", alignItems: "center" }}>
                         <Label>DRIVERS LICENSE / ID</Label>
                         <label style={{ cursor: "pointer", padding: '5px 10px', color: "white", background: "#62d0ab", border: 'none', outline: "none", borderRadius: "50px" }}>
-                            <input type="file" {...register('driverLicenseImage')} style={{ display: 'none' }} />
+                            <input required type="file" {...register('driverLicenseImage')} style={{ display: 'none' }} />
                             Choose a File
                         </label>
                         {watch('driverLicenseImage')?.length ? <img width={250} height="auto" src={URL.createObjectURL(watch('driverLicenseImage')[0])} /> : ""}
@@ -232,11 +343,11 @@ export default function Page() {
                         <Label>CHECK</Label>
                         <div style={{ display: 'flex', gap: "10px" }}>
                             <label style={{ cursor: "pointer", padding: '5px 10px', color: "white", background: "#62d0ab", border: 'none', outline: "none", borderRadius: "50px" }}>
-                                <input {...register('checkFront')} type="file" style={{ display: 'none' }} />
+                                <input required {...register('checkFront')} type="file" style={{ display: 'none' }} />
                                 Front Side
                             </label>
                             <label style={{ cursor: "pointer", padding: '5px 10px', color: "white", background: "#62d0ab", border: 'none', outline: "none", borderRadius: "50px" }}>
-                                <input {...register('checkBack')} type="file" style={{ display: 'none' }} />
+                                <input required {...register('checkBack')} type="file" style={{ display: 'none' }} />
                                 Back Side
                             </label>
                         </div>
@@ -246,7 +357,7 @@ export default function Page() {
                     <div className='mt-4' style={{ width: "100%", display: "flex", gap: "10px", justifyContent: "space-between", alignContent: "center", alignItems: "center" }}>
                         <Label>RECENT PAYSTUBS</Label>
                         <label style={{ cursor: "pointer", padding: '5px 10px', color: "white", background: "#62d0ab", border: 'none', outline: "none", borderRadius: "50px" }}>
-                            <input {...register('paystubs')} type="file" style={{ display: 'none' }} />
+                            <input required {...register('paystubs')} type="file" style={{ display: 'none' }} />
                             Choose a File
                         </label>
                         {watch('paystubs')?.length ? <img width={250} height="auto" src={URL.createObjectURL(watch('paystubs')[0])} /> : ""}
@@ -257,21 +368,40 @@ export default function Page() {
                             control={control}
                             name='referenceOneFirstName'
                             render={({ field }) => (
-                                <Input {...field} placeholder="First Name" />
+                                <Input 
+                                    {...field}
+                                    style={{
+                                        border: errors.referenceOneFirstName ? "1px solid red":""
+                                    }}
+                                    placeholder="First Name"
+                                />
                             )}
                         />
                         <Controller
                             control={control}
                             name='referenceOneLastName'
                             render={({ field }) => (
-                                <Input {...field} placeholder="Last Name" />
+                                <Input 
+                                    {...field} 
+                                    style={{
+                                        border: errors.referenceOneLastName ? "1px solid red":""
+                                    }}
+                                    placeholder="Last Name" 
+                                />
                             )}
                         />
                         <Controller
                             control={control}
                             name='referenceOnePhone'
                             render={({ field }) => (
-                                <Input {...field} placeholder="Phone" />
+                                <Input 
+                                    {...field} 
+                                    placeholder="Phone" 
+                                    type='number'
+                                    style={{
+                                        border: errors.referenceOnePhone ? "1px solid red":""
+                                    }}
+                                />
                             )}
                         />
                     </div>
@@ -281,21 +411,40 @@ export default function Page() {
                             control={control}
                             name='referenceTwoFirstName'
                             render={({ field }) => (
-                                <Input {...field} placeholder="First Name" />
+                                <Input 
+                                    {...field} 
+                                    style={{
+                                        border: errors.referenceTwoFirstName ? "1px solid red":""
+                                    }}
+                                    placeholder="First Name" 
+                                />
                             )}
                         />
                         <Controller
                             control={control}
                             name='referenceTwoLastName'
                             render={({ field }) => (
-                                <Input {...field} placeholder="Last Name" />
+                                <Input 
+                                    {...field} 
+                                    style={{
+                                        border: errors.referenceTwoLastName ? "1px solid red":""
+                                    }}
+                                    placeholder="Last Name" 
+                                />
                             )}
                         />
                         <Controller
                             control={control}
                             name='referenceTwoPhone'
                             render={({ field }) => (
-                                <Input {...field} placeholder="Phone" />
+                                <Input 
+                                    {...field} 
+                                    type='number'
+                                    style={{
+                                        border: errors.referenceTwoPhone ? "1px solid red":""
+                                    }}
+                                    placeholder="Phone" 
+                                />
                             )}
                         />
                     </div>
@@ -305,10 +454,18 @@ export default function Page() {
                             control={control}
                             name='amountRequested'
                             render={({ field }) => (
-                                <Input type='number' {...field} onChange={(e)=>{
-                                   setValue('amountRequested',e.target.value)
-                                   setValue('amountDue',e.target.value*1.25)
-                                }} placeholder="0" />
+                                <Input 
+                                    type='number' 
+                                    {...field}
+                                    style={{
+                                        border: errors.amountRequested ? "1px solid red":""
+                                    }}
+                                    onChange={(e)=>{
+                                        setValue('amountRequested',e.target.value)
+                                        setValue('amountDue',e.target.value*1.25)
+                                    }} 
+                                    placeholder="0" 
+                                />
                             )}
                         />
                         <Button style={{ background: "#62d0ab", border: 'none', outline: "none", borderRadius: "50px" }}>{formattedDate}</Button>
@@ -319,7 +476,12 @@ export default function Page() {
                             control={control}
                             name='amountDue'
                             render={({ field }) => (
-                                <Input disabled={true} {...field} placeholder="0" />
+                                <Input 
+                                    disabled={true} 
+                                    type='number'
+                                    {...field} 
+                                    placeholder="0" 
+                                />
                             )}
                         />
                         <Button style={{ background: "#62d0ab", border: 'none', outline: "none", borderRadius: "50px" }}>{formattedDate}</Button>
@@ -365,8 +527,25 @@ export default function Page() {
                             render={({ field }) => (
                                 <Input
                                     className='mt-3'
+                                    style={{
+                                        border: errors.paymentDetails ? "1px solid red":""
+                                    }}
                                     {...field}
                                     placeholder='Enter details of your prefered payment method'
+                                />
+                            )}
+                        />
+                        <Controller
+                            control={control}
+                            name='signature'
+                            render={({ field }) => (
+                                <Input
+                                    className='mt-3'
+                                    {...field}
+                                    style={{
+                                        border: errors.signature ? "1px solid red":""
+                                    }}
+                                    placeholder='Signature'
                                 />
                             )}
                         />
