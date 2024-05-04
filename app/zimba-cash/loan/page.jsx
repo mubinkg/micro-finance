@@ -67,8 +67,10 @@ export default function Page() {
 
     useEffect(()=>{
         const loan = getItem('loan')
-        for (const [key, value] of Object.entries(loan)) {
-            setValue(key, value)
+        if(loan){
+            for (const [key, value] of Object.entries(loan)) {
+                setValue(key, value)
+            }
         }
     }, [])
 

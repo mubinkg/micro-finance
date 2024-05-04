@@ -6,7 +6,7 @@ export function setItem(key, value){
 
 export function getItem(key){
     if(window !== undefined){
-        return JSON.parse(localStorage.getItem(key) || "" )
+        return JSON.parse(localStorage.getItem(key || ""))
     }
     return null
 }
