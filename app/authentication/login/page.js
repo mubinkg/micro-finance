@@ -59,7 +59,7 @@ export default function Page() {
                     <Button onClick={signinHandler} style={{ background: "#68069d" }} className='mt-4'>SIGN IN</Button>
                     <div style={{ display: "flex", justifyContent: "space-between", marginTop: "10px" }}>
                         <p style={{cursor: "pointer"}} onClick={()=>router.push('/authentication/forget-password')}>Forgot password?</p>
-                        <p style={{cursor: "pointer"}} onClick={()=>router.push('/authentication/registration')}>Sign Up</p>
+                        <p style={{cursor: "pointer", marginLeft: "10px"}} onClick={()=>router.push('/authentication/registration')}>Sign Up</p>
                     </div>
                 </div>
             </div>

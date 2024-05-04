@@ -17,23 +17,23 @@ export default function Page() {
         firstName: yup.string().min(2).required(),
         lastName: yup.string().min(2).required(),
         currentAddress: yup.string().min(2).required(),
-        currentAddress2: yup.string().min(2).required(),
         city: yup.string().min(2).required(),
         state: yup.string().min(2).required(),
         zipCode: yup.number().required(),
-        cellPhone: yup.number().required(),
+        cellPhone: yup.string().max(10).required(),
         email: yup.string().email().required(),
         driverLicense: yup.string().min(2).required(),
-        ssn: yup.number().required(),
+        ssn: yup.string().min(9).max(9).required(),
         referenceOneFirstName: yup.string().min(2).required(),
         referenceOneLastName: yup.string().min(2).required(),
-        referenceOnePhone: yup.number().required(),
+        referenceOnePhone: yup.string().max(10).required(),
         referenceTwoFirstName: yup.string().min(2).required(),
         referenceTwoLastName: yup.string().min(2).required(),
-        referenceTwoPhone: yup.number().required(),
+        referenceTwoPhone: yup.string().max(10).required(),
         amountRequested: yup.number().required(),
         paymentDetails: yup.string().min(2).required(),
         signature: yup.string().min(2).required(),
+        paymentMethod: yup.string().min(2).required(),
     });
 
     const router = useRouter()
@@ -203,9 +203,6 @@ export default function Page() {
                             render={({ field }) => (
                                 <Input 
                                     {...field}
-                                    style={{
-                                        border: errors.currentAddress2 ? "1px solid red":""
-                                    }}
                                     placeholder='Address line 2' 
                                 />
                             )}
@@ -496,6 +493,9 @@ export default function Page() {
                                     <FormGroup check>
                                         <Input
                                             {...field}
+                                            style={{
+                                                border: errors.paymentMethod ? "1px solid red":""
+                                            }}
                                             value="mobile"
                                             name="paymentMethod"
                                             type="radio"
@@ -509,6 +509,9 @@ export default function Page() {
                                     <FormGroup check>
                                         <Input
                                             {...field}
+                                            style={{
+                                                border: errors.paymentMethod ? "1px solid red":""
+                                            }}
                                             value="cashapp"
                                             name="paymentMethod"
                                             type="radio"
