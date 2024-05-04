@@ -5,7 +5,6 @@ var jwt = require('jsonwebtoken');
 // This function can be marked `async` if using `await` inside
 export function middleware(request) {
     const token = (request.cookies.get('access_token'))
-    console.log(token)
     
     const {pathname} = request.nextUrl
     

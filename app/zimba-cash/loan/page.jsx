@@ -3,9 +3,11 @@ import { useForm, Controller } from 'react-hook-form'
 import { Input, Label, Button, Row, Col } from 'reactstrap'
 import {postData} from '../../../utils/axiosUtils'
 import AppNav from '../../../components/Navbar'
+import { useState } from 'react'
 
 export default function Page() {
-    const { handleSubmit, register, control, watch } = useForm({
+    const [loading, setLoading] = useState(false)
+    const { handleSubmit, register, control, watch , reset} = useForm({
         defaultValues: {
             firstName: "",
             lastName: "",
@@ -22,6 +24,7 @@ export default function Page() {
     })
 
     function submitHandler(values) {
+        setLoading(true)
         const formData = new FormData()
 
         for (const [key, value] of Object.entries(values)) {
@@ -33,9 +36,11 @@ export default function Page() {
         }
         formData.append('paymentMethod', "TEst")
         postData('loan', formData).then(res=>{
-            console.log(res)
+            setLoading(false)
+            reset()
         }).catch(err=>{
-            console.log(err)
+            setLoading(false)
+            
         })
     }
 
@@ -307,8 +312,11 @@ export default function Page() {
                         style={{ background: "#68069d" }}
                         className='my-4'
                         onClick={handleSubmit(submitHandler)}
+                        disabled={loading}
                     >
-                        Submit
+                        {
+                            loading? "Submitting....":"Submit"
+                        }
                     </Button>
                 </div>
             </div>
