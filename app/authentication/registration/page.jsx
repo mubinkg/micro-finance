@@ -4,8 +4,10 @@ import { Input, Label, Button } from 'reactstrap'
 import Swal from 'sweetalert2'
 import {postData} from '../../../utils/axiosUtils'
 import AppNav from '../../../components/Navbar'
+import { useRouter } from 'next/navigation'
 
 export default function Page() {
+    const router = useRouter()
     const [firstName, setFirstName] = useState('')
     const [lastName, setLastName] = useState('')
     const [email, setEmail] = useState('')
@@ -31,6 +33,8 @@ export default function Page() {
                 title: "Registration",
                 text: "Please check your email to complete the sign up process. Check spam folder, if needed. Thank you!",
                 icon: "success"
+            }).then(()=>{
+                router.push('/authentication/login')
             })
         }).catch(err=>{
             Swal.fire({
