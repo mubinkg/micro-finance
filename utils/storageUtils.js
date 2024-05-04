@@ -4,6 +4,13 @@ export function setItem(key, value){
     }
 }
 
+export function getItem(key){
+    if(window !== undefined){
+        return JSON.parse(localStorage.getItem(key))
+    }
+    return null
+}
+
 export function getToken(key){
     if(window !== undefined){
         return JSON.parse(localStorage.getItem('token'))

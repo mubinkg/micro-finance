@@ -3,12 +3,13 @@ import { useForm, Controller } from 'react-hook-form'
 import { Input, Label, Button, Row, Col, FormGroup } from 'reactstrap'
 import { postDataWithAuth } from '../../../utils/axiosUtils'
 import AppNav from '../../../components/Navbar'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Swal from 'sweetalert2'
 import { isArray } from 'util'
 import { useRouter } from 'next/navigation'
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { getItem, removeItem, setItem } from '../../../utils/storageUtils'
 
 
 
@@ -35,6 +36,7 @@ export default function Page() {
         signature: yup.string().min(2).required(),
         paymentMethod: yup.string().min(2).required(),
     });
+    
 
     const router = useRouter()
     const today = new Date();
@@ -62,6 +64,27 @@ export default function Page() {
         },
         resolver: yupResolver(schema),
     })
+
+    useEffect(()=>{
+        const loan = getItem('loan')
+        for (const [key, value] of Object.entries(loan)) {
+            setValue(key, value)
+        }
+    }, [])
+
+    function saveLoan(values){
+        const savedValues = {}
+        for (const [key, value] of Object.entries(values)) {
+            
+            if (key === 'driverLicenseImage' || key === 'checkFront' || key === "checkBack" || key === "paystubs") {
+                console.log('file')
+            }else{
+                savedValues[key] = value
+            }
+        }
+        setItem('loan', JSON.stringify(savedValues))
+    }
+
 
     function submitHandler(values) {
         if (!aggree) {
@@ -106,6 +129,7 @@ export default function Page() {
                 text: 'Loan request accepted',
                 icon: "success"
             }).then(()=>{
+                removeItem('loan')
                 router.push('/zimba-cash/history')
             })
         }).catch(err => {
@@ -560,7 +584,7 @@ export default function Page() {
                         />
                         <p>Check Box to Agree <span onClick={()=>router.push('/zimba-cash/terms-conditions')} style={{color: "blue", cursor: "pointer"}}>Terms ans Conditions</span></p>
                     </div>
-                    <Button style={{ background: "#62d0ab" }} className='mt-4'>Save</Button>
+                    <Button onClick={handleSubmit(saveLoan)} style={{ background: "#62d0ab" }} className='mt-4'>Save</Button>
                     <Button
                         style={{ background: "#68069d" }}
                         className='my-4'
