@@ -5,6 +5,7 @@ import { postData } from '../../../utils/axiosUtils'
 import AppNav from '../../../components/Navbar'
 import { useState } from 'react'
 import Swal from 'sweetalert2'
+import { isArray } from 'util'
 
 export default function Page() {
     const today = new Date();
@@ -16,7 +17,7 @@ export default function Page() {
 
     const [loading, setLoading] = useState(false)
     const [aggree, setAgree] = useState(false)
-    const { handleSubmit, register, control, watch, reset } = useForm({
+    const { handleSubmit, register, control, watch, reset, setValue } = useForm({
         defaultValues: {
             firstName: "",
             lastName: "",
@@ -51,16 +52,24 @@ export default function Page() {
                 formData.append(key, value)
             }
         }
-        formData.append('paymentMethod', "TEst")
         postData('loan', formData).then(res => {
             setLoading(false)
             reset()
+            Swal.fire({
+                title: 'Request Loan',
+                text: 'Loan request accepted',
+                icon: "success"
+            })
         }).catch(err => {
             let errorHtml = ''
-            err.message.map(m => {
-                errorHtml = errorHtml + `<li>${m}</li>`
-                return m
-            })
+            if(isArray(err.message)){
+                err.message.map(m => {
+                    errorHtml = errorHtml + `<li>${m}</li>`
+                    return m
+                })
+            }else{
+                errorHtml = errorHtml + `<li>${err.message}</li>`
+            }
             setLoading(false)
             Swal.fire({
                 title: 'Request Loan',
@@ -293,7 +302,10 @@ export default function Page() {
                             control={control}
                             name='amountRequested'
                             render={({ field }) => (
-                                <Input {...field} placeholder="0" />
+                                <Input type='number' {...field} onChange={(e)=>{
+                                   setValue('amountRequested',e.target.value)
+                                   setValue('amountDue',e.target.value*1.25)
+                                }} placeholder="0" />
                             )}
                         />
                         <Button style={{ background: "#62d0ab", border: 'none', outline: "none", borderRadius: "50px" }}>{formattedDate}</Button>
@@ -304,7 +316,7 @@ export default function Page() {
                             control={control}
                             name='amountDue'
                             render={({ field }) => (
-                                <Input defaultValue={watch('amountRequested')*1.25} {...field} placeholder="0" />
+                                <Input disabled={true} {...field} placeholder="0" />
                             )}
                         />
                         <Button style={{ background: "#62d0ab", border: 'none', outline: "none", borderRadius: "50px" }}>{formattedDate}</Button>
@@ -346,13 +358,12 @@ export default function Page() {
                         />
                         <Controller
                             control={control}
-                            name=''
+                            name='paymentDetails'
                             render={({ field }) => (
                                 <Input
                                     className='mt-3'
                                     {...field}
                                     placeholder='Enter details of your prefered payment method'
-                                    onChange={(e) => console.log(e.target.checked)}
                                 />
                             )}
                         />
