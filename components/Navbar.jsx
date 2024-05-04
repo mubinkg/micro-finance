@@ -53,8 +53,8 @@ function AppNav() {
             {
               isAuth ? (
                 <>
-                  <Nav.Link >History</Nav.Link>
-                  <Nav.Link>Contact</Nav.Link>
+                  <Nav.Link onClick={()=>routerHandler('/zimba-cash/history')}>History</Nav.Link>
+                  <Nav.Link onClick={()=>routerHandler('/zimba-cash/loan')}>Loan</Nav.Link>
                   <Nav.Link onClick={logOutHandler}>Logout</Nav.Link>
                 </>
               ) : (
