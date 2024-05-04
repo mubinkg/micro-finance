@@ -33,7 +33,7 @@ export default function Page() {
         postData('mail', values).then(res=>{
             Swal.fire({
                 title:'Contact Us',
-                text: 'Mail sent success',
+                text: 'Mail sent successfully. Thank you!',
                 icon :"success"
             }).then(()=>{
                 reset()
