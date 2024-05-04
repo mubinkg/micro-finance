@@ -35,6 +35,7 @@ function AppNav() {
     getData(local_url).then(res => {
       window.location = '/';
       removeItem('user')
+      removeItem('token')
     }).catch(err => {
       console.log(err)
     })

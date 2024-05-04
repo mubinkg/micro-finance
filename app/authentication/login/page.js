@@ -4,6 +4,8 @@ import { Input, Label, Button } from 'reactstrap'
 import {postData} from '../../../utils/axiosUtils'
 import { useRouter } from 'next/navigation'
 import {setItem} from '../../../utils/storageUtils'
+import Swal from 'sweetalert2'
+
 import AppNav from '../../../components/Navbar'
 
 const prod_url = "http://54.236.12.28/api/login"
@@ -17,11 +19,16 @@ export default function Page() {
     const signinHandler = ()=>{
         postData(local_url, {email, password}).then(res=>{
             setItem('user', JSON.stringify(res.user))
+            setItem('token', JSON.stringify(res.token))
             setPassword('')
             setEmail('')
             window.location = ('/zimba-cash/loan')
         }).catch(err=>{
-            console.log(err)
+            Swal.fire({
+                title: 'Log In',
+                text: 'Please give valid credentials',
+                icon: 'error'
+            })
         })
     }
 
