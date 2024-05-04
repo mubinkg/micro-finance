@@ -3,6 +3,11 @@
 import { Table } from 'reactstrap'
 import { useRouter } from 'next/navigation'
 
+const statusMap = {
+    approve: 'Approved',
+    reject: "Rejected",
+    resubmit: 'Submited'
+}
 
 export default function DataTable({ data }) {
     const router = useRouter()
@@ -56,7 +61,7 @@ export default function DataTable({ data }) {
                                 {d.amountRequested}
                             </td>
                             <td>
-                                {d.status}
+                                {statusMap[d.status]}
                             </td>
                         </tr>
                     ))
