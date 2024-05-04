@@ -22,7 +22,7 @@ export default function Page() {
 
     const router = useRouter()
 
-    const { handleSubmit, control, formState: { errors } } = useForm({
+    const { handleSubmit,reset, control, formState: { errors } } = useForm({
         defaultValues: {
 
         },
@@ -35,6 +35,9 @@ export default function Page() {
                 title:'Contact Us',
                 text: 'Mail sent success',
                 icon :"success"
+            }).then(()=>{
+                reset()
+                router.push('/')
             })
         }).catch(err=>{
             Swal.fire({
