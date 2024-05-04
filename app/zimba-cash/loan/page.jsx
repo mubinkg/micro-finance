@@ -1,13 +1,22 @@
 'use client'
 import { useForm, Controller } from 'react-hook-form'
-import { Input, Label, Button, Row, Col } from 'reactstrap'
-import {postData} from '../../../utils/axiosUtils'
+import { Input, Label, Button, Row, Col, FormGroup } from 'reactstrap'
+import { postData } from '../../../utils/axiosUtils'
 import AppNav from '../../../components/Navbar'
 import { useState } from 'react'
+import Swal from 'sweetalert2'
 
 export default function Page() {
+    const today = new Date();
+    const dd = String(today.getDate()).padStart(2, '0');
+    const mm = String(today.getMonth() + 1).padStart(2, '0'); // January is 0!
+    const yyyy = today.getFullYear();
+
+    const formattedDate = `${mm}/${dd}/${yyyy}`;
+
     const [loading, setLoading] = useState(false)
-    const { handleSubmit, register, control, watch , reset} = useForm({
+    const [aggree, setAgree] = useState(false)
+    const { handleSubmit, register, control, watch, reset } = useForm({
         defaultValues: {
             firstName: "",
             lastName: "",
@@ -19,34 +28,55 @@ export default function Page() {
             email: "",
             driverLicense: "",
             ssn: "",
-            referenceOneFirstName: ""
+            referenceOneFirstName: "",
+            amountRequested: 0
         }
     })
 
     function submitHandler(values) {
+        if (!aggree) {
+            return Swal.fire({
+                title: 'Request Loan',
+                text: 'Please select terms and conditions',
+                icon: 'error'
+            })
+        }
         setLoading(true)
         const formData = new FormData()
 
         for (const [key, value] of Object.entries(values)) {
-            if(key === 'driverLicenseImage' || key === 'checkFront' || key === "checkBack" || key === "paystubs"){
-                formData.append(key,value[0])
-            }else{
+            if (key === 'driverLicenseImage' || key === 'checkFront' || key === "checkBack" || key === "paystubs") {
+                formData.append(key, value[0])
+            } else {
                 formData.append(key, value)
             }
         }
         formData.append('paymentMethod', "TEst")
-        postData('loan', formData).then(res=>{
+        postData('loan', formData).then(res => {
             setLoading(false)
             reset()
-        }).catch(err=>{
+        }).catch(err => {
+            let errorHtml = ''
+            err.message.map(m => {
+                errorHtml = errorHtml + `<li>${m}</li>`
+                return m
+            })
             setLoading(false)
-            
+            Swal.fire({
+                title: 'Request Loan',
+                html: `
+                    <ol>
+                        ${errorHtml}
+                    </ol>
+                `,
+                icon: 'error'
+            })
         })
     }
 
     return (
         <div>
-            <AppNav/>
+            <AppNav />
             <div style={{
                 display: "flex",
                 justifyContent: "center",
@@ -55,7 +85,7 @@ export default function Page() {
                 minHeight: "90vh"
             }}>
                 <div className='container' style={{ maxWidth: "800px", display: "flex", flexDirection: "column", justifyContent: "center", alignContent: "center", }}>
-                    <h5 style={{textAlign:"center"}} className='my-4'>Emergency Loans: Life happens, use borrowed money wisely</h5>
+                    <h5 style={{ textAlign: "center" }} className='my-4'>Emergency Loans: Life happens, use borrowed money wisely</h5>
                     <Row>
                         <Col lg={6} md={12}>
                             <Label>
@@ -184,7 +214,7 @@ export default function Page() {
                             <input type="file" {...register('driverLicenseImage')} style={{ display: 'none' }} />
                             Choose a File
                         </label>
-                        {watch('driverLicenseImage')?.length ? <img width={250} height="auto"  src={URL.createObjectURL(watch('driverLicenseImage')[0])}/> : ""}
+                        {watch('driverLicenseImage')?.length ? <img width={250} height="auto" src={URL.createObjectURL(watch('driverLicenseImage')[0])} /> : ""}
                     </div>
                     <div className='mt-4' style={{ width: "100%", display: "flex", justifyContent: "space-between", alignContent: "center", alignItems: "center" }}>
                         <Label>CHECK</Label>
@@ -198,8 +228,8 @@ export default function Page() {
                                 Back Side
                             </label>
                         </div>
-                        {watch('checkFront')?.length ? <img width={150} height="auto"  src={URL.createObjectURL(watch('checkFront')[0])}/> : ""}
-                        {watch('checkBack')?.length ? <img width={150} height="auto"  src={URL.createObjectURL(watch('checkBack')[0])}/> : ""}
+                        {watch('checkFront')?.length ? <img width={150} height="auto" src={URL.createObjectURL(watch('checkFront')[0])} /> : ""}
+                        {watch('checkBack')?.length ? <img width={150} height="auto" src={URL.createObjectURL(watch('checkBack')[0])} /> : ""}
                     </div>
                     <div className='mt-4' style={{ width: "100%", display: "flex", gap: "10px", justifyContent: "space-between", alignContent: "center", alignItems: "center" }}>
                         <Label>RECENT PAYSTUBS</Label>
@@ -207,7 +237,7 @@ export default function Page() {
                             <input {...register('paystubs')} type="file" style={{ display: 'none' }} />
                             Choose a File
                         </label>
-                        {watch('paystubs')?.length ? <img width={250} height="auto"  src={URL.createObjectURL(watch('paystubs')[0])}/> : ""}
+                        {watch('paystubs')?.length ? <img width={250} height="auto" src={URL.createObjectURL(watch('paystubs')[0])} /> : ""}
                     </div>
                     <Label className='my-2'>REFERENCE 1</Label>
                     <div style={{ width: "100%", display: "flex", gap: "10px" }}>
@@ -266,7 +296,7 @@ export default function Page() {
                                 <Input {...field} placeholder="0" />
                             )}
                         />
-                        <Button style={{ background: "#62d0ab", border: 'none', outline: "none", borderRadius: "50px" }}>11/04/2024</Button>
+                        <Button style={{ background: "#62d0ab", border: 'none', outline: "none", borderRadius: "50px" }}>{formattedDate}</Button>
                     </div>
                     <Label className='my-2'>AMOUNT DUE</Label>
                     <div style={{ width: "100%", display: "flex", gap: "10px" }}>
@@ -274,36 +304,63 @@ export default function Page() {
                             control={control}
                             name='amountDue'
                             render={({ field }) => (
-                                <Input {...field} placeholder="0" />
+                                <Input defaultValue={watch('amountRequested')*1.25} {...field} placeholder="0" />
                             )}
                         />
-                        <Button style={{ background: "#62d0ab", border: 'none', outline: "none", borderRadius: "50px" }}>11/04/2024</Button>
+                        <Button style={{ background: "#62d0ab", border: 'none', outline: "none", borderRadius: "50px" }}>{formattedDate}</Button>
                     </div>
-                    <Label className='my-2 text-center mt-2'>CHOOSE HOW WE PAY</Label>
+                    <Label className='my-2'>CHOOSE HOW WE PAY</Label>
                     <div style={{ width: "100%", display: "flex", flexDirection: "column" }}>
-                        <div style={{ display: 'flex', gap: "9px" }}>
-                            <Input
-                                type="checkbox"
-                                onChange={(e) => console.log(e.target.checked)}
-                            />
-                            <p>Mobile Banking (enter email or phone)</p>
-                        </div>
-                        <div style={{ display: 'flex', gap: "9px" }}>
-                            <Input
-                                type="checkbox"
-                                onChange={(e) => console.log(e.target.checked)}
-                            />
-                            <p>Cash App (enter $cashtag or username)</p>
-                        </div>
-                        <Input
-                            placeholder='Enter details of your prefered payment method'
-                            onChange={(e) => console.log(e.target.checked)}
+                        <Controller
+                            control={control}
+                            name='paymentMethod'
+                            render={({ field }) => (
+                                <>
+                                    <FormGroup check>
+                                        <Input
+                                            {...field}
+                                            value="mobile"
+                                            name="paymentMethod"
+                                            type="radio"
+
+                                        />
+                                        {' '}
+                                        <Label check>
+                                            Mobile Banking (enter email or phone)
+                                        </Label>
+                                    </FormGroup>
+                                    <FormGroup check>
+                                        <Input
+                                            {...field}
+                                            value="cashapp"
+                                            name="paymentMethod"
+                                            type="radio"
+                                        />
+                                        {' '}
+                                        <Label check>
+                                            Cash App (enter $cashtag or username)
+                                        </Label>
+                                    </FormGroup>
+                                </>
+                            )}
+                        />
+                        <Controller
+                            control={control}
+                            name=''
+                            render={({ field }) => (
+                                <Input
+                                    className='mt-3'
+                                    {...field}
+                                    placeholder='Enter details of your prefered payment method'
+                                    onChange={(e) => console.log(e.target.checked)}
+                                />
+                            )}
                         />
                     </div>
                     <div className='mt-3' style={{ display: 'flex', gap: "9px", justifyContent: "center" }}>
                         <Input
                             type="checkbox"
-                            onChange={(e) => console.log(e.target.checked)}
+                            onChange={(e) => setAgree(e.target.checked)}
                         />
                         <p>Check Box to Agree Terms ans Conditions</p>
                     </div>
@@ -315,7 +372,7 @@ export default function Page() {
                         disabled={loading}
                     >
                         {
-                            loading? "Submitting....":"Submit"
+                            loading ? "Submitting...." : "Submit"
                         }
                     </Button>
                 </div>
