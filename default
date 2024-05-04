@@ -1,10 +1,5 @@
 server {
     listen 80;
-    
-    location /images/ {
-        root /micro-finance-backend/upload;
-        autoindex off; # Optional: Disable directory listing
-    }
 
     location /backend/api/ {
         proxy_pass http://localhost:3001/; # Forward requests to your Nest.js application
@@ -13,6 +8,7 @@ server {
         proxy_set_header Connection 'upgrade';
         proxy_set_header Host $host;
         proxy_cache_bypass $http_upgrade;
+        client_max_body_size 100M;
     }
 
     location / {
