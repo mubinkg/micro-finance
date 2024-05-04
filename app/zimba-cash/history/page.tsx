@@ -1,7 +1,7 @@
 'use client'
 
 import AppNav from "../../../components/Navbar";
-import DataTable from '../../../components/DataTable'
+import ClientDataTable from '../../../components/ClientDataTable'
 import { Container } from "reactstrap";
 import { useEffect, useState } from "react";
 import { getDataWtihAuth } from "../../../utils/axiosUtils";
@@ -21,7 +21,7 @@ export default function Page(){
             <div style={{
                 
             }}>
-                <DataTable data={data}/> 
+                <ClientDataTable data={data}/> 
             </div>
         </Container>
     )
