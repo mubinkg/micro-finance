@@ -4,10 +4,10 @@ import { Input, Label, Button } from 'reactstrap'
 import Swal from 'sweetalert2'
 import {postData} from '../../../utils/axiosUtils'
 import AppNav from '../../../components/Navbar'
-
+import { useRouter } from 'next/navigation'
 
 export default function Page() {
-
+    const router = useRouter()
     const [email, setEmail] = useState('')
 
     const signupHandler = () => {
@@ -18,15 +18,17 @@ export default function Page() {
                 icon: "error"
             })
         }
-        postData('/user/registration', {
+        postData('/user/reset-password', {
             email,
         }).then(data=>{
             setEmail('')
             
             Swal.fire({
                 title: "Registration",
-                text: "Please check your email to complete the sign up process. Check spam folder, if needed. Thank you!",
+                text: "Please check your email to complete the reset process. Check spam folder, if needed. Thank you!",
                 icon: "success"
+            }).then(()=>{
+                router.push('/authentication/login')
             })
         }).catch(err=>{
             Swal.fire({
