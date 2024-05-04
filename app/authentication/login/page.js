@@ -17,7 +17,7 @@ export default function Page() {
     const router = useRouter()
 
     const signinHandler = ()=>{
-        postData(prod_url, {email, password}).then(res=>{
+        postData(local_url, {email, password}).then(res=>{
             setItem('user', JSON.stringify(res.user))
             setItem('token', JSON.stringify(res.token))
             setPassword('')
@@ -58,7 +58,7 @@ export default function Page() {
                     </div>
                     <Button onClick={signinHandler} style={{ background: "#68069d" }} className='mt-4'>SIGN IN</Button>
                     <div style={{ display: "flex", justifyContent: "space-between", marginTop: "10px" }}>
-                        <p style={{cursor: "pointer"}} onClick={()=>router.push('/authentication/forget-password')}>Forget your password?</p>
+                        <p style={{cursor: "pointer"}} onClick={()=>router.push('/authentication/forget-password')}>Forgot password?</p>
                         <p style={{cursor: "pointer"}} onClick={()=>router.push('/authentication/registration')}>Sign Up</p>
                     </div>
                 </div>

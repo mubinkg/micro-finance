@@ -29,7 +29,7 @@ export function middleware(request) {
             }
         }
     }else{
-        console.log('Ok')
+
         if(pathname === '/'){
             return NextResponse.next()
         }

@@ -76,6 +76,10 @@ export default function Page() {
                         <Input value={email} onChange={(e) => setEmail(e.target.value)} />
                     </div>
                     <Button style={{ background: "#68069d" }} className='mt-4' onClick={signupHandler}>SIGN UP</Button>
+                    <div style={{display: 'flex',marginTop: "10px", justifyContent: "center" }}>
+                        <p style={{cursor: "pointer"}} onClick={()=>router.push('/authentication/forget-password')}>Already have an account?</p>
+                        <p style={{cursor: "pointer", color: "blue"}} onClick={()=>router.push('/authentication/login')}>Log In</p>
+                    </div>
                 </div>
             </div>
         </div>
