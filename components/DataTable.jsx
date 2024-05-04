@@ -7,6 +7,7 @@ const statusMap = {
     approve: 'Approved',
     reject: "Rejected",
     resubmit: 'Submited'
+    pending: 'Pending'
 }
 
 export default function DataTable({ data }) {
