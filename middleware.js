@@ -5,10 +5,6 @@ var jwt = require('jsonwebtoken');
 // This function can be marked `async` if using `await` inside
 export function middleware(request) {
     const token = (request.cookies.get('access_token'))
-
-    if(pathname === '/zimba-cash/contact' || pathname === '/zimba-cash/terms-conditions'){
-        return NextResponse.next()
-    }
     
     const {pathname} = request.nextUrl
     
