@@ -32,7 +32,6 @@ export default function Page() {
             driverLicense: "",
             ssn: "",
             referenceOneFirstName: "",
-            amountRequested: 0
         }
     })
 
