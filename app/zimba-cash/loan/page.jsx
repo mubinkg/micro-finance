@@ -88,7 +88,7 @@ export default function Page() {
     }
 
     return (
-        <div>
+        <div style={{marginBottom: "200px"}}>
             <AppNav />
             <div style={{
                 display: "flex",
@@ -377,7 +377,7 @@ export default function Page() {
                             type="checkbox"
                             onChange={(e) => setAgree(e.target.checked)}
                         />
-                        <p>Check Box to Agree Terms ans Conditions</p>
+                        <p>Check Box to Agree <span onClick={()=>router.push('/zimba-cash/terms-conditions')} style={{color: "blue", cursor: "pointer"}}>Terms ans Conditions</span></p>
                     </div>
                     <Button style={{ background: "#62d0ab" }} className='mt-4'>Save</Button>
                     <Button
