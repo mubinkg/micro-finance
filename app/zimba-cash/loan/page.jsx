@@ -69,6 +69,8 @@ export default function Page() {
             driverLicense: "",
             ssn: "",
             referenceOneFirstName: "",
+            amountDueDate: amountDueDate,
+            amoundRequestedDate: amoundRequestedDate
         },
         resolver: yupResolver(schema),
     })
