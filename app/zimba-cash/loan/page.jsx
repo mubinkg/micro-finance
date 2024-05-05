@@ -20,7 +20,7 @@ export default function Page() {
         currentAddress: yup.string().min(2).required(),
         city: yup.string().min(2).required(),
         state: yup.string().min(2).required(),
-        zipCode: yup.number().min(5).max(5).required(),
+        zipCode: yup.string().min(5).max(5).required(),
         cellPhone: yup.string().min(10).max(10).required(),
         email: yup.string().email().required(),
         driverLicense: yup.string().min(2).required(),
@@ -84,6 +84,11 @@ export default function Page() {
         }
     }, [])
 
+    function setAmountDate(){
+        setValue('amoundRequestedDate', amoundRequestedDate)
+        setValue('amountDueDate', amountDueDate)
+    }
+
     function saveLoan(values){
         const savedValues = {}
         for (const [key, value] of Object.entries(values)) {
@@ -97,8 +102,8 @@ export default function Page() {
         setItem('loan', JSON.stringify(savedValues))
     }
 
-
     function submitHandler(values) {
+        setAmountDate()
         if (!aggree) {
             return Swal.fire({
                 title: 'Request Loan',
@@ -495,6 +500,7 @@ export default function Page() {
                                         border: errors.amountRequested ? "1px solid red":""
                                     }}
                                     onChange={(e)=>{
+                                        setAmountDate()
                                         setValue('amountRequested',e.target.value)
                                         setValue('amountDue',e.target.value*1.25)
                                     }} 
