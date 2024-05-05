@@ -19,7 +19,7 @@ export default function ClientDataTable({ data }) {
                         Last Name
                     </th>
                     <th>
-                        ISSN
+                        SSN
                     </th>
                     <th>
                         Amount

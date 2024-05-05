@@ -32,7 +32,7 @@ export default function DataTable({ data }) {
                         Last Name
                     </th>
                     <th>
-                        ISSN
+                        SSN
                     </th>
                     <th>
                         Amount
