@@ -50,7 +50,6 @@ export default function Page() {
 
     return (
         <div style={{ marginBottom: "200px" }}>
-            <AppNav />
             <div style={{
                 minHeight: "70vh"
             }}>

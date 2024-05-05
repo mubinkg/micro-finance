@@ -7,6 +7,14 @@ export function middleware(request) {
     const token = (request.cookies.get('access_token'))
     
     const {pathname} = request.nextUrl
+
+    if(pathname === '/zimba-cash/contact'){
+        return NextResponse.next()
+    }
+
+    if(pathname === '/zimba-cash/terms-conditions'){
+        return NextResponse.next()
+    }
     
     if(token){
         var decoded = jwt.decode(token.value);
