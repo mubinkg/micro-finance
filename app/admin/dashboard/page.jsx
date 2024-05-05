@@ -11,6 +11,7 @@ import {getData} from '../../../utils/axiosUtils'
 import ApplicantsDataTable from '../../../components/ApplicantsDataTable'
 import logo from '../../../public/L-5.jpg'
 import Image from 'next/image'
+import { removeItem } from '../../../utils/storageUtils'
 
 
 const prod_url = "http://54.236.12.28/api/logout"
@@ -27,6 +28,7 @@ export default function Page() {
         getData(prod_url).then(res=>{
             window.location = '/';
             removeItem('user')
+            removeItem('token')
         }).catch(err=>{
             console.log(err)
         })
