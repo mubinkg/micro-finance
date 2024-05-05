@@ -6,6 +6,12 @@ import { Container, Row, Col, Button } from 'reactstrap'
 import Image from 'next/image'
 import Swal from 'sweetalert2'
 
+const statusMap = {
+    approve: 'Approved',
+    reject: "Rejected",
+    resubmit: 'Resubmit',
+    pending: 'Pending'
+}
 
 export default function LoanDetils() {
     const searchParams = useSearchParams();
@@ -47,7 +53,7 @@ export default function LoanDetils() {
                     <Col lg={12} sm={12} align="center">
                         <h5>Applicant Name : {data?.firstName} {data?.lastName}</h5>
                         <h5>Amount : {data?.amountRequested}</h5>
-                        <h5>Status : {data?.status}</h5>
+                        <h5>Status : {statusMap[data?.status]}</h5>
                         <h5>Current Address : {data?.currentAddress}</h5>
                         <h5>Address Line2 : {data?.currentAddress2}</h5>
                         <h5>State: {data?.state}</h5>

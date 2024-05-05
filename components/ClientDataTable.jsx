@@ -2,9 +2,15 @@
 
 import { Table } from 'reactstrap'
 
+const statusMap = {
+    approve: 'Approved',
+    reject: "Rejected",
+    resubmit: 'Resubmit',
+    pending: 'Pending'
+}
+
 export default function ClientDataTable({ data }) {
 
-    
     return (
         <Table hover className='mt-4'>
             <thead>
@@ -49,7 +55,7 @@ export default function ClientDataTable({ data }) {
                                 {d.amountRequested}
                             </td>
                             <td>
-                                {d.status}
+                                {statusMap[d.status]}
                             </td>
                         </tr>
                     ))
