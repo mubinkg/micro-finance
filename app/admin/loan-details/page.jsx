@@ -45,9 +45,11 @@ export default function LoanDetils() {
                 </div>
                 <Row className="justify-content-center">
                     <Col lg={12} sm={12} align="center">
-                        <h2>Applicant Name : {data?.firstName} {data?.lastName}</h2>
-                        <h2>Amount : {data?.amountRequested}</h2>
-                        <h2>Status : {data?.status}</h2>
+                        <h5>Applicant Name : {data?.firstName} {data?.lastName}</h5>
+                        <h5>Amount : {data?.amountRequested}</h5>
+                        <h5>Status : {data?.status}</h5>
+                        <h5>Current Address : {data?.currentAddress}</h5>
+                        <h5>Address Line2 : {data?.currentAddress2}</h5>
                         <Row>
                             <Col lg={6} sm={12}>
                                 <h5>Driver License Image</h5>

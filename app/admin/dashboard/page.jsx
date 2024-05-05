@@ -24,7 +24,7 @@ export default function Page() {
     const [userCount, setUserCount] = useState(0)
 
     const logOutHandler = ()=>{
-        getData(prod_url).then(res=>{
+        getData(local_url).then(res=>{
             window.location = '/';
             removeItem('user')
         }).catch(err=>{

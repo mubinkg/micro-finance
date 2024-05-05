@@ -20,17 +20,17 @@ export default function Page() {
         currentAddress: yup.string().min(2).required(),
         city: yup.string().min(2).required(),
         state: yup.string().min(2).required(),
-        zipCode: yup.number().required(),
-        cellPhone: yup.string().max(10).required(),
+        zipCode: yup.number().min(5).max(5).required(),
+        cellPhone: yup.string().min(10).max(10).required(),
         email: yup.string().email().required(),
         driverLicense: yup.string().min(2).required(),
         ssn: yup.string().min(9).max(9).required(),
         referenceOneFirstName: yup.string().min(2).required(),
         referenceOneLastName: yup.string().min(2).required(),
-        referenceOnePhone: yup.string().max(10).required(),
+        referenceOnePhone: yup.string().min(10).max(10).required(),
         referenceTwoFirstName: yup.string().min(2).required(),
         referenceTwoLastName: yup.string().min(2).required(),
-        referenceTwoPhone: yup.string().max(10).required(),
+        referenceTwoPhone: yup.string().min(10).max(10).required(),
         amountRequested: yup.number().required(),
         paymentDetails: yup.string().min(2).required(),
         signature: yup.string().min(2).required(),
@@ -96,6 +96,7 @@ export default function Page() {
                 icon: 'error'
             })
         }
+        
         setLoading(true)
         
         const formData = new FormData()

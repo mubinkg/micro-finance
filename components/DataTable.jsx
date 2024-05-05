@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation'
 const statusMap = {
     approve: 'Approved',
     reject: "Rejected",
-    resubmit: 'Submited',
+    resubmit: 'Re-Submit',
     pending: 'Pending'
 }
 
