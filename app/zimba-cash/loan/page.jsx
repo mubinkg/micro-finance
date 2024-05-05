@@ -39,12 +39,20 @@ export default function Page() {
     
 
     const router = useRouter()
-    const today = new Date();
-    const dd = String(today.getDate()).padStart(2, '0');
-    const mm = String(today.getMonth() + 1).padStart(2, '0'); // January is 0!
-    const yyyy = today.getFullYear();
+    let today = new Date();
+    let dd = String(today.getDate()).padStart(2, '0');
+    let mm = String(today.getMonth() + 1).padStart(2, '0'); // January is 0!
+    let yyyy = today.getFullYear();
 
-    const formattedDate = `${mm}/${dd}/${yyyy}`;
+    const amoundRequestedDate = `${mm}/${dd}/${yyyy}`;
+
+    const fourteenDaysInMilliseconds = 14 * 24 * 60 * 60 * 1000;
+    today =  new Date(today.getTime()+fourteenDaysInMilliseconds);
+    dd = String(today.getDate()).padStart(2, '0');
+    mm = String(today.getMonth() + 1).padStart(2, '0'); // January is 0!
+    yyyy = today.getFullYear();
+
+    const amountDueDate = `${mm}/${dd}/${yyyy}`;
 
     const [loading, setLoading] = useState(false)
     const [aggree, setAgree] = useState(false)
@@ -492,7 +500,7 @@ export default function Page() {
                                 />
                             )}
                         />
-                        <Button style={{ background: "#62d0ab", border: 'none', outline: "none", borderRadius: "50px" }}>{formattedDate}</Button>
+                        <Button style={{ background: "#62d0ab", border: 'none', outline: "none", borderRadius: "50px" }}>{amoundRequestedDate}</Button>
                     </div>
                     <Label className='my-2'>AMOUNT DUE</Label>
                     <div style={{ width: "100%", display: "flex", gap: "10px" }}>
@@ -508,7 +516,7 @@ export default function Page() {
                                 />
                             )}
                         />
-                        <Button style={{ background: "#62d0ab", border: 'none', outline: "none", borderRadius: "50px" }}>{formattedDate}</Button>
+                        <Button style={{ background: "#62d0ab", border: 'none', outline: "none", borderRadius: "50px" }}>{amountDueDate}</Button>
                     </div>
                     <Label className='my-2'>CHOOSE HOW WE PAY</Label>
                     <div style={{ width: "100%", display: "flex", flexDirection: "column" }}>
