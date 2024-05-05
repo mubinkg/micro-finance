@@ -2,7 +2,6 @@
 import { useForm, Controller } from 'react-hook-form'
 import { Input, Label, Button, Row, Col } from 'reactstrap'
 import { postData } from '../../../utils/axiosUtils'
-import AppNav from '../../../components/Navbar'
 import Swal from 'sweetalert2'
 import { useRouter } from 'next/navigation'
 import * as yup from "yup";
