@@ -17,7 +17,7 @@ export default function Page() {
     const router = useRouter()
 
     const signinHandler = ()=>{
-        postData(prod_url, {email, password}).then(res=>{
+        postData(local_url, {email, password}).then(res=>{
             setItem('user', JSON.stringify(res.user))
             setItem('token', JSON.stringify(res.token))
             setPassword('')

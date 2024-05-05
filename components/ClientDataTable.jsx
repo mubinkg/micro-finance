@@ -1,6 +1,7 @@
 'use client'
 
-import { Table } from 'reactstrap'
+import { Table,Button } from 'reactstrap'
+import { useRouter } from 'next/navigation'
 
 const statusMap = {
     approve: 'Approved',
@@ -10,6 +11,13 @@ const statusMap = {
 }
 
 export default function ClientDataTable({ data }) {
+
+    const router = useRouter()
+    const createQueryString = (name, value) => {
+        const params = new URLSearchParams();
+        params.set(name, value);
+        return params.toString();
+    };
 
     return (
         <Table hover className='mt-4'>
@@ -55,7 +63,7 @@ export default function ClientDataTable({ data }) {
                                 {d.amountRequested}
                             </td>
                             <td>
-                                {statusMap[d.status]}
+                                {d.status === 'resubmit'?<Button onClick={()=>router.push('/zimba-cash/resubmit'+ "?" + createQueryString('id',d._id))} color='primary'>{statusMap[d.status]}</Button>:statusMap[d.status]}
                             </td>
                         </tr>
                     ))
