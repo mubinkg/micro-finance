@@ -41,7 +41,7 @@ export default function Page() {
         }).catch(err=>{
             Swal.fire({
                 title:'Contact Us',
-                text: 'Error on sendin gmail',
+                text: 'Error on sending gmail',
                 icon :"error"
             })
         })

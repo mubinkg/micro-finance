@@ -23,7 +23,7 @@ export default function LoanDetils() {
         patchDataWtihAuth('loan/' + searchParams.get('id'), { status }).then(res => {
             Swal.fire({
                 title: 'Loan',
-                text: 'Loan status update successfull',
+                text: 'Loan status updated successfully',
                 icon: 'success'
             })
             setData(res.data)

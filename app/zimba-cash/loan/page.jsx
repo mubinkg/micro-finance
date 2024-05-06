@@ -121,11 +121,20 @@ export default function Page() {
             
             if (key === 'driverLicenseImage' || key === 'checkFront' || key === "checkBack" || key === "paystubs") {
                 if(!value[0]){
+                    let message = ""
+                    if(key === 'paystubs'){
+                        message = "Copy of paystub is required"
+                    }
+                    else if(key === 'checkFront' || key === "checkBack"){
+                        message = "Front and Back copies of a signed check are required"
+                    }else{
+                        message = "Driver licencse image is required"
+                    }
                     isValid = false
                     Swal.fire({
                         title: 'Request Loan',
                         icon: "error",
-                        text: `${key} image is required`
+                        text: message
                     })
                 }
                 formData.append(key, value[0])
@@ -143,8 +152,10 @@ export default function Page() {
             setLoading(false)
             reset()
             Swal.fire({
-                title: 'Request Loan',
-                text: 'Loan request accepted',
+                title: "Loan Application",
+                text: `Loan successfully submitted.
+                Our team is reviewing, and will respond shortly. You may get an SMS notification about
+                loan status. You can also check status under "History"`,
                 icon: "success"
             }).then(()=>{
                 removeItem('loan')
