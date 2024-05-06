@@ -19,7 +19,7 @@ export default function Page(){
         <Container style={{
             minHeight: "90vh"
         }}>
-            <AppNav />
+            <AppNav hideSideNav={false}/>
             <div style={{
                 
             }}>

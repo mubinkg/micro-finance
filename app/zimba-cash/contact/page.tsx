@@ -6,6 +6,7 @@ import Swal from 'sweetalert2'
 import { useRouter } from 'next/navigation'
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
+import AppNav from '../../../components/Navbar'
 
 
 
@@ -49,6 +50,7 @@ export default function Page() {
 
     return (
         <div style={{ marginBottom: "200px" }}>
+            <AppNav hideSideNav={true}/>
             <div style={{
                 minHeight: "70vh"
             }}>

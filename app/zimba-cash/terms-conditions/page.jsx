@@ -1,7 +1,10 @@
 import {Container} from 'reactstrap'
+import AppNav from '../../../components/Navbar'
 
 export default function Page(){
     return(
+        <>
+        <AppNav hideSideNav={true}/>
         <Container className='mt-4'>
             <p>Terms & Conditions</p>
             <p>Notice: A short term loan provides the cash needed to meet an immediate short-term cash flow problem. It is not a solution for longer term financial problems for which longer term financing may be more appropriate. You may want to discuss your financial situation with a nonprofit financial counseling service in your community. You may be charged additional fees if you renew the loan.</p>
@@ -38,5 +41,6 @@ export default function Page(){
             <p>12. Links. This Site may contain links to sites maintained by third parties. zimbacash.com d/b/a zimbacash.com is not responsible for the content, terms and conditions or privacy policies of those sites. Any such links should not be considered an endorsement or recommendation of those sites or of any product or service offered on those sites or of any party that is associated with those sites. Please note that other web sites and web pages linked to this Site may have their own or be governed by separate terms and conditions, including privacy policies. Please refer to the applicable terms and conditions of those web sites and web pages when visiting them.</p>
             <p>13. Persons under 18. This Site should not be accessed by persons under the age of 18.</p>
         </Container>
+        </>
     )
 }

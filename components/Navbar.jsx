@@ -14,7 +14,7 @@ import { removeItem } from '../utils/storageUtils';
 const prod_url = "http://54.236.12.28/api/logout"
 const local_url = "http://localhost:3000/api/logout"
 
-function AppNav() {
+function AppNav({ hideSideNav }) {
   const [isAuth, setAuth] = useState(false)
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -47,27 +47,29 @@ function AppNav() {
         <Navbar.Brand onClick={() => routerHandler('/')}>
           <Image src={logo} width={100} />
         </Navbar.Brand>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
-        <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="justify-content-end" style={{ width: "100%" }}>
-            {
-              isAuth ? (
-                <>
-                  <Nav.Link onClick={()=>routerHandler('/zimba-cash/history')}>History</Nav.Link>
-                  <Nav.Link onClick={()=>routerHandler('/zimba-cash/loan')}>Loan</Nav.Link>
-                  <Nav.Link onClick={()=>routerHandler('/zimba-cash/contact')}>Contact</Nav.Link>
-                  <Nav.Link onClick={logOutHandler}>Logout</Nav.Link>
-                </>
-              ) : (
-                <>
-                  <Nav.Link >Contact</Nav.Link>
-                  <Nav.Link onClick={() => routerHandler('/authentication/login')}>Login</Nav.Link>
-                  <Nav.Link onClick={() => routerHandler('/authentication/registration')}>Register</Nav.Link>
-                </>
-              )
-            }
-          </Nav>
-        </Navbar.Collapse>
+        {
+          !hideSideNav ? (<>        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+            <Navbar.Collapse id="basic-navbar-nav">
+              <Nav className="justify-content-end" style={{ width: "100%" }}>
+                {
+                  isAuth ? (
+                    <>
+                      <Nav.Link onClick={() => routerHandler('/zimba-cash/history')}>History</Nav.Link>
+                      <Nav.Link onClick={() => routerHandler('/zimba-cash/loan')}>Loan</Nav.Link>
+                      <Nav.Link onClick={() => routerHandler('/zimba-cash/contact')}>Contact</Nav.Link>
+                      <Nav.Link onClick={logOutHandler}>Logout</Nav.Link>
+                    </>
+                  ) : (
+                    <>
+                      <Nav.Link >Contact</Nav.Link>
+                      <Nav.Link onClick={() => routerHandler('/authentication/login')}>Login</Nav.Link>
+                      <Nav.Link onClick={() => routerHandler('/authentication/registration')}>Register</Nav.Link>
+                    </>
+                  )
+                }
+              </Nav>
+            </Navbar.Collapse></>) : ""
+        }
       </Container>
     </Navbar>
   );
