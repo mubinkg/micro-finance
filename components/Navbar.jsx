@@ -44,7 +44,7 @@ function AppNav({ hideSideNav }) {
   return (
     <Navbar expand="lg">
       <Container>
-        <Navbar.Brand onClick={() => routerHandler('/')}>
+        <Navbar.Brand onClick={() => routerHandler('/')} style={{cursor: "pointer"}}>
           <Image src={logo} width={100} />
         </Navbar.Brand>
         {
