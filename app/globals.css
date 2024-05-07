@@ -5,7 +5,7 @@
 }
 
 .main{
-  background-image: url('../public/zimba3.png');
+  background-image: url('../public/bg1.jpeg');
   background-repeat: no-repeat;
   background-size:cover;
   min-height: 600px;
@@ -29,6 +29,7 @@
 @media screen and (max-width: 480px) {
   .main {
     background-size:cover;
-    background-image: url('../public/zimba.png');
+    background-position:center;
+    background-image: url('../public/bg1.jpeg');
   }
 }
