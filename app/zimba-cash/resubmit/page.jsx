@@ -1,12 +1,12 @@
 'use client'
 import { useForm, Controller } from 'react-hook-form'
 import { Input, Label, Button, Row, Col, FormGroup } from 'reactstrap'
-import { postDataWithAuth,getData } from '../../../utils/axiosUtils'
+import { postDataWithAuth, getData, putDataWtihAuth } from '../../../utils/axiosUtils'
 import AppNav from '../../../components/Navbar'
 import { useEffect, useState } from 'react'
 import Swal from 'sweetalert2'
 import { isArray } from 'util'
-import { useRouter,useSearchParams } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { getItem, removeItem, setItem } from '../../../utils/storageUtils'
@@ -35,13 +35,13 @@ export default function Page() {
         signature: yup.string().min(2).required(),
         paymentMethod: yup.string().min(2).required(),
     });
-    
+
 
     const router = useRouter()
 
     const [loading, setLoading] = useState(false)
     const [aggree, setAgree] = useState(false)
-    const { handleSubmit, register, control, watch, reset, setValue, formState:{errors} } = useForm({
+    const { handleSubmit, register, control, watch, reset, setValue, formState: { errors, dirtyFields } } = useForm({
         defaultValues: {
         },
         resolver: yupResolver(schema),
@@ -49,7 +49,7 @@ export default function Page() {
 
     useEffect(() => {
         getData('/loan/' + searchParams.get('id')).then(loan => {
-            if(loan){
+            if (loan) {
                 for (const [key, value] of Object.entries(loan)) {
                     setValue(key, value)
                 }
@@ -57,7 +57,8 @@ export default function Page() {
         })
     }, [searchParams.get('id')])
 
-    function submitHandler(values) {
+    function submitHandler(data) {
+
         if (!aggree) {
             return Swal.fire({
                 title: 'Request Loan',
@@ -65,13 +66,23 @@ export default function Page() {
                 icon: 'error'
             })
         }
-        
+
+        const dirtyValues = Object.keys(dirtyFields)
+            .reduce((acc, field) => {
+                acc[field] = data[field];
+                return acc;
+            }, {});
+
+        // Submit only the modified data (dirtyValues)
+        console.log(dirtyValues);
+
         setLoading(true)
-        
+
         const formData = new FormData()
-        
-        for (const [key, value] of Object.entries(values)) {
-            
+        formData.append('id', searchParams.get('id'))
+
+        for (const [key, value] of Object.entries(dirtyValues)) {
+
             if (key === 'driverLicenseImage' || key === 'checkFront' || key === "checkBack" || key === "paystubs") {
                 formData.append(key, value[0])
             } else {
@@ -79,26 +90,26 @@ export default function Page() {
             }
         }
 
-        postDataWithAuth('loan', formData).then(res => {
+        putDataWtihAuth('loan', formData).then(res => {
             setLoading(false)
             reset()
             Swal.fire({
                 title: 'Request Loan',
                 text: 'Loan request accepted',
                 icon: "success"
-            }).then(()=>{
+            }).then(() => {
                 removeItem('loan')
                 router.push('/zimba-cash/history')
             })
         }).catch(err => {
             let errorHtml = ''
             setLoading(false)
-            if(isArray(err.message)){
+            if (isArray(err.message)) {
                 err.message.map(m => {
                     errorHtml = errorHtml + `<li>${m}</li>`
                     return m
                 })
-            }else{
+            } else {
                 console.log(err.message)
                 errorHtml = errorHtml + `<li>${err.message}</li>`
             }
@@ -111,11 +122,13 @@ export default function Page() {
                 `,
                 icon: 'error'
             })
+        }).finally(()=>{
+            setLoading(false)
         })
     }
 
     return (
-        <div style={{marginBottom: "200px"}}>
+        <div style={{ marginBottom: "200px" }}>
             <AppNav />
             <div style={{
                 display: "flex",
@@ -136,7 +149,7 @@ export default function Page() {
                                 name='firstName'
                                 render={({ field }) => (
                                     <Input style={{
-                                        border: errors.firstName ? "1px solid red":""
+                                        border: errors.firstName ? "1px solid red" : ""
                                     }} {...field} placeholder='First Name' />
                                 )}
                             />
@@ -149,11 +162,11 @@ export default function Page() {
                                 control={control}
                                 name='lastName'
                                 render={({ field }) => (
-                                    <Input 
-                                        {...field} 
-                                        placeholder='Last name' 
+                                    <Input
+                                        {...field}
+                                        placeholder='Last name'
                                         style={{
-                                            border: errors.lastName ? "1px solid red":""
+                                            border: errors.lastName ? "1px solid red" : ""
                                         }}
                                     />
                                 )}
@@ -168,12 +181,12 @@ export default function Page() {
                             control={control}
                             name='currentAddress'
                             render={({ field }) => (
-                                <Input 
+                                <Input
                                     {...field}
                                     style={{
-                                        border: errors.currentAddress ? "1px solid red":""
-                                    }} 
-                                    placeholder='Current address' 
+                                        border: errors.currentAddress ? "1px solid red" : ""
+                                    }}
+                                    placeholder='Current address'
                                 />
                             )}
                         />
@@ -183,9 +196,9 @@ export default function Page() {
                             control={control}
                             name='currentAddress2'
                             render={({ field }) => (
-                                <Input 
+                                <Input
                                     {...field}
-                                    placeholder='Address line 2' 
+                                    placeholder='Address line 2'
                                 />
                             )}
                         />
@@ -195,12 +208,12 @@ export default function Page() {
                             control={control}
                             name='city'
                             render={({ field }) => (
-                                <Input 
-                                    {...field} 
+                                <Input
+                                    {...field}
                                     style={{
-                                        border: errors.city ? "1px solid red":""
+                                        border: errors.city ? "1px solid red" : ""
                                     }}
-                                    placeholder='City' 
+                                    placeholder='City'
                                 />
                             )}
                         />
@@ -210,13 +223,13 @@ export default function Page() {
                             control={control}
                             name='state'
                             render={({ field }) => (
-                                <Input 
-                                    {...field} 
+                                <Input
+                                    {...field}
                                     placeholder='State'
                                     style={{
-                                        border: errors.state ? "1px solid red":""
+                                        border: errors.state ? "1px solid red" : ""
                                     }}
-                                 />
+                                />
                             )}
                         />
                     </div>
@@ -228,10 +241,10 @@ export default function Page() {
                                 <Input
                                     type='number'
                                     style={{
-                                        border: errors.zipCode ? "1px solid red":""
+                                        border: errors.zipCode ? "1px solid red" : ""
                                     }}
-                                    {...field} 
-                                    placeholder='Zip Code' 
+                                    {...field}
+                                    placeholder='Zip Code'
                                 />
                             )}
                         />
@@ -247,9 +260,9 @@ export default function Page() {
                                 <Input
                                     type='number'
                                     style={{
-                                        border: errors.cellPhone ? "1px solid red":""
+                                        border: errors.cellPhone ? "1px solid red" : ""
                                     }}
-                                    {...field} 
+                                    {...field}
                                     placeholder='Cell phone'
                                 />
                             )}
@@ -263,12 +276,12 @@ export default function Page() {
                             control={control}
                             name='email'
                             render={({ field }) => (
-                                <Input 
-                                    {...field} 
+                                <Input
+                                    {...field}
                                     style={{
-                                        border: errors.email ? "1px solid red":""
+                                        border: errors.email ? "1px solid red" : ""
                                     }}
-                                    placeholder='Email address' 
+                                    placeholder='Email address'
                                 />
                             )}
                         />
@@ -281,12 +294,12 @@ export default function Page() {
                             control={control}
                             name='driverLicense'
                             render={({ field }) => (
-                                <Input 
-                                    {...field} 
+                                <Input
+                                    {...field}
                                     style={{
-                                        border: errors.driverLicense ? "1px solid red":""
+                                        border: errors.driverLicense ? "1px solid red" : ""
                                     }}
-                                    placeholder="Drivers lisence/id" 
+                                    placeholder="Drivers lisence/id"
                                 />
                             )}
                         />
@@ -299,13 +312,13 @@ export default function Page() {
                             control={control}
                             name='ssn'
                             render={({ field }) => (
-                                <Input 
+                                <Input
                                     {...field}
                                     type='number'
                                     style={{
-                                        border: errors.ssn ? "1px solid red":""
+                                        border: errors.ssn ? "1px solid red" : ""
                                     }}
-                                    placeholder="XXX-XXX-XXX" 
+                                    placeholder="XXX-XXX-XXX"
                                 />
                             )}
                         />
@@ -316,7 +329,8 @@ export default function Page() {
                             <input required type="file" {...register('driverLicenseImage')} style={{ display: 'none' }} />
                             Choose a File
                         </label>
-                        {watch('driverLicenseImage')?.length ? <img width={250} height="auto" src={watch('driverLicenseImage')} /> : ""}
+                        {typeof watch('driverLicenseImage') === 'string' ? <img width={250} height="auto" src={watch('driverLicenseImage')} /> : ""}
+                        {typeof watch('driverLicenseImage') === 'object' ? <img width={250} height="auto" src={URL.createObjectURL(watch('driverLicenseImage')[0])} /> : ""}
                     </div>
                     <div className='mt-4' style={{ width: "100%", display: "flex", justifyContent: "space-between", alignContent: "center", alignItems: "center" }}>
                         <Label>CHECK</Label>
@@ -330,8 +344,10 @@ export default function Page() {
                                 Back Side
                             </label>
                         </div>
-                        {watch('checkFront')?.length ? <img width={150} height="auto" src={watch('checkFront')} /> : ""}
-                        {watch('checkBack')?.length ? <img width={150} height="auto" src={watch('checkBack')} /> : ""}
+                        {typeof watch('checkFront') === 'string' ? <img width={150} height="auto" src={watch('checkFront')} /> : ""}
+                        {typeof watch('checkFront') === 'object' ? <img width={250} height="auto" src={URL.createObjectURL(watch('checkFront')[0])} /> : ""}
+                        {typeof watch('checkBack') === 'string' ? <img width={150} height="auto" src={watch('checkBack')} /> : ""}
+                        {typeof watch('checkBack') === 'object' ? <img width={250} height="auto" src={URL.createObjectURL(watch('checkBack')[0])} /> : ""}
                     </div>
                     <div className='mt-4' style={{ width: "100%", display: "flex", gap: "10px", justifyContent: "space-between", alignContent: "center", alignItems: "center" }}>
                         <Label>RECENT PAYSTUBS</Label>
@@ -339,7 +355,8 @@ export default function Page() {
                             <input required {...register('paystubs')} type="file" style={{ display: 'none' }} />
                             Choose a File
                         </label>
-                        {watch('paystubs')?.length ? <img width={250} height="auto" src={watch('paystubs')} /> : ""}
+                        {typeof watch('paystubs') === 'string' ? <img width={250} height="auto" src={watch('paystubs')} /> : ""}
+                        {typeof watch('paystubs') === 'object' ? <img width={250} height="auto" src={URL.createObjectURL(watch('paystubs')[0])} /> : ""}
                     </div>
                     <Label className='my-2'>REFERENCE 1</Label>
                     <div style={{ width: "100%", display: "flex", gap: "10px" }}>
@@ -347,10 +364,10 @@ export default function Page() {
                             control={control}
                             name='referenceOneFirstName'
                             render={({ field }) => (
-                                <Input 
+                                <Input
                                     {...field}
                                     style={{
-                                        border: errors.referenceOneFirstName ? "1px solid red":""
+                                        border: errors.referenceOneFirstName ? "1px solid red" : ""
                                     }}
                                     placeholder="First Name"
                                 />
@@ -360,12 +377,12 @@ export default function Page() {
                             control={control}
                             name='referenceOneLastName'
                             render={({ field }) => (
-                                <Input 
-                                    {...field} 
+                                <Input
+                                    {...field}
                                     style={{
-                                        border: errors.referenceOneLastName ? "1px solid red":""
+                                        border: errors.referenceOneLastName ? "1px solid red" : ""
                                     }}
-                                    placeholder="Last Name" 
+                                    placeholder="Last Name"
                                 />
                             )}
                         />
@@ -373,12 +390,12 @@ export default function Page() {
                             control={control}
                             name='referenceOnePhone'
                             render={({ field }) => (
-                                <Input 
-                                    {...field} 
-                                    placeholder="Phone" 
+                                <Input
+                                    {...field}
+                                    placeholder="Phone"
                                     type='number'
                                     style={{
-                                        border: errors.referenceOnePhone ? "1px solid red":""
+                                        border: errors.referenceOnePhone ? "1px solid red" : ""
                                     }}
                                 />
                             )}
@@ -390,12 +407,12 @@ export default function Page() {
                             control={control}
                             name='referenceTwoFirstName'
                             render={({ field }) => (
-                                <Input 
-                                    {...field} 
+                                <Input
+                                    {...field}
                                     style={{
-                                        border: errors.referenceTwoFirstName ? "1px solid red":""
+                                        border: errors.referenceTwoFirstName ? "1px solid red" : ""
                                     }}
-                                    placeholder="First Name" 
+                                    placeholder="First Name"
                                 />
                             )}
                         />
@@ -403,12 +420,12 @@ export default function Page() {
                             control={control}
                             name='referenceTwoLastName'
                             render={({ field }) => (
-                                <Input 
-                                    {...field} 
+                                <Input
+                                    {...field}
                                     style={{
-                                        border: errors.referenceTwoLastName ? "1px solid red":""
+                                        border: errors.referenceTwoLastName ? "1px solid red" : ""
                                     }}
-                                    placeholder="Last Name" 
+                                    placeholder="Last Name"
                                 />
                             )}
                         />
@@ -416,13 +433,13 @@ export default function Page() {
                             control={control}
                             name='referenceTwoPhone'
                             render={({ field }) => (
-                                <Input 
-                                    {...field} 
+                                <Input
+                                    {...field}
                                     type='number'
                                     style={{
-                                        border: errors.referenceTwoPhone ? "1px solid red":""
+                                        border: errors.referenceTwoPhone ? "1px solid red" : ""
                                     }}
-                                    placeholder="Phone" 
+                                    placeholder="Phone"
                                 />
                             )}
                         />
@@ -433,18 +450,18 @@ export default function Page() {
                             control={control}
                             name='amountRequested'
                             render={({ field }) => (
-                                <Input 
-                                    type='number' 
+                                <Input
+                                    type='number'
                                     {...field}
                                     style={{
-                                        border: errors.amountRequested ? "1px solid red":""
+                                        border: errors.amountRequested ? "1px solid red" : ""
                                     }}
-                                    onChange={(e)=>{
+                                    onChange={(e) => {
                                         setAmountDate()
-                                        setValue('amountRequested',e.target.value)
-                                        setValue('amountDue',e.target.value*1.25)
-                                    }} 
-                                    placeholder="0" 
+                                        setValue('amountRequested', e.target.value)
+                                        setValue('amountDue', e.target.value * 1.25)
+                                    }}
+                                    placeholder="0"
                                 />
                             )}
                         />
@@ -456,11 +473,11 @@ export default function Page() {
                             control={control}
                             name='amountDue'
                             render={({ field }) => (
-                                <Input 
-                                    disabled={true} 
+                                <Input
+                                    disabled={true}
                                     type='number'
-                                    {...field} 
-                                    placeholder="0" 
+                                    {...field}
+                                    placeholder="0"
                                 />
                             )}
                         />
@@ -477,7 +494,7 @@ export default function Page() {
                                         <Input
                                             {...field}
                                             style={{
-                                                border: errors.paymentMethod ? "1px solid red":""
+                                                border: errors.paymentMethod ? "1px solid red" : ""
                                             }}
                                             value="mobile"
                                             name="paymentMethod"
@@ -493,7 +510,7 @@ export default function Page() {
                                         <Input
                                             {...field}
                                             style={{
-                                                border: errors.paymentMethod ? "1px solid red":""
+                                                border: errors.paymentMethod ? "1px solid red" : ""
                                             }}
                                             value="cashapp"
                                             name="paymentMethod"
@@ -514,7 +531,7 @@ export default function Page() {
                                 <Input
                                     className='mt-3'
                                     style={{
-                                        border: errors.paymentDetails ? "1px solid red":""
+                                        border: errors.paymentDetails ? "1px solid red" : ""
                                     }}
                                     {...field}
                                     placeholder='Enter details of your prefered payment method'
@@ -529,7 +546,7 @@ export default function Page() {
                                     className='mt-3'
                                     {...field}
                                     style={{
-                                        border: errors.signature ? "1px solid red":""
+                                        border: errors.signature ? "1px solid red" : ""
                                     }}
                                     placeholder='Signature'
                                 />
@@ -541,9 +558,9 @@ export default function Page() {
                             type="checkbox"
                             onChange={(e) => setAgree(e.target.checked)}
                         />
-                        <p>Check Box to Agree <span onClick={()=>router.push('/zimba-cash/terms-conditions')} style={{color: "blue", cursor: "pointer"}}>Terms ans Conditions</span></p>
+                        <p>Check Box to Agree <span onClick={() => router.push('/zimba-cash/terms-conditions')} style={{ color: "blue", cursor: "pointer" }}>Terms ans Conditions</span></p>
                     </div>
-                    
+
                     <Button
                         style={{ background: "#68069d" }}
                         className='my-4'
