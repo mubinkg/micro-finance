@@ -38,6 +38,20 @@ export default function Page() {
 
 
     const router = useRouter()
+    let today = new Date();
+    let dd = String(today.getDate()).padStart(2, '0');
+    let mm = String(today.getMonth() + 1).padStart(2, '0'); // January is 0!
+    let yyyy = today.getFullYear();
+
+    const amoundRequestedDate = `${mm}/${dd}/${yyyy}`;
+
+    const fourteenDaysInMilliseconds = 14 * 24 * 60 * 60 * 1000;
+    today =  new Date(today.getTime()+fourteenDaysInMilliseconds);
+    dd = String(today.getDate()).padStart(2, '0');
+    mm = String(today.getMonth() + 1).padStart(2, '0'); // January is 0!
+    yyyy = today.getFullYear();
+
+    const amountDueDate = `${mm}/${dd}/${yyyy}`;
 
     const [loading, setLoading] = useState(false)
     const [aggree, setAgree] = useState(false)
@@ -52,6 +66,8 @@ export default function Page() {
             if (loan) {
                 for (const [key, value] of Object.entries(loan)) {
                     setValue(key, value)
+                    setValue('amoundRequestedDate', amoundRequestedDate)
+                    setValue('amountDueDate', amountDueDate)
                 }
             }
         })
@@ -72,9 +88,8 @@ export default function Page() {
                 acc[field] = data[field];
                 return acc;
             }, {});
-
-        // Submit only the modified data (dirtyValues)
-        console.log(dirtyValues);
+        dirtyValues['amoundRequestedDate'] = amoundRequestedDate
+        dirtyValues['amountDueDate'] = amountDueDate
 
         setLoading(true)
 
