@@ -453,7 +453,6 @@ export default function Page() {
                             name='amountRequested'
                             render={({ field }) => (
                                 <Input
-                                    disabled
                                     type='number'
                                     {...field}
                                     style={{
