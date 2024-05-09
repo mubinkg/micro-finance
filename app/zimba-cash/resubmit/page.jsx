@@ -459,7 +459,6 @@ export default function Page() {
                                         border: errors.amountRequested ? "1px solid red" : ""
                                     }}
                                     onChange={(e) => {
-                                        setAmountDate()
                                         setValue('amountRequested', e.target.value)
                                         setValue('amountDue', e.target.value * 1.25)
                                     }}
