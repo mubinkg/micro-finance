@@ -54,16 +54,15 @@ export default function LoanDetils() {
                         <h5>Status : {statusMap[data?.status]}</h5>
                         <h5>Applicant Name : {data?.firstName} {data?.lastName}</h5>
                         <h5>Amount : {data?.amountRequested}</h5>
-                        <h5>Status : {statusMap[data?.status]}</h5>
                         <h5>Current Address : {data?.currentAddress}</h5>
-                        <h5>Address Line2 : {data?.currentAddress2}</h5>
+                        <h5>Address Line2 : {data?.currentAddress2 ? data?.currentAddress2 : ""}</h5>
                         <h5>State: {data?.state}</h5>
                         <h5>City: {data?.city}</h5>
                         <h5>Zip Code: {data?.zipCode}</h5>
                         <h5>Cell Phone: {data?.cellPhone}</h5>
                         <h5>Email : {data?.email}</h5>
                         <h5>Drivers License/Id: {data?.driverLicense}</h5>
-                        <h5>Ssn: {data?.ssn}</h5>
+                        <h5>SSN: {data?.ssn}</h5>
                         <h5>Reference One</h5>
                         <div className="d-flex justify-content-center gap-3">
                             <p>First Name : {data?.referenceOneFirstName}</p>
