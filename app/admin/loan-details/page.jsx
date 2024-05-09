@@ -50,7 +50,8 @@ export default function LoanDetils() {
                     <Button onClick={() => router.push('/admin/dashboard')}>Dashboard</Button>
                 </div>
                 <Row className="justify-content-center">
-                    <Col lg={12} sm={12} align="center">
+                    <Col lg={6} sm={12}>
+                        <h5>Status : {statusMap[data?.status]}</h5>
                         <h5>Applicant Name : {data?.firstName} {data?.lastName}</h5>
                         <h5>Amount : {data?.amountRequested}</h5>
                         <h5>Status : {statusMap[data?.status]}</h5>
@@ -80,6 +81,10 @@ export default function LoanDetils() {
                         <h5>Payment Method: {data?.paymentMethod === 'mobile' ? "Mobile Banking (enter email or phone)" : "Cash App (enter $cashtag or username)"}</h5>
                         <h5>Payment Method Details: {data?.paymentDetails}</h5>
                         <h5>Signature: {data?.signature}</h5>
+                    </Col>
+                </Row>
+                <Row className="justify-content-center">
+                    <Col lg={12} sm={12} align="center">
                         <hr />
                         <Row className="mt-4">
                             <Col lg={6} sm={12}>

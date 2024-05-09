@@ -94,8 +94,10 @@ export default function Page() {
             setLoading(false)
             reset()
             Swal.fire({
-                title: 'Request Loan',
-                text: 'Loan request accepted',
+                title: "Loan Application",
+                text: `Loan successfully submitted.
+                Our team is reviewing, and will respond shortly. You may get an SMS notification about
+                loan status. You can also check status under "History"`,
                 icon: "success"
             }).then(() => {
                 removeItem('loan')
@@ -451,6 +453,7 @@ export default function Page() {
                             name='amountRequested'
                             render={({ field }) => (
                                 <Input
+                                    disabled
                                     type='number'
                                     {...field}
                                     style={{
