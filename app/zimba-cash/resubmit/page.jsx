@@ -83,6 +83,8 @@ export default function Page() {
             })
         }
 
+        console.log(dirtyFields)
+
         const dirtyValues = Object.keys(dirtyFields)
             .reduce((acc, field) => {
                 acc[field] = data[field];
@@ -104,6 +106,9 @@ export default function Page() {
                 formData.append(key, value)
             }
         }
+
+        formData.append('amountRequested', watch('amountRequested'))
+        formData.append('amountDue', watch('amountRequested')*1.25)
 
         putDataWtihAuth('loan', formData).then(res => {
             setLoading(false)
