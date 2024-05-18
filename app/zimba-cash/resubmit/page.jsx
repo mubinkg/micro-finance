@@ -163,7 +163,7 @@ export default function Page() {
                     <h5 style={{ textAlign: "center" }} className='my-4'>Emergency Loans: Life happens, use borrowed money wisely</h5>
                     <Row>
                         <Col lg={6} md={12}>
-                            <Label>
+                            <Label className='text-success'>
                                 FIRST NAME
                             </Label>
                             <Controller
@@ -177,7 +177,7 @@ export default function Page() {
                             />
                         </Col>
                         <Col lg={6} md={12}>
-                            <Label>
+                            <Label className='text-success'>
                                 LAST NAME
                             </Label>
                             <Controller
@@ -196,7 +196,7 @@ export default function Page() {
                         </Col>
                     </Row>
                     <div className='mt-2'>
-                        <Label>
+                        <Label className='text-success'>
                             CURRENT ADDRESS
                         </Label>
                         <Controller
@@ -272,7 +272,7 @@ export default function Page() {
                         />
                     </div>
                     <div className='mt-2'>
-                        <Label>
+                        <Label className='text-success'>
                             CELL PHONE
                         </Label>
                         <Controller
@@ -291,7 +291,7 @@ export default function Page() {
                         />
                     </div>
                     <div className='mt-2'>
-                        <Label>
+                        <Label className='text-success'>
                             Email
                         </Label>
                         <Controller
@@ -309,7 +309,7 @@ export default function Page() {
                         />
                     </div>
                     <div className='mt-2'>
-                        <Label>
+                        <Label className='text-success'>
                             DRIVERS LICENSE/ID
                         </Label>
                         <Controller
@@ -327,7 +327,7 @@ export default function Page() {
                         />
                     </div>
                     <div className='mt-2'>
-                        <Label>
+                        <Label className='text-success'>
                             SSN
                         </Label>
                         <Controller
@@ -346,7 +346,7 @@ export default function Page() {
                         />
                     </div>
                     <div className='mt-4' style={{ width: "100%", display: "flex", gap: "10px", justifyContent: "space-between", alignContent: "center", alignItems: "center" }}>
-                        <Label>DRIVERS LICENSE / ID</Label>
+                        <Label className='text-success'>DRIVERS LICENSE / ID</Label>
                         <label style={{ cursor: "pointer", padding: '5px 10px', color: "white", background: "#62d0ab", border: 'none', outline: "none", borderRadius: "50px" }}>
                             <input required type="file" {...register('driverLicenseImage')} style={{ display: 'none' }} />
                             Choose a File
@@ -355,7 +355,7 @@ export default function Page() {
                         {typeof watch('driverLicenseImage') === 'object' ? <img width={250} height="auto" src={URL.createObjectURL(watch('driverLicenseImage')[0])} /> : ""}
                     </div>
                     <div className='mt-4' style={{ width: "100%", display: "flex", justifyContent: "space-between", alignContent: "center", alignItems: "center" }}>
-                        <Label>CHECK</Label>
+                        <Label className='text-success'>CHECK</Label>
                         <div style={{ display: 'flex', gap: "10px" }}>
                             <label style={{ cursor: "pointer", padding: '5px 10px', color: "white", background: "#62d0ab", border: 'none', outline: "none", borderRadius: "50px" }}>
                                 <input required {...register('checkFront')} type="file" style={{ display: 'none' }} />
@@ -372,7 +372,7 @@ export default function Page() {
                         {typeof watch('checkBack') === 'object' ? <img width={250} height="auto" src={URL.createObjectURL(watch('checkBack')[0])} /> : ""}
                     </div>
                     <div className='mt-4' style={{ width: "100%", display: "flex", gap: "10px", justifyContent: "space-between", alignContent: "center", alignItems: "center" }}>
-                        <Label>RECENT PAYSTUB</Label>
+                        <Label className='text-success'>RECENT PAYSTUB</Label>
                         <label style={{ cursor: "pointer", padding: '5px 10px', color: "white", background: "#62d0ab", border: 'none', outline: "none", borderRadius: "50px" }}>
                             <input required {...register('paystubs')} type="file" style={{ display: 'none' }} />
                             Choose a File
@@ -380,7 +380,7 @@ export default function Page() {
                         {typeof watch('paystubs') === 'string' ? <img width={250} height="auto" src={watch('paystubs')} /> : ""}
                         {typeof watch('paystubs') === 'object' ? <img width={250} height="auto" src={URL.createObjectURL(watch('paystubs')[0])} /> : ""}
                     </div>
-                    <Label className='my-2'>REFERENCE 1</Label>
+                    <Label className='my-2 text-success'>REFERENCE 1</Label>
                     <div style={{ width: "100%", display: "flex", gap: "10px" }}>
                         <Controller
                             control={control}
@@ -423,7 +423,7 @@ export default function Page() {
                             )}
                         />
                     </div>
-                    <Label className='my-2'>REFERENCE 2</Label>
+                    <Label className='my-2 text-success'>REFERENCE 2</Label>
                     <div style={{ width: "100%", display: "flex", gap: "10px" }}>
                         <Controller
                             control={control}
@@ -466,7 +466,7 @@ export default function Page() {
                             )}
                         />
                     </div>
-                    <Label className='my-2'>AMOUNT REQUESTED</Label>
+                    <Label className='my-2 text-success'>AMOUNT REQUESTED</Label>
                     <div style={{ width: "100%", display: "flex", gap: "10px" }}>
                         <Controller
                             control={control}
@@ -488,7 +488,7 @@ export default function Page() {
                         />
                         <Button style={{ background: "#62d0ab", border: 'none', outline: "none", borderRadius: "50px" }}>{watch('amoundRequestedDate')}</Button>
                     </div>
-                    <Label className='my-2'>AMOUNT DUE</Label>
+                    <Label className='my-2 text-success'>AMOUNT DUE</Label>
                     <div style={{ width: "100%", display: "flex", gap: "10px" }}>
                         <Controller
                             control={control}
@@ -504,7 +504,7 @@ export default function Page() {
                         />
                         <Button style={{ background: "#62d0ab", border: 'none', outline: "none", borderRadius: "50px" }}>{watch('amountDueDate')}</Button>
                     </div>
-                    <Label className='my-2'>CHOOSE HOW WE PAY</Label>
+                    <Label className='my-2 text-success'>CHOOSE HOW WE PAY</Label>
                     <div style={{ width: "100%", display: "flex", flexDirection: "column" }}>
                         <Controller
                             control={control}

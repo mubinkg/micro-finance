@@ -58,7 +58,7 @@ export default function Page() {
                     <h5 style={{ textAlign: "center" }} className='my-4'>Contact Us</h5>
                     <Row>
                         <Col lg={12}>
-                            <Label>
+                            <Label className='text-success'>
                                 FIRST NAME
                             </Label>
                             <Controller
@@ -75,7 +75,7 @@ export default function Page() {
 
                     <Row className='mt-4'>
                         <Col lg={12}>
-                            <Label>
+                            <Label className='text-success'>
                                 LAST NAME
                             </Label>
                             <Controller
@@ -92,7 +92,7 @@ export default function Page() {
 
                     <Row className='mt-4'>
                         <Col lg={12}>
-                            <Label>
+                            <Label className='text-success'>
                                 EMAIL
                             </Label>
                             <Controller
@@ -108,7 +108,7 @@ export default function Page() {
                     </Row>
                     <Row className='mt-4'>
                         <Col lg={12}>
-                            <Label>
+                            <Label className='text-success'>
                                 SUBJECT
                             </Label>
                             <Controller
@@ -124,7 +124,7 @@ export default function Page() {
                     </Row>
                     <Row className='mt-4'>
                         <Col lg={12}>
-                            <Label>
+                            <Label className='text-success'>
                                 BODY
                             </Label>
                             <Controller

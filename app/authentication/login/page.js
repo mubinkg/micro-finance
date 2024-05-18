@@ -45,13 +45,13 @@ export default function Page() {
                 <div style={{ width: "360px", display: "flex", flexDirection: "column", justifyContent: "center", alignContent: "center", }}>
                     <h2 style={{ textAlign: "center", textTransform: "uppercase" }}>log in</h2>
                     <div style={{ width: "100%", marginTop: "40px" }} >
-                        <p  className='text-center'>
+                        <p  className='text-center text-success'>
                             EMAIL
                         </p>
                         <Input value={email} onChange={(e)=>setEmail(e.target.value)}/>
                     </div>
                     <div style={{ width: "100%", marginTop: "20px" }} >
-                        <p className='text-center'>
+                        <p className='text-center text-success'>
                             PASSWORD
                         </p>
                         <Input value={password} onChange={(e)=>setPassword(e.target.value)}/>

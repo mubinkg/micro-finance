@@ -32,7 +32,7 @@ function AppNav({ hideSideNav }) {
   }
 
   const logOutHandler = () => {
-    getData(prod_url).then(res => {
+    getData(local_url).then(res => {
       window.location = '/';
       removeItem('user')
       removeItem('token')
