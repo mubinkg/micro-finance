@@ -10,6 +10,7 @@ import { useRouter } from 'next/navigation'
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { getItem, removeItem, setItem } from '../../../utils/storageUtils'
+import { title } from 'process'
 
 
 
@@ -100,6 +101,11 @@ export default function Page() {
             }
         }
         setItem('loan', JSON.stringify(savedValues))
+        Swal.fire({
+            title:'Loan',
+            text:'Loan information saved',
+            icon:"success"
+        })
     }
 
     function submitHandler(values) {
@@ -196,7 +202,7 @@ export default function Page() {
                 minHeight: "90vh"
             }}>
                 <div className='container' style={{ maxWidth: "800px", display: "flex", flexDirection: "column", justifyContent: "center", alignContent: "center", }}>
-                    <h5 style={{ textAlign: "center" }} className='my-4'>Emergency Loans: Life happens, use borrowed money wisely</h5>
+                    <h5 style={{ textAlign: "center" }} className='my-4'>Emergency Loans: Life happens</h5>
                     <Row>
                         <Col lg={6} md={12}>
                             <Label className='text-success'>
@@ -346,7 +352,7 @@ export default function Page() {
                     </div>
                     <div className='mt-2'>
                         <Label className='text-success'>
-                            DRIVERS LICENSE/ID
+                            DRIVER&rsquo;S LICENSE/ID
                         </Label>
                         <Controller
                             control={control}
@@ -357,7 +363,7 @@ export default function Page() {
                                     style={{
                                         border: errors.driverLicense ? "1px solid red":""
                                     }}
-                                    placeholder="Drivers lisence/id" 
+                                    placeholder="Driver&rsquo;s lisence/id" 
                                 />
                             )}
                         />
@@ -382,7 +388,7 @@ export default function Page() {
                         />
                     </div>
                     <div className='mt-4' style={{ width: "100%", display: "flex", gap: "10px", justifyContent: "space-between", alignContent: "center", alignItems: "center" }}>
-                        <Label className='text-success'>DRIVERS LICENSE / ID</Label>
+                        <Label className='text-success'>DRIVER&rsquo;S LICENSE / ID</Label>
                         <label style={{ cursor: "pointer", padding: '5px 10px', color: "white", background: "#62d0ab", border: 'none', outline: "none", borderRadius: "50px" }}>
                             <input required type="file" {...register('driverLicenseImage')} style={{ display: 'none' }} />
                             Choose a File
@@ -390,7 +396,7 @@ export default function Page() {
                         {watch('driverLicenseImage')?.length ? <img width={250} height="auto" src={URL.createObjectURL(watch('driverLicenseImage')[0])} /> : ""}
                     </div>
                     <div className='mt-4' style={{ width: "100%", display: "flex", justifyContent: "space-between", alignContent: "center", alignItems: "center" }}>
-                        <Label className='text-success'>CHECK</Label>
+                        <Label className='text-success'>CHECK (Blank and Signed on the back)</Label>
                         <div style={{ display: 'flex', gap: "10px" }}>
                             <label style={{ cursor: "pointer", padding: '5px 10px', color: "white", background: "#62d0ab", border: 'none', outline: "none", borderRadius: "50px" }}>
                                 <input required {...register('checkFront')} type="file" style={{ display: 'none' }} />
@@ -522,22 +528,25 @@ export default function Page() {
                         <Button style={{ background: "#62d0ab", border: 'none', outline: "none", borderRadius: "50px" }}>{amoundRequestedDate}</Button>
                     </div>
                     <Label className='my-2 text-success'>AMOUNT DUE</Label>
-                    <div style={{ width: "100%", display: "flex", gap: "10px" }}>
-                        <Controller
-                            control={control}
-                            name='amountDue'
-                            render={({ field }) => (
-                                <Input 
-                                    disabled={true} 
-                                    type='number'
-                                    {...field} 
-                                    placeholder="0" 
-                                />
-                            )}
-                        />
-                        <Button style={{ background: "#62d0ab", border: 'none', outline: "none", borderRadius: "50px" }}>{amountDueDate}</Button>
+                    <div style={{ width: "100%", display: "flex", gap: "10px", justifyContent:"space-between" }}>
+                        <div style={{display:'flex', flexDirection:"column", width:"80%"}}>
+                            <Controller
+                                control={control}
+                                name='amountDue'
+                                render={({ field }) => (
+                                    <Input 
+                                        disabled={true} 
+                                        type='number'
+                                        {...field} 
+                                        placeholder="0" 
+                                    />
+                                )}
+                            />
+                            <span style={{fontSize:"small"}}>25% Interest. Additional fees can apply for late payments</span>
+                        </div>
+                        <Button style={{ background: "#62d0ab", border: 'none', outline: "none", borderRadius: "50px" , height:"40px"}}>{amountDueDate}</Button>
                     </div>
-                    <Label className='my-2 text-success'>CHOOSE HOW WE PAY</Label>
+                    <Label className='my-2 text-success'>CHOOSE HOW WE PAY YOU</Label>
                     <div style={{ width: "100%", display: "flex", flexDirection: "column" }}>
                         <Controller
                             control={control}

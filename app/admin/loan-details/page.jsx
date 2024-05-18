@@ -10,7 +10,8 @@ const statusMap = {
     approve: 'Approved',
     reject: "Rejected",
     resubmit: 'Resubmit',
-    pending: 'Pending'
+    pending: 'Pending',
+    paid: 'Paid'
 }
 
 export default function LoanDetils() {
@@ -19,20 +20,28 @@ export default function LoanDetils() {
     const [data, setData] = useState({})
 
     function updateLoan(status) {
-        console.log(status)
-        patchDataWtihAuth('loan/' + searchParams.get('id'), { status }).then(res => {
-            Swal.fire({
-                title: 'Loan',
-                text: 'Loan status updated successfully',
-                icon: 'success'
-            })
-            setData(res.data)
-        }).catch(err => {
-            Swal.fire({
-                title: 'Loan',
-                text: 'Error on update loan',
-                icon: 'error'
-            })
+        Swal.fire({
+            title:"Update Loan Status!",
+            text: "Are you sure about this action?",
+            icon: "warning",
+            showCancelButton: true,
+        }).then((res)=>{
+            if(res.isConfirmed){
+                patchDataWtihAuth('loan/' + searchParams.get('id'), { status }).then(res => {
+                    Swal.fire({
+                        title: 'Loan',
+                        text: 'Loan status updated successfully',
+                        icon: 'success'
+                    })
+                    setData(res.data)
+                }).catch(err => {
+                    Swal.fire({
+                        title: 'Loan',
+                        text: 'Error on update loan',
+                        icon: 'error'
+                    })
+                })
+            }
         })
     }
 
@@ -51,7 +60,7 @@ export default function LoanDetils() {
                 </div>
                 <Row className="justify-content-center">
                     <Col lg={6} sm={12}>
-                        <h5>Status : {statusMap[data?.status]}</h5>
+                        <h5 style={{color: "blue"}}>Status : {statusMap[data?.status]}</h5>
                         <h5>Applicant Name : {data?.firstName} {data?.lastName}</h5>
                         <h5>Amount : {data?.amountRequested}</h5>
                         <h5>Current Address : {data?.currentAddress}</h5>
@@ -61,7 +70,7 @@ export default function LoanDetils() {
                         <h5>Zip Code: {data?.zipCode}</h5>
                         <h5>Cell Phone: {data?.cellPhone}</h5>
                         <h5>Email : {data?.email}</h5>
-                        <h5>Drivers License/Id: {data?.driverLicense}</h5>
+                        <h5>Driver&rsquo;s License/Id: {data?.driverLicense}</h5>
                         <h5>SSN: {data?.ssn}</h5>
                         <h5>Reference One</h5>
                         <div className="d-flex justify-content-center gap-3">
@@ -107,6 +116,18 @@ export default function LoanDetils() {
                             <Button onClick={() => updateLoan('approve')} style={{ marginRight: "10px" }} color="primary">Approve</Button>
                             <Button onClick={() => updateLoan('reject')} style={{ marginRight: "10px" }} color="danger">Reject</Button>
                             <Button onClick={() => updateLoan('resubmit')} style={{ marginRight: "10px" }} color="info">Request Resubmit</Button>
+                            <Button 
+                                color="warning"
+                                outline 
+                                onClick={() => updateLoan('paid')}
+                                style={{
+                                    color:"blue",
+                                    fontWeight: "bold",
+                                    padding:"6px 30px"
+                                }}
+                            >
+                                Paid
+                            </Button>
                         </div>
                     </Col>
                 </Row>

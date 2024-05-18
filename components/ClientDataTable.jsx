@@ -7,7 +7,8 @@ const statusMap = {
     approve: 'Approved',
     reject: "Rejected",
     resubmit: 'Resubmit',
-    pending: 'Pending'
+    pending: 'Pending',
+    paid: 'Paid'
 }
 
 export default function ClientDataTable({ data }) {

@@ -24,7 +24,8 @@ export default function Home() {
               url="/authentication/registration"
               icon={<LockIcon />} 
               title="SIGN UP" 
-              body="Create a quick account. Joining ZimbaCash couldn't be more simple, just enter your email and password." 
+              body="Create a quick account. Joining ZimbaCash couldn't be more simple, just enter
+              your name and email. We value your security." 
             />
           </Col>
           <Col md={6} sm={12} lg={4} content="center">
@@ -32,7 +33,8 @@ export default function Home() {
               url="/zimba-cash/loan"
               icon={<RightIcon />}
               title="SUBMIT APPLICATION"
-              body="Complete a simple, secure 3 to 5 min online application, no paperwork or phone calls - and get a decision on minutes."
+              body="Complete a simple yet secure 3 to 5 minutes online application. No paperwork
+              or phone calls - and get a decision in minutes."
             />
           </Col>
           <Col md={6} sm={12} lg={4} content="center">
@@ -40,7 +42,8 @@ export default function Home() {
               url="/authentication/login"
               icon={<CardIcon />}
               title="GET YOUR MONEY"
-              body="Receive your money within minutes. We offer a number of different payment options to suit all clients."
+              body="Receive your money within minutes. We offer different payment options to suit
+              diverse customers."
             />
           </Col>
         </Row>
