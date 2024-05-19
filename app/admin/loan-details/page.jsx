@@ -60,7 +60,7 @@ export default function LoanDetils() {
                 </div>
                 <Row className="justify-content-center">
                     <Col lg={6} sm={12}>
-                        <h5 style={{color: "blue"}}>Status : {statusMap[data?.status]}</h5>
+                        <h5 style={{marginBottom:"20px",fontSize:"25px",color: "blue", fontWeight:"bold"}}>Status : {statusMap[data?.status]}</h5>
                         <h5>Applicant Name : {data?.firstName} {data?.lastName}</h5>
                         <h5>Amount : {data?.amountRequested}</h5>
                         <h5>Current Address : {data?.currentAddress}</h5>
@@ -121,7 +121,7 @@ export default function LoanDetils() {
                                 outline 
                                 onClick={() => updateLoan('paid')}
                                 style={{
-                                    color:"blue",
+                                    color:"green",
                                     fontWeight: "bold",
                                     padding:"6px 30px"
                                 }}

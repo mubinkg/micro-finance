@@ -321,7 +321,7 @@ export default function Page() {
                                     style={{
                                         border: errors.driverLicense ? "1px solid red" : ""
                                     }}
-                                    placeholder="Driver&rsquo;s lisence/id"
+                                    placeholder="Driver&rsquo;s License / ID"
                                 />
                             )}
                         />
