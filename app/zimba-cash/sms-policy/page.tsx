@@ -6,7 +6,7 @@ export default function Page() {
         <>
             <AppNav hideSideNav={true} />
             <Container className="mt-4">
-                <h5 style={{ color: "#68069d" }} className="mb-4">ZimbaCash SMS Policys</h5>
+                <h5 style={{ color: "#68069d" }} className="mb-4">ZimbaCash SMS Policy</h5>
                 <p>
                     <span style={{ fontWeight: "bold" }}>TEXT MESSAGING:</span> When accepting the text messaging
                     agreement, you authorize ZimbaCash, our assigns, successors, or
