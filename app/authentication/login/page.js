@@ -7,9 +7,7 @@ import {setItem} from '../../../utils/storageUtils'
 import Swal from 'sweetalert2'
 
 import AppNav from '../../../components/Navbar'
-
-const prod_url = "http://54.236.12.28/api/login"
-const local_url = "http://localhost:3000/api/login"
+import { signinUrl } from '../../../utils/urls'
 
 export default function Page() {
     const [email, setEmail] = useState('')
@@ -17,7 +15,7 @@ export default function Page() {
     const router = useRouter()
 
     const signinHandler = ()=>{
-        postData(prod_url, {email, password}).then(res=>{
+        postData(signinUrl, {email, password}).then(res=>{
             setItem('user', JSON.stringify(res.user))
             setItem('token', JSON.stringify(res.token))
             setPassword('')

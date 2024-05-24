@@ -9,10 +9,7 @@ import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { getData } from '../utils/axiosUtils';
 import { removeItem } from '../utils/storageUtils';
-
-
-const prod_url = "http://54.236.12.28/api/logout"
-const local_url = "http://localhost:3000/api/logout"
+import {logoutUrl} from '../utils/urls'
 
 function AppNav({ hideSideNav }) {
   const [isAuth, setAuth] = useState(false)
@@ -32,7 +29,7 @@ function AppNav({ hideSideNav }) {
   }
 
   const logOutHandler = () => {
-    getData(prod_url).then(res => {
+    getData(logoutUrl).then(res => {
       window.location = '/';
       removeItem('user')
       removeItem('token')

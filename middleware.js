@@ -15,6 +15,10 @@ export function middleware(request) {
     if(pathname === '/zimba-cash/terms-conditions'){
         return NextResponse.next()
     }
+
+    if(pathname === '/zimba-cash/sms-policy'){
+        return NextResponse.next()
+    }
     
     if(token){
         var decoded = jwt.decode(token.value);

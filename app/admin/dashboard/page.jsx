@@ -12,10 +12,7 @@ import ApplicantsDataTable from '../../../components/ApplicantsDataTable'
 import logo from '../../../public/L-5.jpg'
 import Image from 'next/image'
 import { removeItem } from '../../../utils/storageUtils'
-
-
-const prod_url = "http://54.236.12.28/api/logout"
-const local_url = "http://localhost:3000/api/logout"
+import { logoutUrl } from '../../../utils/urls'
 
 export default function Page() {
     const [loans, setLoans] = useState([])
@@ -25,7 +22,7 @@ export default function Page() {
     const [userCount, setUserCount] = useState(0)
 
     const logOutHandler = ()=>{
-        getData(prod_url).then(res=>{
+        getData(logoutUrl).then(res=>{
             window.location = '/';
             removeItem('user')
             removeItem('token')

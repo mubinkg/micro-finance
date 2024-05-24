@@ -1,11 +1,8 @@
 import axios from "axios"
 import { getToken } from "./storageUtils";
+import { baseUrl } from "./urls";
 
-const local_url = 'http://localhost:3001'
-const prod_url = 'http://54.236.12.28/backend/api/'
-const BASE_URL = prod_url
-
-const publicRequest = axios.create({ baseURL: BASE_URL });
+const publicRequest = axios.create({ baseURL: baseUrl });
 publicRequest.interceptors.response.use(
   (res) => res.data,
   (error) => {
@@ -28,7 +25,7 @@ export const putData = publicRequest.put;
 export const deleteData = publicRequest.delete;
 
 const privateRequest = axios.create({
-  baseURL: BASE_URL,
+  baseURL: baseUrl,
 });
 
 privateRequest.interceptors.request.use((req) => {
