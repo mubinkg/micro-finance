@@ -162,6 +162,7 @@ export default function Page() {
                 <div className='container' style={{ maxWidth: "800px", display: "flex", flexDirection: "column", justifyContent: "center", alignContent: "center", }}>
                     <h5 style={{ textAlign: "center" }} className='my-4'>Emergency Loans: Life happens</h5>
                     <Row>
+                        <h6 style={{color: "#68069d"}}>PERSONAL INFORMATION</h6>
                         <Col lg={6} md={12}>
                             <Label className='text-success'>
                                 FIRST NAME
@@ -345,7 +346,8 @@ export default function Page() {
                             )}
                         />
                     </div>
-                    <div className='mt-4' style={{ width: "100%", display: "flex", gap: "10px", justifyContent: "space-between", alignContent: "center", alignItems: "center" }}>
+                    <h6 style={{color: "#68069d", marginTop: "20px"}}>REQUIRED DOCUMENTS</h6>
+                    <div className='mt-2' style={{ width: "100%", display: "flex", gap: "10px", justifyContent: "space-between", alignContent: "center", alignItems: "center" }}>
                         <Label className='text-success'>DRIVER&rsquo;S LICENSE / ID</Label>
                         <label style={{ cursor: "pointer", padding: '5px 10px', color: "white", background: "#62d0ab", border: 'none', outline: "none", borderRadius: "50px" }}>
                             <input required type="file" {...register('driverLicenseImage')} style={{ display: 'none' }} />
@@ -380,6 +382,7 @@ export default function Page() {
                         {typeof watch('paystubs') === 'string' ? <img width={250} height="auto" src={watch('paystubs')} /> : ""}
                         {typeof watch('paystubs') === 'object' ? <img width={250} height="auto" src={URL.createObjectURL(watch('paystubs')[0])} /> : ""}
                     </div>
+                    <h6 style={{color: "#68069d", marginTop: "20px"}}>REFERENCES</h6>
                     <Label className='my-2 text-success'>REFERENCE 1</Label>
                     <div style={{ width: "100%", display: "flex", gap: "10px" }}>
                         <Controller
@@ -466,6 +469,7 @@ export default function Page() {
                             )}
                         />
                     </div>
+                    <h6 style={{color: "#68069d", marginTop: "20px"}}>PAYMENT INFORMATION</h6>
                     <Label className='my-2 text-success'>AMOUNT REQUESTED</Label>
                     <div style={{ width: "100%", display: "flex", gap: "10px" }}>
                         <Controller
