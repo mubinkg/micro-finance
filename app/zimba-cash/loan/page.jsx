@@ -60,6 +60,8 @@ export default function Page() {
 
     const [loading, setLoading] = useState(false)
     const [aggree, setAgree] = useState(false)
+    const [isSmsPolicy, setSmsPolicy] = useState(false)
+
     const { handleSubmit, register, control, watch, reset, setValue, formState:{errors} } = useForm({
         defaultValues: {
             firstName: "",
@@ -117,6 +119,13 @@ export default function Page() {
             return Swal.fire({
                 title: 'Request Loan',
                 text: 'Please accept Terms and Conditions to proceed',
+                icon: 'error'
+            })
+        }
+        if(!isSmsPolicy){
+            return Swal.fire({
+                title: 'Request Loan',
+                text: 'Please accept SMS Policy to proceed',
                 icon: 'error'
             })
         }
@@ -633,7 +642,7 @@ export default function Page() {
                     <div style={{ display: 'flex', gap: "9px",marginLeft: "-60px", justifyContent: "center" }}>
                         <Input
                             type="checkbox"
-                            onChange={(e) => setAgree(e.target.checked)}
+                            onChange={(e) => setSmsPolicy(e.target.checked)}
                         />
                         <p>Check Box to Agree to SMS Policy</p>
                     </div>
