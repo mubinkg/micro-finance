@@ -10,11 +10,14 @@ import { useRouter } from 'next/navigation'
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { getItem, removeItem, setItem } from '../../../utils/storageUtils'
-import { title } from 'process'
+import {useTotalApprovedLoan} from '../../../hooks/useTotalApprovedLoan'
 
 
 
 export default function Page() {
+    
+    const {totalApprovedLoan} = useTotalApprovedLoan()
+
     const schema = yup.object().shape({
         firstName: yup.string().min(2).required(),
         lastName: yup.string().min(2).required(),
@@ -32,7 +35,7 @@ export default function Page() {
         referenceTwoFirstName: yup.string().min(2).required(),
         referenceTwoLastName: yup.string().min(2).required(),
         referenceTwoPhone: yup.string().min(10).max(10).required(),
-        amountRequested: yup.number().required(),
+        amountRequested: yup.number().max(totalApprovedLoan).required(),
         paymentDetails: yup.string().min(2).required(),
         signature: yup.string().min(2).required(),
         paymentMethod: yup.string().min(2).required(),
@@ -620,12 +623,19 @@ export default function Page() {
                             )}
                         />
                     </div>
-                    <div className='mt-3' style={{ display: 'flex', gap: "9px", justifyContent: "center" }}>
+                    <div className='mt-4' style={{ display: 'flex', gap: "9px", justifyContent: "center" }}>
                         <Input
                             type="checkbox"
                             onChange={(e) => setAgree(e.target.checked)}
                         />
                         <p>Check Box to Agree <span onClick={()=>router.push('/zimba-cash/terms-conditions')} style={{color: "blue", cursor: "pointer"}}>Terms ans Conditions</span></p>
+                    </div>
+                    <div style={{ display: 'flex', gap: "9px",marginLeft: "-60px", justifyContent: "center" }}>
+                        <Input
+                            type="checkbox"
+                            onChange={(e) => setAgree(e.target.checked)}
+                        />
+                        <p>Check Box to Agree to SMS Policy</p>
                     </div>
                     <Button onClick={handleSubmit(saveLoan)} style={{ background: "#62d0ab" }} className='mt-4'>Save</Button>
                     <Button
