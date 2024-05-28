@@ -637,14 +637,14 @@ export default function Page() {
                             type="checkbox"
                             onChange={(e) => setAgree(e.target.checked)}
                         />
-                        <p>Check Box to Agree <span onClick={()=>router.push('/zimba-cash/terms-conditions')} style={{color: "blue", cursor: "pointer"}}>Terms ans Conditions</span></p>
+                        <p>Check Box to Agree <span onClick={()=>router.push('/zimba-cash/terms-conditions')} style={{color: "#0569ed", cursor: "pointer"}}>Terms ans Conditions</span></p>
                     </div>
                     <div style={{ display: 'flex', gap: "9px",marginLeft: "-60px", justifyContent: "center" }}>
                         <Input
                             type="checkbox"
                             onChange={(e) => setSmsPolicy(e.target.checked)}
                         />
-                        <p>Check Box to Agree to SMS Policy</p>
+                        <p>Check Box to Agree to <a href="#" style={{textDecoration:"none"}}>SMS Policy</a></p>
                     </div>
                     <Button onClick={handleSubmit(saveLoan)} style={{ background: "#62d0ab" }} className='mt-4'>Save</Button>
                     <Button
