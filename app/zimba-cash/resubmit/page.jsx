@@ -581,12 +581,19 @@ export default function Page() {
                             )}
                         />
                     </div>
-                    <div className='mt-3' style={{ display: 'flex', gap: "9px", justifyContent: "center" }}>
+                    <div className='mt-4' style={{ display: 'flex', gap: "9px", justifyContent: "center" }}>
                         <Input
                             type="checkbox"
                             onChange={(e) => setAgree(e.target.checked)}
                         />
                         <p>Check Box to Agree <span onClick={() => router.push('/zimba-cash/terms-conditions')} style={{ color: "blue", cursor: "pointer" }}>Terms ans Conditions</span></p>
+                    </div>
+                    <div style={{ display: 'flex', gap: "9px",marginLeft: "-60px", justifyContent: "center" }}>
+                        <Input
+                            type="checkbox"
+                            onChange={(e) => setAgree(e.target.checked)}
+                        />
+                        <p>Check Box to Agree to SMS Policy</p>
                     </div>
 
                     <Button
