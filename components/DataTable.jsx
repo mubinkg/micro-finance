@@ -2,6 +2,7 @@
 
 import { Table } from 'reactstrap'
 import { useRouter } from 'next/navigation'
+import { convertUTCToCST } from '../utils/dateTime'
 
 const statusMap = {
     approve: 'Approved',
@@ -48,7 +49,7 @@ export default function DataTable({ data }) {
                     data?.map((d) => (
                         <tr key={d._id} style={{cursor: "pointer"}} onClick={()=>router.push('/admin/loan-details'+ "?" + createQueryString('id',d._id))}>
                             <td>
-                            {d.createdAt}
+                            {convertUTCToCST(d.createdAt)}
                             </td>
                             <td>
                                 {d.firstName}

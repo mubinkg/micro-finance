@@ -5,3 +5,10 @@ export function getDateTime(dateString){
 
     return `${date} ${time}`;
 }
+
+export function convertUTCToCST(utcDateString) {
+    var utcDate = new Date(utcDateString);
+    var localTime = utcDate.toLocaleString(undefined, { timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone });
+    console.log(localTime)
+    return localTime.toString();
+}
