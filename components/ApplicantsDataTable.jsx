@@ -2,7 +2,7 @@
 'use client'
 
 import { Table } from 'reactstrap'
-import {getDateTime} from '../utils/dateTime'
+import {convertUTCToCST, getDateTime} from '../utils/dateTime'
 
 export default function ApplicantsDataTable({ data }) {
     return (
@@ -31,7 +31,7 @@ export default function ApplicantsDataTable({ data }) {
                     data && data?.length ? data.map(d => (
                         <tr key={d?._id}>
                             <td>
-                                {getDateTime(d?.createdAt?.toString())}
+                                {convertUTCToCST(d?.createdAt)}
                             </td>
                             <td>
                                 {d?.firstName}

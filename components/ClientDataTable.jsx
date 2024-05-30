@@ -2,6 +2,7 @@
 
 import { Table,Button } from 'reactstrap'
 import { useRouter } from 'next/navigation'
+import { convertUTCToCST } from '../utils/dateTime'
 
 const statusMap = {
     approve: 'Approved',
@@ -49,7 +50,7 @@ export default function ClientDataTable({ data }) {
                     data?.map((d) => (
                         <tr key={d._id}>
                             <td>
-                            {d.createdAt}
+                            {convertUTCToCST(d.createdAt)}
                             </td>
                             <td>
                                 {d.firstName}
