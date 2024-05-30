@@ -8,7 +8,7 @@ export function useTotalApprovedLoan(){
 
     function getTotalApprovedLoan(){
         getDataWtihAuth(totalLoanUrl).then(res=>{
-            console.log(res)
+            setTotalApprovedLoan(res.data)
         }).catch(err=>{
             console.log(err)
         })

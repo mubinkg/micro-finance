@@ -36,6 +36,8 @@ export default function Page() {
         paymentMethod: yup.string().min(2).required(),
     });
 
+    const {totalApprovedLoan} = useTotalApprovedLoan()
+
 
     const router = useRouter()
     let today = new Date();
@@ -74,6 +76,14 @@ export default function Page() {
     }, [searchParams.get('id')])
 
     function submitHandler(data) {
+
+        if(data?.amountRequested>totalApprovedLoan){
+            return Swal.fire({
+                title: 'Request Loan',
+                text: `At this time, your max loan request amount is $${totalApprovedLoan}`,
+                icon: 'error'
+            })
+        }
 
         if (!aggree) {
             return Swal.fire({
