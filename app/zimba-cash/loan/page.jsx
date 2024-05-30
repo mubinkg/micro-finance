@@ -18,6 +18,7 @@ export default function Page() {
     
     const {totalApprovedLoan} = useTotalApprovedLoan()
 
+
     const schema = yup.object().shape({
         firstName: yup.string().min(2).required(),
         lastName: yup.string().min(2).required(),
@@ -35,12 +36,11 @@ export default function Page() {
         referenceTwoFirstName: yup.string().min(2).required(),
         referenceTwoLastName: yup.string().min(2).required(),
         referenceTwoPhone: yup.string().min(10).max(10).required(),
-        amountRequested: yup.number().max(totalApprovedLoan).required(),
+        amountRequested: yup.number().required(),
         paymentDetails: yup.string().min(2).required(),
         signature: yup.string().min(2).required(),
         paymentMethod: yup.string().min(2).required(),
-    });
-    
+    });  
 
     const router = useRouter()
     let today = new Date();
@@ -96,6 +96,13 @@ export default function Page() {
     }
 
     function saveLoan(values){
+        if(values?.amountRequested>totalApprovedLoan){
+            return Swal.fire({
+                title: 'Request Loan',
+                text: `At this time, your max loan request amount is $${totalApprovedLoan}`,
+                icon: 'error'
+            })
+        }
         const savedValues = {}
         for (const [key, value] of Object.entries(values)) {
             
@@ -114,7 +121,15 @@ export default function Page() {
     }
 
     function submitHandler(values) {
+        console.log("submitvalues",values)
         setAmountDate()
+        if(values?.amountRequested>totalApprovedLoan){
+            return Swal.fire({
+                title: 'Request Loan',
+                text: `At this time, your max loan request amount is $${totalApprovedLoan}`,
+                icon: 'error'
+            })
+        }
         if (!aggree) {
             return Swal.fire({
                 title: 'Request Loan',
