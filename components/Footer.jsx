@@ -16,7 +16,9 @@ export default function Footer() {
             <p>|</p>
             <p onClick={()=>router.push('/zimba-cash/terms-conditions')} style={{marginLeft: '10px', cursor: "pointer",  marginRight: '10px'}}>Terms and Conditions</p>
             <p>|</p>
-            <p onClick={()=>router.push('/zimba-cash/sms-policy')} style={{marginLeft: '10px', cursor: "pointer"}}>SMS Policy</p>
+            <p onClick={()=>router.push('/zimba-cash/sms-policy')} style={{marginLeft: '10px', cursor: "pointer", marginRight: '10px'}}>SMS Policy</p>
+            <p>|</p>
+            <p onClick={()=>router.push('/zimba-cash/privacy-policy')} style={{marginLeft: '10px', cursor: "pointer"}}>Privacy Policy</p>
         </div>
     ) : ""
 }
