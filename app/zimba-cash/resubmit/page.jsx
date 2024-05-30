@@ -10,6 +10,7 @@ import { useRouter, useSearchParams } from 'next/navigation'
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { getItem, removeItem, setItem } from '../../../utils/storageUtils'
+import { useTotalApprovedLoan } from '../../../hooks/useTotalApprovedLoan'
 
 export default function Page() {
     const searchParams = useSearchParams()
