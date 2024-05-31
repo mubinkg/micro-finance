@@ -41,6 +41,9 @@ export default function ClientDataTable({ data }) {
                         Amount
                     </th>
                     <th>
+                        Comments
+                    </th>
+                    <th>
                         Status
                     </th>
                 </tr>
@@ -63,6 +66,9 @@ export default function ClientDataTable({ data }) {
                             </td>
                             <td>
                                 {d.amountRequested}
+                            </td>
+                            <td>
+                                {d?.comments || ""}
                             </td>
                             <td>
                                 {d.status === 'resubmit'?<Button onClick={()=>router.push('/zimba-cash/resubmit'+ "?" + createQueryString('id',d._id))} color='primary'>{statusMap[d.status]}</Button>:statusMap[d.status]}

@@ -2,7 +2,7 @@
 import { useSearchParams, useRouter } from "next/navigation";
 import { useEffect, useState, Suspense } from "react";
 import { getData, patchDataWtihAuth } from "../../../utils/axiosUtils";
-import { Container, Row, Col, Button } from 'reactstrap'
+import { Container, Row, Col, Button, Input } from 'reactstrap'
 import Image from 'next/image'
 import Swal from 'sweetalert2'
 
@@ -18,16 +18,17 @@ export default function LoanDetils() {
     const searchParams = useSearchParams();
     const router = useRouter()
     const [data, setData] = useState({})
+    const [comments, setComments] = useState("")
 
     function updateLoan(status) {
         Swal.fire({
-            title:"Update Loan Status!",
+            title: "Update Loan Status!",
             text: "Are you sure about this action?",
             icon: "warning",
             showCancelButton: true,
-        }).then((res)=>{
-            if(res.isConfirmed){
-                patchDataWtihAuth('loan/' + searchParams.get('id'), { status }).then(res => {
+        }).then((res) => {
+            if (res.isConfirmed) {
+                patchDataWtihAuth('loan/' + searchParams.get('id'), { status, comments }).then(res => {
                     Swal.fire({
                         title: 'Loan',
                         text: 'Loan status updated successfully',
@@ -48,6 +49,7 @@ export default function LoanDetils() {
     useEffect(() => {
         getData('/loan/' + searchParams.get('id')).then(res => {
             setData(res)
+            setComments(res?.comments)
         })
     }, [searchParams.get('id')])
 
@@ -60,7 +62,7 @@ export default function LoanDetils() {
                 </div>
                 <Row className="justify-content-center">
                     <Col lg={6} sm={12}>
-                        <h5 style={{marginBottom:"20px",fontSize:"25px",color: "blue", fontWeight:"bold"}}>Status : {statusMap[data?.status]}</h5>
+                        <h5 style={{ marginBottom: "20px", fontSize: "25px", color: "blue", fontWeight: "bold" }}>Status : {statusMap[data?.status]}</h5>
                         <h5>Applicant Name : {data?.firstName} {data?.lastName}</h5>
                         <h5>Amount : {data?.amountRequested}</h5>
                         <h5>Current Address : {data?.currentAddress}</h5>
@@ -112,18 +114,27 @@ export default function LoanDetils() {
                                 <Image alt="Pay Stubs" src={data?.paystubs || ""} height={200} width={300} />
                             </Col>
                         </Row>
+                        <Input
+                            className="mt-4"
+                            placeholder="Add Comments"
+                            id="exampleText"
+                            name="text"
+                            type="textarea"
+                            onChange={(e)=>setComments(e.target.value)}
+                            value={comments}
+                        />
                         <div className="my-4">
                             <Button onClick={() => updateLoan('approve')} style={{ marginRight: "10px" }} color="primary">Approve</Button>
                             <Button onClick={() => updateLoan('reject')} style={{ marginRight: "10px" }} color="danger">Reject</Button>
                             <Button onClick={() => updateLoan('resubmit')} style={{ marginRight: "10px" }} color="info">Request Resubmit</Button>
-                            <Button 
+                            <Button
                                 color="warning"
-                                outline 
+                                outline
                                 onClick={() => updateLoan('paid')}
                                 style={{
-                                    color:"green",
+                                    color: "green",
                                     fontWeight: "bold",
-                                    padding:"6px 30px"
+                                    padding: "6px 30px"
                                 }}
                             >
                                 Paid

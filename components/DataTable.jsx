@@ -40,6 +40,9 @@ export default function DataTable({ data }) {
                         Amount
                     </th>
                     <th>
+                        Comments
+                    </th>
+                    <th>
                         Status
                     </th>
                 </tr>
@@ -62,6 +65,9 @@ export default function DataTable({ data }) {
                             </td>
                             <td>
                                 {d.amountRequested}
+                            </td>
+                            <td>
+                                {d?.comments || ""}
                             </td>
                             <td>
                                 {statusMap[d.status]}
