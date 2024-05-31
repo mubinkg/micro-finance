@@ -3,6 +3,7 @@
 import { Table } from 'reactstrap'
 import { useRouter } from 'next/navigation'
 import { convertUTCToCST } from '../utils/dateTime'
+import ViewText from '../components/ViewText'
 
 const statusMap = {
     approve: 'Approved',
@@ -67,7 +68,7 @@ export default function DataTable({ data }) {
                                 {d.amountRequested}
                             </td>
                             <td>
-                                {d?.comments || ""}
+                                <ViewText text={d?.comments}/>
                             </td>
                             <td>
                                 {statusMap[d.status]}

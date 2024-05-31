@@ -3,6 +3,7 @@
 import { Table,Button } from 'reactstrap'
 import { useRouter } from 'next/navigation'
 import { convertUTCToCST } from '../utils/dateTime'
+import ViewText from './ViewText'
 
 const statusMap = {
     approved: 'Approved',
@@ -68,7 +69,7 @@ export default function ClientDataTable({ data }) {
                                 {d.amountRequested}
                             </td>
                             <td>
-                                {d?.comments || ""}
+                                <ViewText text={d?.comments}/>
                             </td>
                             <td>
                                 {d.status === 'resubmit'?<Button onClick={()=>router.push('/zimba-cash/resubmit'+ "?" + createQueryString('id',d._id))} color='primary'>{statusMap[d.status]}</Button>:statusMap[d.status]}
