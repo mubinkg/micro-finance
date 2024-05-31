@@ -124,9 +124,9 @@ export default function LoanDetils() {
                             value={comments}
                         />
                         <div className="my-4">
-                            <Button onClick={() => updateLoan(statusMap.approve)} style={{ marginRight: "10px" }} color="primary">Approve</Button>
-                            <Button onClick={() => updateLoan(statusMap.reject)} style={{ marginRight: "10px" }} color="danger">Reject</Button>
-                            <Button onClick={() => updateLoan(statusMap.resubmit)} style={{ marginRight: "10px" }} color="info">Request Resubmit</Button>
+                            <Button onClick={() => updateLoan('approve')} style={{ marginRight: "10px" }} color="primary">Approve</Button>
+                            <Button onClick={() => updateLoan('reject')} style={{ marginRight: "10px" }} color="danger">Reject</Button>
+                            <Button onClick={() => updateLoan('resubmit')} style={{ marginRight: "10px" }} color="info">Request Resubmit</Button>
                             <Button
                                 color="warning"
                                 outline
