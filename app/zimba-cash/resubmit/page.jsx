@@ -604,7 +604,7 @@ export default function Page() {
                             type="checkbox"
                             onChange={(e) => setAgree(e.target.checked)}
                         />
-                        <p>Check Box to Agree to SMS Policy</p>
+                        <p>Check Box to Agree to <a href="#" onClick={()=>router.push('/zimba-cash/sms-policy')} style={{textDecoration:"none"}}>SMS Policy</a></p>
                     </div>
 
                     <Button
