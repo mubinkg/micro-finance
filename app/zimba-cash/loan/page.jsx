@@ -121,8 +121,10 @@ export default function Page() {
     }
 
     function submitHandler(values) {
-        console.log("submitvalues",values)
         setAmountDate()
+        // if(totalApprovedLoan==0){
+        //     return
+        // }
         if(values?.amountRequested>totalApprovedLoan){
             return Swal.fire({
                 title: 'Request Loan',

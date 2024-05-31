@@ -1,5 +1,6 @@
 const { useEffect } = require("react");
 const { useState } = require("react");
+import Swal from 'sweetalert2';
 import {getDataWtihAuth} from '../utils/axiosUtils'
 import { totalLoanUrl } from '../utils/urls';
 
@@ -10,7 +11,12 @@ export function useTotalApprovedLoan(){
         getDataWtihAuth(totalLoanUrl).then(res=>{
             setTotalApprovedLoan(res.data)
         }).catch(err=>{
-            console.log(err)
+            // console.log("err",err)
+            // Swal.fire({
+            //     title: 'Request Loan',
+            //     text: `${err.message}`,
+            //     icon: 'error'
+            // })
         })
     }
 

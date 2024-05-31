@@ -5,8 +5,8 @@ import { useRouter } from 'next/navigation'
 import { convertUTCToCST } from '../utils/dateTime'
 
 const statusMap = {
-    approve: 'Approved',
-    reject: "Rejected",
+    approved: 'Approved',
+    rejected: "Rejected",
     resubmit: 'Resubmit',
     pending: 'Pending',
     paid: 'Paid'

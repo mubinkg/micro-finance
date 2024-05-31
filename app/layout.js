@@ -13,13 +13,13 @@ export const metadata = {
       rel: 'icon',
       type: 'image/jpg',
       sizes: '32x32',
-      url: '../public/favicon-32X32.jpg',
+      url: '/favicon-32X32.jpg',
     },
     {
       rel: 'icon',
       type: 'image/jpg',
       sizes: '16x16',
-      url: '../public/favicon-16x16.jpg',
+      url: '/favicon-16x16.jpg',
     },
   ],
 };
