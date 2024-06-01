@@ -6,8 +6,8 @@ import { convertUTCToCST } from '../utils/dateTime'
 import ViewText from './ViewText'
 
 const statusMap = {
-    approved: 'Approved',
-    rejected: "Rejected",
+    approve: 'Approved',
+    reject: "Rejected",
     resubmit: 'Resubmit',
     pending: 'Pending',
     paid: 'Paid'
