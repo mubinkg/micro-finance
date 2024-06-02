@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation'
 import { convertUTCToCST } from '../utils/dateTime'
 import ViewText from './ViewText'
 import Swal from 'sweetalert2'
+import { postDataWithAuth } from '../utils/axiosUtils'
 
 
 const statusMap = {
@@ -24,7 +25,7 @@ export default function ClientDataTable({ data }) {
         return params.toString();
     };
 
-    function onlyInterestPay(status) {
+    function onlyInterestPay({loanId, amount}) {
         Swal.fire({
             title: "Only Interest Pay!",
             text: "You are paying Interest only. Your loan principal will roll over 14 more days",
@@ -33,7 +34,15 @@ export default function ClientDataTable({ data }) {
             showCancelButton: true,
         }).then((res) => {
             if (res.isConfirmed) {
-              console.log("Success")
+                postDataWithAuth('/payments', {
+                    "loanId":loanId,
+                    "amount": amount,
+                    "paymentType": "interestPay"
+                }).then(()=>{
+                    
+                }).catch(err=>{
+                    console.log(err)
+                })
             }
         })
     }
@@ -46,7 +55,15 @@ export default function ClientDataTable({ data }) {
             showCancelButton: true,
         }).then((res) => {
             if (res.isConfirmed) {
-              console.log("Success")
+                postDataWithAuth('/payments', {
+                    "loanId":loanId,
+                    "amount": amount,
+                    "paymentType": "loanPay"
+                }).then(()=>{
+                    
+                }).catch(err=>{
+                    console.log(err)
+                })
             }
         })
     }
@@ -116,10 +133,10 @@ export default function ClientDataTable({ data }) {
                                 {d.amountRequested}
                             </td>
                             <td>
-                                {<Button onClick={()=>onlyInterestPay()} color='primary'>{d.intersetDue}</Button>}
+                                {<Button onClick={()=>onlyInterestPay({loanId:d._id, amount:d.intersetDue})} color='primary'>{d.intersetDue}</Button>}
                             </td>
                             <td>
-                                {<Button onClick={()=>totalAmountPay()} color='primary'>{d.totalDue}</Button>}
+                                {<Button onClick={()=>totalAmountPay({loanId:d._id, amount:d.totalDue})} color='primary'>{d.totalDue}</Button>}
                             </td>
                             <td>
                                 <ViewText text={d?.comments}/>
