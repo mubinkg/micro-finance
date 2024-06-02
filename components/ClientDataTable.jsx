@@ -116,10 +116,10 @@ export default function ClientDataTable({ data }) {
                                 {d.amountRequested}
                             </td>
                             <td>
-                                {<Button onClick={()=>onlyInterestPay()} color='primary'>{d.amountDue-d.amountRequested}</Button>}
+                                {<Button onClick={()=>onlyInterestPay()} color='primary'>{d.intersetDue}</Button>}
                             </td>
                             <td>
-                                {<Button onClick={()=>totalAmountPay()} color='primary'>{d.amountDue}</Button>}
+                                {<Button onClick={()=>totalAmountPay()} color='primary'>{d.totalDue}</Button>}
                             </td>
                             <td>
                                 <ViewText text={d?.comments}/>
