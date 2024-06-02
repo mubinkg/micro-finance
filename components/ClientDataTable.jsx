@@ -4,6 +4,8 @@ import { Table,Button } from 'reactstrap'
 import { useRouter } from 'next/navigation'
 import { convertUTCToCST } from '../utils/dateTime'
 import ViewText from './ViewText'
+import Swal from 'sweetalert2'
+
 
 const statusMap = {
     approve: 'Approved',
@@ -22,12 +24,45 @@ export default function ClientDataTable({ data }) {
         return params.toString();
     };
 
+    function onlyInterestPay(status) {
+        Swal.fire({
+            title: "Only Interest Pay!",
+            text: "You are paying Interest only. Your loan principal will roll over 14 more days",
+            icon: "warning",
+            confirmButtonText:"Yes",
+            showCancelButton: true,
+        }).then((res) => {
+            if (res.isConfirmed) {
+              console.log("Success")
+            }
+        })
+    }
+    function totalAmountPay(status) {
+        Swal.fire({
+            title: "Total Amount Pay!",
+            text: "You are paying theTotal balance. Thank you!",
+            icon: "warning",
+            confirmButtonText:"Yes",
+            showCancelButton: true,
+        }).then((res) => {
+            if (res.isConfirmed) {
+              console.log("Success")
+            }
+        })
+    }
+
     return (
         <Table hover className='mt-4'>
             <thead>
                 <tr>
                     <th>
                         Date
+                    </th>
+                    <th>
+                        Due Date
+                    </th>
+                    <th>
+                        Loan Number
                     </th>
                     <th>
                         First Name
@@ -40,6 +75,12 @@ export default function ClientDataTable({ data }) {
                     </th>
                     <th>
                         Amount
+                    </th>
+                    <th>
+                        Interest Due
+                    </th>
+                    <th>
+                        Total Due
                     </th>
                     <th>
                         Comments
@@ -57,6 +98,12 @@ export default function ClientDataTable({ data }) {
                             {convertUTCToCST(d.createdAt)}
                             </td>
                             <td>
+                            {d.amountDueDate}
+                            </td>
+                            <td>
+                            {d?.loanNumber}
+                            </td>
+                            <td>
                                 {d.firstName}
                             </td>
                             <td>
@@ -67,6 +114,12 @@ export default function ClientDataTable({ data }) {
                             </td>
                             <td>
                                 {d.amountRequested}
+                            </td>
+                            <td>
+                                {<Button onClick={()=>onlyInterestPay()} color='primary'>{d.amountDue-d.amountRequested}</Button>}
+                            </td>
+                            <td>
+                                {<Button onClick={()=>totalAmountPay()} color='primary'>{d.amountDue}</Button>}
                             </td>
                             <td>
                                 <ViewText text={d?.comments}/>
