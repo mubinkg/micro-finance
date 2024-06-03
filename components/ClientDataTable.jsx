@@ -13,6 +13,7 @@ const statusMap = {
     reject: "Rejected",
     resubmit: 'Resubmit',
     pending: 'Pending',
+    process: "Processing",
     paid: 'Paid'
 }
 
@@ -25,10 +26,10 @@ export default function ClientDataTable({ data }) {
         return params.toString();
     };
 
-    function onlyInterestPay({loanId, amount}) {
+    function onlyInterestPay({loanId, amount, lateFee}) {
         Swal.fire({
-            title: "Only Interest Pay!",
-            text: "You are paying Interest only. Your loan principal will roll over 14 more days",
+            title: "Pay Interest + Late Fees!",
+            text: `You are paying ${lateFee} late fee and ${amount} interest. Your loan principal will roll over 14 more days`,
             icon: "warning",
             confirmButtonText:"Yes",
             showCancelButton: true,
@@ -36,19 +37,29 @@ export default function ClientDataTable({ data }) {
             if (res.isConfirmed) {
                 postDataWithAuth('/payments', {
                     "loanId":loanId,
-                    "amount": amount,
+                    "amount": amount+lateFee,
                     "paymentType": "interestPay"
                 }).then(()=>{
-                    
+                    Swal.fire({
+                        title: "Pay Interest + Late Fees!",
+                        text: "Your sayment succeeded.",
+                        icon: "success",
+                        confirmButtonText:"Yes",
+                    })
                 }).catch(err=>{
-                    console.log(err)
+                    Swal.fire({
+                        title: "Pay Interest + Late Fees!",
+                        text: "At this time your are not able to pay for this loan.",
+                        icon: "warning",
+                        confirmButtonText:"Yes",
+                    })
                 })
             }
         })
     }
-    function totalAmountPay(status) {
+    function totalAmountPay({loanId, amount}) {
         Swal.fire({
-            title: "Total Amount Pay!",
+            title: "Pay Total Amount!",
             text: "You are paying theTotal balance. Thank you!",
             icon: "warning",
             confirmButtonText:"Yes",
@@ -60,9 +71,19 @@ export default function ClientDataTable({ data }) {
                     "amount": amount,
                     "paymentType": "loanPay"
                 }).then(()=>{
-                    
+                    Swal.fire({
+                        title: "Pay Total Amount!",
+                        text: "Your payment succeeded.",
+                        icon: "success",
+                        confirmButtonText:"Yes",
+                    })
                 }).catch(err=>{
-                    console.log(err)
+                    Swal.fire({
+                        title: "Pay Total Amount!",
+                        text: "At this time your are not able to pay for this loan.",
+                        icon: "warning",
+                        confirmButtonText:"Yes",
+                    })
                 })
             }
         })
@@ -94,7 +115,7 @@ export default function ClientDataTable({ data }) {
                         Amount
                     </th>
                     <th>
-                        Interest Due
+                        Interest Due with Late Fee
                     </th>
                     <th>
                         Total Due
@@ -133,10 +154,10 @@ export default function ClientDataTable({ data }) {
                                 {d.amountRequested}
                             </td>
                             <td>
-                                {<Button onClick={()=>onlyInterestPay({loanId:d._id, amount:d.intersetDue})} color='primary'>{d.intersetDue}</Button>}
+                                {<Button onClick={()=>onlyInterestPay({loanId:d._id, amount:d.intersetDue, lateFee: d.lateFee})} color={d?.isIntersetPays? "success":"primary"}>{d.intersetDue + d.lateFee}</Button>}
                             </td>
                             <td>
-                                {<Button onClick={()=>totalAmountPay({loanId:d._id, amount:d.totalDue})} color='primary'>{d.totalDue}</Button>}
+                                {<Button onClick={()=>totalAmountPay({loanId:d._id, amount:d.totalDue})} color={d?.isLoanPays? "success":"primary"}>{d.totalDue}</Button>}
                             </td>
                             <td>
                                 <ViewText text={d?.comments}/>

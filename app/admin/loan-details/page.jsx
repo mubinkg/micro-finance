@@ -11,6 +11,7 @@ const statusMap = {
     reject: "Rejected",
     resubmit: 'Resubmit',
     pending: 'Pending',
+    process: "Processing",
     paid: 'Paid'
 }
 
