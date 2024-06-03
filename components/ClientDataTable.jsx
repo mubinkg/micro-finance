@@ -17,7 +17,7 @@ const statusMap = {
     paid: 'Paid'
 }
 
-export default function ClientDataTable({ data }) {
+export default function ClientDataTable({ data , getLoanData}) {
 
     const router = useRouter()
     const createQueryString = (name, value) => {
@@ -45,7 +45,8 @@ export default function ClientDataTable({ data }) {
                         text: "Your sayment succeeded.",
                         icon: "success",
                         confirmButtonText: "Yes",
-                    })
+                    });
+                    getLoanData()
                 }).catch(err => {
                     Swal.fire({
                         title: "Pay Interest + Late Fees!",
@@ -76,7 +77,8 @@ export default function ClientDataTable({ data }) {
                         text: "Your payment succeeded.",
                         icon: "success",
                         confirmButtonText: "Yes",
-                    })
+                    });
+                    getLoanData()
                 }).catch(err => {
                     Swal.fire({
                         title: "Pay Total Amount!",

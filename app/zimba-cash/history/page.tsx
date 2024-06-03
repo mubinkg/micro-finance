@@ -8,12 +8,15 @@ import { getDataWtihAuth } from "../../../utils/axiosUtils";
 
 export default function Page(){
     const [data, setData] = useState([])
-    useEffect(()=>{
+    const getLoanData = ()=>{
         getDataWtihAuth('/loan/user-loan').then((res)=>{
             setData(res.data)
         }).catch(err=>{
             console.log(err)
         })
+    }
+    useEffect(()=>{
+        getLoanData()
     }, [])
     return (
         <Container style={{
@@ -23,7 +26,7 @@ export default function Page(){
             <div style={{
                 
             }}>
-                <ClientDataTable data={data}/> 
+                <ClientDataTable data={data} getLoanData={getLoanData}/> 
             </div>
         </Container>
     )
