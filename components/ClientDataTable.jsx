@@ -29,7 +29,7 @@ export default function ClientDataTable({ data , getLoanData}) {
     function onlyInterestPay({ loanId, amount, lateFee }) {
         Swal.fire({
             title: "Pay Interest + Late Fees!",
-            text: `You are paying ${lateFee} late fee and ${amount} interest. Your loan principal will roll over 14 more days`,
+            text: `You are paying $${lateFee} late fees and $${amount} interest. Your loan principal will roll over 14 more days`,
             icon: "warning",
             confirmButtonText: "Yes",
             showCancelButton: true,
@@ -42,7 +42,7 @@ export default function ClientDataTable({ data , getLoanData}) {
                 }).then(() => {
                     Swal.fire({
                         title: "Pay Interest + Late Fees!",
-                        text: "Your sayment succeeded.",
+                        text: "Once payment is verified, loan status will update to PAID. Thank you!",
                         icon: "success",
                         confirmButtonText: "Yes",
                     });

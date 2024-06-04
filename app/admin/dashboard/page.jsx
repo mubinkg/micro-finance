@@ -13,6 +13,7 @@ import logo from '../../../public/L-5.jpg'
 import Image from 'next/image'
 import { removeItem } from '../../../utils/storageUtils'
 import { logoutUrl } from '../../../utils/urls'
+import AdminPaymentHistoryData from '../../../components/AdminPaymentHistoryData'
 
 export default function Page() {
     const [loans, setLoans] = useState([])
@@ -20,6 +21,8 @@ export default function Page() {
     const [dashboardItem, setDashboardItem] = useState('loan')
     const [data, setData] = useState([])
     const [userCount, setUserCount] = useState(0)
+    const [paymentHistory,setPaymentHistory]=useState([])
+    const [paymentCount,setPaymentCount]=useState(0)
 
     const logOutHandler = ()=>{
         getData(logoutUrl).then(res=>{
@@ -45,9 +48,17 @@ export default function Page() {
         })
     }
 
+    function paymentHistoryData(){
+        getData('/payments/findPaymentHistory').then(res=>{
+            setPaymentHistory(res.history)
+            setPaymentCount(res.count)
+        })
+    }
+
     useEffect(()=>{
         getLoanData()
         getUserData()
+        paymentHistoryData()
     }, [])
 
     return (
@@ -66,7 +77,7 @@ export default function Page() {
                     <DashboardItem count={userCount} onClick={()=>setDashboardItem('user')}  title="Applicants/User" icon={<GroupIcon/>} />
                 </Col>
                 <Col lg={3}>
-                    <DashboardItem onClick={()=>setDashboardItem('history')} title="History" icon={<GroupIcon/>}/>
+                    <DashboardItem onClick={()=>setDashboardItem('history')} title="Payment History" icon={<GroupIcon/>}/>
                 </Col>
                 <Col lg={3}>
                     <DashboardItem onClick={()=>setDashboardItem('loan')} title="Bank Details" icon={<CartIcon/>} />
@@ -79,7 +90,7 @@ export default function Page() {
                 dashboardItem === 'user' ? <ApplicantsDataTable data={data}/> : ""
             }
             {
-                dashboardItem === 'history' ? <DataTable data={loans}/> : ""
+                dashboardItem === 'history' ? <AdminPaymentHistoryData data={paymentHistory}/> : ""
             }
         </Container>
     )
