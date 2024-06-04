@@ -9,6 +9,7 @@ const statusMap = {
     approve: 'Approved',
     reject: "Rejected",
     resubmit: 'Resubmit',
+    process:'Processing',
     pending: 'Pending',
     paid: 'Paid'
 }
