@@ -117,7 +117,7 @@ export default function ClientDataTable({ data , getLoanData}) {
                         Amount
                     </th>
                     <th>
-                        Interest Due with Late Fee
+                        Interest Due
                     </th>
                     <th>
                         Total Due
