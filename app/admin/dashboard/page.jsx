@@ -77,7 +77,7 @@ export default function Page() {
                     <DashboardItem count={userCount} onClick={()=>setDashboardItem('user')}  title="Applicants/User" icon={<GroupIcon/>} />
                 </Col>
                 <Col lg={3}>
-                    <DashboardItem onClick={()=>setDashboardItem('history')} title="Payment History" icon={<GroupIcon/>}/>
+                    <DashboardItem count={paymentCount} onClick={()=>setDashboardItem('history')} title="Payment History" icon={<GroupIcon/>}/>
                 </Col>
                 <Col lg={3}>
                     <DashboardItem onClick={()=>setDashboardItem('loan')} title="Bank Details" icon={<CartIcon/>} />
