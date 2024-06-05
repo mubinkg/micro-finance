@@ -3,6 +3,7 @@
 import { Table } from 'reactstrap'
 import { useRouter } from 'next/navigation'
 import { convertUTCToCST } from '../utils/dateTime'
+import { formatNumber } from '../utils/formatNumber'
 
 
 export default function AdminPaymentHistoryData({ data }) {
@@ -62,28 +63,28 @@ export default function AdminPaymentHistoryData({ data }) {
                                 {d.loan.loanNumber}
                             </td>
                             <td>
-                                {d.user.firstName}
+                                {d.loan.firstName}
                             </td>
                             <td>
-                                {d.user.lastName}
+                                {d.loan.lastName}
                             </td>
                             <td>
-                                {d.loan.amountRequested}
+                                {"$"+d.loan.amountRequested}
                             </td>
                             <td>
-                                {d.loan.amountDue-d.loan.amountRequested}
+                                {"$"+(formatNumber(d.loan.amountDue-d.loan.amountRequested))}
                             </td>
                             <td>
-                                {d.loan.amountDue}
+                                {"$"+(formatNumber(d.loan.amountDue))}
                             </td>
                             <td>
                                 {convertUTCToCST(d.createdAt)}
                             </td>
                             <td>
-                                {d.paidAmount}
+                                {"$"+(formatNumber(d.paidAmount))}
                             </td>
                             <td>
-                                {d.loan.amountDue-d.paidAmount}
+                                {"$"+(formatNumber(d.loan.amountDue-d.paidAmount))}
                             </td>
                         </tr>
                     ))

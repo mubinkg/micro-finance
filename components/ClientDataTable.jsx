@@ -6,6 +6,7 @@ import { convertUTCToCST } from '../utils/dateTime'
 import ViewText from './ViewText'
 import Swal from 'sweetalert2'
 import { postDataWithAuth } from '../utils/axiosUtils'
+import { formatNumber } from '../utils/formatNumber'
 
 
 const statusMap = {
@@ -153,7 +154,7 @@ export default function ClientDataTable({ data , getLoanData}) {
                                 {d.ssn}
                             </td>
                             <td>
-                                {d.amountRequested}
+                                {"$"+(formatNumber(d.amountRequested))}
                             </td>
                             <td>
                                 {
@@ -161,7 +162,7 @@ export default function ClientDataTable({ data , getLoanData}) {
                                         onClick={() => onlyInterestPay({ loanId: d._id, amount: d.intersetDue, lateFee: d.lateFee })} 
                                         color={d?.isIntersetPays ? "success" : "primary"}
                                     >
-                                            {d.intersetDue + d.lateFee} PAY
+                                            {"$"+(formatNumber(d.intersetDue + d.lateFee))} PAY
                                     </Button>
                                 }
                             </td>
@@ -171,7 +172,7 @@ export default function ClientDataTable({ data , getLoanData}) {
                                         onClick={() => totalAmountPay({ loanId: d._id, amount: d.totalDue })}
                                         color={d?.isLoanPays ? "success" : "primary"}
                                     >
-                                        {d.totalDue} PAY
+                                        {"$"+(formatNumber(d.totalDue))} PAY
                                     </Button>
                                 }
                             </td>
