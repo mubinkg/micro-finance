@@ -51,7 +51,7 @@ export default function ClientDataTable({ data , getLoanData}) {
                 }).catch(err => {
                     Swal.fire({
                         title: "Pay Interest + Late Fees!",
-                        text: "At this time your are not able to pay for this loan.",
+                        text: `At this time you are not able to pay this loan. Only loans in "Approved" status can be paid.`,
                         icon: "warning",
                         confirmButtonText: "Yes",
                     })
@@ -83,7 +83,7 @@ export default function ClientDataTable({ data , getLoanData}) {
                 }).catch(err => {
                     Swal.fire({
                         title: "Pay Total Amount!",
-                        text: "At this time your are not able to pay for this loan.",
+                        text: `At this time you are not able to pay this loan. Only loans in "Approved" status can be paid.`,
                         icon: "warning",
                         confirmButtonText: "Yes",
                     })
