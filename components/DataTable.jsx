@@ -26,8 +26,14 @@ export default function DataTable({ data }) {
         <Table hover className='mt-4'>
             <thead>
                 <tr>
-                    <th>
+                <th>
                         Date
+                    </th>
+                    <th>
+                        Due Date
+                    </th>
+                    <th>
+                        Loan Number
                     </th>
                     <th>
                         First Name
@@ -40,6 +46,12 @@ export default function DataTable({ data }) {
                     </th>
                     <th>
                         Amount
+                    </th>
+                    <th>
+                        Interest Due
+                    </th>
+                    <th>
+                        Total Due
                     </th>
                     <th>
                         Comments
@@ -57,6 +69,12 @@ export default function DataTable({ data }) {
                             {convertUTCToCST(d.createdAt)}
                             </td>
                             <td>
+                                {d.amountDueDate}
+                            </td>
+                            <td>
+                                {d?.loanNumber}
+                            </td>
+                            <td>
                                 {d.firstName}
                             </td>
                             <td>
@@ -67,6 +85,12 @@ export default function DataTable({ data }) {
                             </td>
                             <td>
                                 {d.amountRequested}
+                            </td>
+                            <td>
+                                {d.interestPays}
+                            </td>
+                            <td>
+                                {d.amountDue}
                             </td>
                             <td>
                                 <ViewText text={d?.comments}/>

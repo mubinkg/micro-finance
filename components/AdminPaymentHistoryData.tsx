@@ -14,7 +14,7 @@ export default function AdminPaymentHistoryData({ data }) {
             <thead>
                 <tr>
                     <th>
-                        Loan Request Date
+                        Date
                     </th>
                     <th>
                         Due Date
@@ -23,10 +23,10 @@ export default function AdminPaymentHistoryData({ data }) {
                         Loan Number
                     </th>
                     <th>
-                        Customer First Name
+                         First Name
                     </th>
                     <th>
-                    Customer Last Name
+                         Last Name
                     </th>
                     <th>
                         Loan Amount
@@ -83,7 +83,7 @@ export default function AdminPaymentHistoryData({ data }) {
                                 {d.paidAmount}
                             </td>
                             <td>
-                                {d.unpaidAmount}
+                                {d.loan.amountDue-d.paidAmount}
                             </td>
                         </tr>
                     ))
