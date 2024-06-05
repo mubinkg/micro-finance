@@ -11,6 +11,7 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { getItem, removeItem, setItem } from '../../../utils/storageUtils'
 import {useTotalApprovedLoan} from '../../../hooks/useTotalApprovedLoan'
+import { formatNumber } from '../../../utils/formatNumber'
 
 
 
@@ -552,7 +553,7 @@ export default function Page() {
                                     onChange={(e)=>{
                                         setAmountDate()
                                         setValue('amountRequested',e.target.value)
-                                        setValue('amountDue',e.target.value*1.25)
+                                        setValue('amountDue',(formatNumber(e.target.value*1.25)))
                                     }} 
                                     placeholder="0" 
                                 />

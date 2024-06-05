@@ -5,6 +5,7 @@ import { getData, patchDataWtihAuth } from "../../../utils/axiosUtils";
 import { Container, Row, Col, Button, Input } from 'reactstrap'
 import Image from 'next/image'
 import Swal from 'sweetalert2'
+import {formatNumber} from "../../../utils/formatNumber"
 
 const statusMap = {
     approve: 'Approved',
@@ -88,7 +89,7 @@ export default function LoanDetils() {
                             <p>Phone: {data?.referenceTwoPhone}</p>
                         </div>
                         <h5>Amount Request: {data?.amountRequested}</h5>
-                        <h5>Amount Due: {data?.amountDue}</h5>
+                        <h5>Amount Due: {formatNumber(data?.amountDue)}</h5>
                         <h5>Payment Method: {data?.paymentMethod === 'mobile' ? "Mobile Banking (enter email or phone)" : "Cash App (enter $cashtag or username)"}</h5>
                         <h5>Payment Method Details: {data?.paymentDetails}</h5>
                         <h5>Signature: {data?.signature}</h5>

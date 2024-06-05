@@ -4,6 +4,7 @@ import { Table } from 'reactstrap'
 import { useRouter } from 'next/navigation'
 import { convertUTCToCST } from '../utils/dateTime'
 import ViewText from '../components/ViewText'
+import { formatNumber } from '../utils/formatNumber'
 
 const statusMap = {
     approve: 'Approved',
@@ -84,13 +85,13 @@ export default function DataTable({ data }) {
                                 {d.ssn}
                             </td>
                             <td>
-                                {d.amountRequested}
+                                {"$"+d.amountRequested}
                             </td>
                             <td>
-                                {d.amountDue-d.amountRequested}
+                                {"$"+(formatNumber(d.amountDue-d.amountRequested))}
                             </td>
                             <td>
-                                {d.amountDue}
+                                {"$"+(formatNumber(d.amountDue))}
                             </td>
                             <td>
                                 <ViewText text={d?.comments}/>
