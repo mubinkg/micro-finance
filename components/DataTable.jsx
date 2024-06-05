@@ -87,7 +87,7 @@ export default function DataTable({ data }) {
                                 {d.amountRequested}
                             </td>
                             <td>
-                                {d.interestPays}
+                                {d.amountDue-d.amountRequested}
                             </td>
                             <td>
                                 {d.amountDue}
