@@ -62,7 +62,7 @@ export default function ClientDataTable({ data , getLoanData}) {
     function totalAmountPay({ loanId, amount }) {
         Swal.fire({
             title: "Pay Total Amount!",
-            text: "You are paying theTotal balance. Thank you!",
+            text: "You are paying the total balance. Thank you!",
             icon: "warning",
             confirmButtonText: "Yes",
             showCancelButton: true,
@@ -75,7 +75,7 @@ export default function ClientDataTable({ data , getLoanData}) {
                 }).then(() => {
                     Swal.fire({
                         title: "Pay Total Amount!",
-                        text: "Your payment succeeded.",
+                        text: "Once payment is verified, loan status will update to PAID. Thank you!",
                         icon: "success",
                         confirmButtonText: "Yes",
                     });
