@@ -128,7 +128,7 @@ export default function Page() {
                 title: "Loan Application",
                 text: `Loan successfully submitted.
                 Our team is reviewing, and will respond shortly. You may get an SMS notification about
-                loan status. You can also check status under "History"`,
+                loan status. You can also check status under "Loans List"`,
                 icon: "success"
             }).then(() => {
                 removeItem('loan')
