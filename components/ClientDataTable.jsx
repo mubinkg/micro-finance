@@ -30,7 +30,7 @@ export default function ClientDataTable({ data , getLoanData}) {
     function onlyInterestPay({ loanId, amount, lateFee }) {
         Swal.fire({
             title: "Pay Interest + Late Fees!",
-            text: `You are paying $${lateFee} late fees and $${amount} interest. Your loan principal will roll over 14 more days`,
+            text: `You are paying $${formatNumber(lateFee)} late fees and $${formatNumber(amount)} interest. Your loan principal will roll over 14 more days`,
             icon: "warning",
             confirmButtonText: "Yes",
             showCancelButton: true,
@@ -38,7 +38,7 @@ export default function ClientDataTable({ data , getLoanData}) {
             if (res.isConfirmed) {
                 postDataWithAuth('/payments', {
                     "loanId": loanId,
-                    "amount": amount + lateFee,
+                    "amount": formatNumber(amount + lateFee),
                     "paymentType": "interestPay"
                 }).then(() => {
                     Swal.fire({
@@ -118,6 +118,9 @@ export default function ClientDataTable({ data , getLoanData}) {
                         Amount
                     </th>
                     <th>
+                        Late Fee
+                    </th>
+                    <th>
                         Interest Due
                     </th>
                     <th>
@@ -156,6 +159,7 @@ export default function ClientDataTable({ data , getLoanData}) {
                             <td>
                                 {"$"+(formatNumber(d.amountRequested))}
                             </td>
+                            <td>{"$"+(formatNumber(d.lateFee))}</td>
                             <td>
                                 {
                                     <Button 
