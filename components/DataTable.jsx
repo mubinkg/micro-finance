@@ -48,9 +48,7 @@ export default function DataTable({ data }) {
                     <th>
                         Amount
                     </th>
-                    <th>
-                        Late Fee
-                    </th>
+                    <th>Late Fee</th>
                     <th>
                         Interest Due
                     </th>
@@ -88,13 +86,13 @@ export default function DataTable({ data }) {
                                 {d.ssn}
                             </td>
                             <td>
-                                {"$"+d.amountRequested}
-                            </td>
-                            <td>
-                                {"$"+formatNumber(d.amountRequested)}
+                                {"$"+((formatNumber(d.amountRequested)))}
                             </td>
                             <td>
                                 {"$"+(formatNumber(d.lateFee))}
+                            </td>
+                            <td>
+                                {"$"+(formatNumber(d.amountDue-d.amountRequested))}
                             </td>
                             <td>
                                 {"$"+(formatNumber(d.amountDue))}
