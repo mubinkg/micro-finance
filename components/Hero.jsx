@@ -8,8 +8,8 @@ export default function Hero() {
     return (
         <div className="container" style={{ color: "white", display: "flex", alignItems: "center", justifyContent: "center", alignContent: "center", marginTop: "200px" }}>
             <div style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }}>
-                <h2 style={{textAlign: "justify"}}>Because Life Happens</h2>
-                <p style={{textAlign:"justify"}}>Emergency cash sent to you within 5 minutes of approval.</p>
+                <h2 style={{textAlign: "justify", color:"purple",backgroundColor:"white"}}>Because Life Happens</h2>
+                <p style={{textAlign:"justify", color:"purple"}}>Emergency cash sent to you within 5 minutes of approval.</p>
                 <Button 
                     onClick={()=>router.push('/zimba-cash/loan')}
                     style={{
