@@ -8,6 +8,7 @@ import { CardIcon } from "../icons/CardIcon";
 import Image from 'next/image'
 import mailLogo from '../public/l-5-t.png'
 import imgUrl from '../public/sidebar.jpeg'
+import sidebarOne from '../public/sidebar1.jpeg'
 
 export default function Home() {
 
@@ -91,7 +92,7 @@ export default function Home() {
             </div>
           </Col>
           <Col lg={6} sm={12}>
-            <img src={imgUrl.src} style={{ width: "100%" }} />
+            <img src={sidebarOne.src} style={{ width: "100%" }} />
           </Col>
         </Row>
       </Container>
