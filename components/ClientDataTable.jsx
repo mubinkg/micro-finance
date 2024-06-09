@@ -38,7 +38,7 @@ export default function ClientDataTable({ data , getLoanData}) {
             if (res.isConfirmed) {
                 postDataWithAuth('/payments', {
                     "loanId": loanId,
-                    "amount": formatNumber(amount + lateFee),
+                    "amount": (amount + lateFee),
                     "paymentType": "interestPay"
                 }).then(() => {
                     Swal.fire({
