@@ -6,3 +6,4 @@ export const signinApiUrl =  (env === 'dev' ? "http://localhost:3001/user/signin
 export const signinUrl = (env === 'dev' ? "http://localhost:3000/api/login" : "https:www.zimbacash.com/api/login");
 export const baseUrl = (env === 'dev' ? 'http://localhost:3001':'https:www.zimbacash.com/backend/api/');
 export const totalLoanUrl = `${baseUrl}/loan/total-approved-loan`
+export const resetPasswordUlr = (env === 'dev' ? "http://localhost:3001/user/signin" : "https:www.zimbacash.com/backend/api/user/reset-password");
