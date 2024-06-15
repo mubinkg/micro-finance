@@ -1,5 +1,5 @@
-const env = 'production';
-// const env = 'dev';
+// const env = 'production';
+const env = 'dev';
 
 export const logoutUrl = (env === 'dev' ? "http://localhost:3000/api/logout" : "http://54.196.46.131/api/logout");
 export const signinApiUrl =  (env === 'dev' ? "http://localhost:3001/user/signin" : "http://54.196.46.131/backend/api/user/signin");

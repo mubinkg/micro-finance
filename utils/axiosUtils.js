@@ -2,7 +2,7 @@ import axios from "axios"
 import { getToken } from "./storageUtils";
 import { baseUrl } from "./urls";
 
-const publicRequest = axios.create({ baseURL: baseUrl });
+export const publicRequest = axios.create({ baseURL: baseUrl });
 publicRequest.interceptors.response.use(
   (res) => res.data,
   (error) => {

@@ -5,6 +5,7 @@ import {postData} from '../../../utils/axiosUtils'
 import { useRouter } from 'next/navigation'
 import {setItem} from '../../../utils/storageUtils'
 import Swal from 'sweetalert2'
+import {exampleAction} from '../../action'
 
 import AppNav from '../../../components/Navbar'
 import { signinUrl } from '../../../utils/urls'
@@ -14,20 +15,22 @@ export default function Page() {
     const [password, setPassword] = useState('')
     const router = useRouter()
 
-    const signinHandler = ()=>{
-        postData(signinUrl, {email, password}).then(res=>{
+    const signinHandler = async ()=>{
+        try{
+            const res = await exampleAction(email,password)
             setItem('user', JSON.stringify(res.user))
-            setItem('token', JSON.stringify(res.token))
-            setPassword('')
             setEmail('')
+            setPassword('')
+            setItem('token', JSON.stringify(res.token))
             window.location = ('/zimba-cash/loan')
-        }).catch(err=>{
+        }
+        catch(err){
             Swal.fire({
                 title: 'Log In',
                 text: 'Please give valid credentials',
                 icon: 'error'
             })
-        })
+        }
     }
 
     return (
