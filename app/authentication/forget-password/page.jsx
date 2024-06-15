@@ -5,6 +5,7 @@ import Swal from 'sweetalert2'
 import {postData} from '../../../utils/axiosUtils'
 import AppNav from '../../../components/Navbar'
 import { useRouter } from 'next/navigation'
+import { resetUrl } from '../../../utils/urls'
 
 export default function Page() {
     const router = useRouter()
@@ -18,7 +19,7 @@ export default function Page() {
                 icon: "error"
             })
         }
-        postData('/user/reset-password', {
+        postData(resetUrl, {
             email,
         }).then(data=>{
             setEmail('')
