@@ -10,6 +10,7 @@ import { useEffect, useState } from 'react';
 import { getData } from '../utils/axiosUtils';
 import { removeItem } from '../utils/storageUtils';
 import {logoutUrl} from '../utils/urls'
+import {logoutAction} from '../app/action'
 
 function AppNav({ hideSideNav }) {
   const [isAuth, setAuth] = useState(false)
@@ -28,15 +29,12 @@ function AppNav({ hideSideNav }) {
     router.push(path)
   }
 
-  const logOutHandler = () => {
-    getData(logoutUrl).then(res => {
-      window.location = '/';
-      removeItem('user')
-      removeItem('token')
-    }).catch(err => {
-      console.log(err)
-    })
-  }
+  const logOutHandler = async () => {
+    await logoutAction()
+    window.location = '/';
+    removeItem('user')
+    removeItem('token')
+}
 
   return (
     <Navbar expand="lg">

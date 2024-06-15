@@ -16,3 +16,7 @@ export async function exampleAction(email, password) {
         throw err
     }
 }
+
+export async function logoutAction(){
+    cookies().delete('access_token')
+}

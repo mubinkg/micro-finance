@@ -14,6 +14,7 @@ import Image from 'next/image'
 import { removeItem } from '../../../utils/storageUtils'
 import { logoutUrl } from '../../../utils/urls'
 import AdminPaymentHistoryData from '../../../components/AdminPaymentHistoryData'
+import { logoutAction } from '../../action'
 
 export default function Page() {
     const [loans, setLoans] = useState([])
@@ -24,14 +25,11 @@ export default function Page() {
     const [paymentHistory,setPaymentHistory]=useState([])
     const [paymentCount,setPaymentCount]=useState(0)
 
-    const logOutHandler = ()=>{
-        getData(logoutUrl).then(res=>{
-            window.location = '/';
-            removeItem('user')
-            removeItem('token')
-        }).catch(err=>{
-            console.log(err)
-        })
+    const logOutHandler = async ()=>{
+        await logoutAction()
+        window.location = '/';
+        removeItem('user')
+        removeItem('token')
       }
     
     function getUserData(){
