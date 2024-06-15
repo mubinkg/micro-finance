@@ -18,7 +18,7 @@ export default function Page() {
                 icon: "error"
             })
         }
-        postData('/user/reset-password', {
+        postData('user/reset-password', {
             email,
         }).then(data=>{
             setEmail('')
