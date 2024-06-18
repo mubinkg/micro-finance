@@ -1,5 +1,6 @@
 server {
     listen 80;
+    server_name zimbacash.com;
 
     location /backend/api/ {
         proxy_pass http://localhost:3001/; # Forward requests to your Nest.js application
