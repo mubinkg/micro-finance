@@ -29,6 +29,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <head>
         <meta name="google-site-verification" content="ZU1VWY_mpCbIdH0IZEqzEAFwCy8j7xDd1TECex57P6M" />
+        <meta property="og:image" content="/L-5.jpg" />
       </head>
       <body className={`${inter.className}`}>{children}</body>
       <Footer/>
