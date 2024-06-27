@@ -2,7 +2,6 @@
 
 import { cookies } from 'next/headers'
 import { postData } from '../utils/axiosUtils'
-import { signinApiUrl } from '../utils/urls'
 
 export async function exampleAction(email, password) {
     try {

@@ -7,7 +7,7 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
   title: "ZimbaCash",
-  description: "A Microfinace App",
+  description: "ZimbaCash - Emergency cash sent to you within 5 minutes of approval",
   icons: [
     {
       rel: 'icon',
