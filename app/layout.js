@@ -29,7 +29,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <head>
         <meta name="google-site-verification" content="ZU1VWY_mpCbIdH0IZEqzEAFwCy8j7xDd1TECex57P6M" />
-        <meta property="og:image" content="https://storage.googleapis.com/kocart/02c50e81-f911-40ed-9ab7-3c90f267935fimages%20(3).png" />
+        <meta property="og:image" content="/L-1.jpg" />
       </head>
       <body className={`${inter.className}`}>{children}</body>
       <Footer/>
