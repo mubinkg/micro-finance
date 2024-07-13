@@ -33,7 +33,7 @@ export default function Page() {
         }).catch(err=>{
             Swal.fire({
                 title: 'Registration',
-                text:'Error on register new user.',
+                text:'Error on registering new user.',
                 icon: "error"
             })
         })

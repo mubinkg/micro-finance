@@ -11,6 +11,7 @@ export default function Page() {
     const [firstName, setFirstName] = useState('')
     const [lastName, setLastName] = useState('')
     const [email, setEmail] = useState('')
+    const [phone, setPhone] = useState('')
 
     const signupHandler = () => {
         if (!email || !firstName || !lastName) {
@@ -74,6 +75,12 @@ export default function Page() {
                             Email
                         </p>
                         <Input value={email} onChange={(e) => setEmail(e.target.value)} />
+                    </div>
+                    <div style={{ width: "100%", marginTop: '20px' }} >
+                        <p  className='text-center text-success'>
+                            Phone
+                        </p>
+                        <Input value={phone} onChange={(e) => setEmail(e.target.value)} />
                     </div>
                     <Button style={{ background: "#68069d" }} className='mt-4' onClick={signupHandler}>SIGN UP</Button>
                     <div style={{display: 'flex',marginTop: "10px", justifyContent: "center" }}>
