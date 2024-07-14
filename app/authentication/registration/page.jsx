@@ -21,10 +21,28 @@ export default function Page() {
                 icon: "error"
             })
         }
+        let isInvalidPhone = false
+        if(phone.length !== 10){
+            isInvalidPhone = true
+        }
+        for(let i=0;i<phone.length;i++){
+            if(!Number.isInteger(parseInt(phone[i]))){
+                isInvalidPhone = true
+            }
+        }
+        if(isInvalidPhone){
+            Swal.fire({
+                title: "Registration",
+                text: "Please give a correct phone number.",
+                icon: "error"
+            })
+            return
+        }
         postData('/user/registration', {
             email,
             firstName,
-            lastName
+            lastName,
+            phone
         }).then(data=>{
             setLastName('')
             setFirstName('')
@@ -80,7 +98,7 @@ export default function Page() {
                         <p  className='text-center text-success'>
                             Phone
                         </p>
-                        <Input value={phone} onChange={(e) => setEmail(e.target.value)} />
+                        <Input value={phone} onChange={(e) => setPhone(e.target.value)} />
                     </div>
                     <Button style={{ background: "#68069d" }} className='mt-4' onClick={signupHandler}>SIGN UP</Button>
                     <div style={{display: 'flex',marginTop: "10px", justifyContent: "center" }}>

@@ -22,6 +22,9 @@ export default function ApplicantsDataTable({ data }) {
                         Email
                     </th>
                     <th>
+                        Phone Number
+                    </th>
+                    <th>
                         Last Active Date
                     </th>
                 </tr>
@@ -41,6 +44,9 @@ export default function ApplicantsDataTable({ data }) {
                             </td>
                             <td>
                                 {d?.email}
+                            </td>
+                            <td>
+                                {d?.phone}
                             </td>
                             <td>
                                 {getDateTime(d?.updatedAt?.toString())}
