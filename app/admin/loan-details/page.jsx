@@ -6,6 +6,7 @@ import { Container, Row, Col, Button, Input } from 'reactstrap'
 import Image from 'next/image'
 import Swal from 'sweetalert2'
 import {formatNumber} from "../../../utils/formatNumber"
+import PdfViewer from "../../../components/PdfViewer";
 
 const statusMap = {
     approve: 'Approved',
@@ -105,15 +106,27 @@ export default function LoanDetils() {
                             </Col>
                             <Col lg={6} sm={12}>
                                 <h5>Check Front</h5>
-                                <Image alt="Check Front" src={data?.checkFront || ""} width={300} height={200} />
+                                {
+                                    data?.checkFront?.split('.').pop() !== 'pdf'?
+                                    <Image alt="Check Front" src={data?.checkFront || ""} width={300} height={200} />:
+                                    <PdfViewer url={data?.checkFront}/>
+                                }
                             </Col>
                             <Col lg={6} sm={12}>
                                 <h5>Check Back</h5>
-                                <Image alt="Check Back" src={data?.checkBack || ""} width={300} height={200} />
+                                {
+                                    data?.checkBack?.split('.').pop() !== 'pdf'?
+                                    <Image alt="Check Front" src={data?.checkBack || ""} width={300} height={200} />:
+                                    <PdfViewer url={data?.checkBack}/>
+                                }
                             </Col>
                             <Col lg={6} sm={12}>
                                 <h5>Pay Stubs</h5>
-                                <Image alt="Pay Stubs" src={data?.paystubs || ""} height={200} width={300} />
+                                {
+                                    data?.paystubs?.split('.').pop() !== 'pdf'?
+                                    <Image alt="Pay Stubs" src={data?.paystubs || ""} height={200} width={300} />:
+                                    <PdfViewer url={data?.paystubs}/>
+                                }
                             </Col>
                         </Row>
                         <Input

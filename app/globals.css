@@ -25,6 +25,16 @@
   justify-content: "center";
   margin:"0px 40px 0px 40px"
 }
+.textLayer{
+  display: none;
+}
+.annotationLayer{
+  display: none;
+}
+
+canvas{
+  border: 1px solid black;
+}
 
 @media screen and (max-width: 480px) {
   .main {
