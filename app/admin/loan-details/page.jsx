@@ -101,7 +101,11 @@ export default function LoanDetils() {
                         <Row className="mt-4">
                             <Col lg={6} sm={12}>
                                 <h5>Driver License Image</h5>
-                                <Image alt="Driver License Image" src={data?.driverLicenseImage || ""} width={300} height={200} />
+                                {
+                                    data?.driverLicenseImage?.split('.').pop() !== 'pdf'?
+                                    <Image alt="Check Front" src={data?.driverLicenseImage || ""} width={300} height={200} />:
+                                    <embed type="application/pdf" frameborder="0" src={`https://docs.google.com/gview?url=${data?.driverLicenseImage}&embedded=true`} width={650} height={800}></embed>
+                                }
                             </Col>
                             <Col lg={6} sm={12}>
                                 <h5>Check Front</h5>
