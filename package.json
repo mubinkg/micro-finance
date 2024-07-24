@@ -19,7 +19,6 @@
     "react-bootstrap": "^2.10.2",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.51.4",
-    "react-pdf": "^9.1.0",
     "reactstrap": "^9.2.2",
     "sweetalert2": "^11.10.8",
     "yup": "^1.4.0"
