@@ -430,7 +430,7 @@ export default function Page() {
                         {
                             typeof watch('checkFront') === 'string' 
                             ? watch('checkFront')?.split('.')?.pop() == 'pdf'
-                            ? "pdf file successfully attached"
+                            ? "pdf file successfully attached "
                             : <img width={250} height="auto" src={watch('checkFront')} /> 
                             : ""
                         }
@@ -438,13 +438,13 @@ export default function Page() {
                             typeof watch('checkFront') === 'object' && watch('checkFront').length 
                             ? watch('checkFront')[0]?.name.split('.')?.pop() != 'pdf'?
                             <img width={250} height="auto" src={URL.createObjectURL(watch('checkFront')[0])} />
-                            :"pdf file successfully attached"
+                            :"pdf file successfully attached "
                             : ""
                         }
                         {
                             typeof watch('checkBack') === 'string' 
                             ? watch('checkBack')?.split('.')?.pop() == 'pdf'
-                            ? "pdf file successfully attached"
+                            ? " pdf file successfully attached"
                             : <img width={250} height="auto" src={watch('checkBack')} />
                             : ""
                         }
@@ -452,7 +452,7 @@ export default function Page() {
                             typeof watch('checkBack') === 'object' && watch('checkBack').length 
                             ? watch('checkBack')[0]?.name.split('.')?.pop() != 'pdf'?
                             <img width={250} height="auto" src={URL.createObjectURL(watch('checkBack')[0])} />
-                            :"pdf file successfully attached"
+                            :" pdf file successfully attached"
                             : ""
                         }
                     </div>

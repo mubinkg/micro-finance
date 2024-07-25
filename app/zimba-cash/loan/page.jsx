@@ -486,14 +486,14 @@ export default function Page() {
                             watch('checkFront')?.length ? 
                             watch('checkFront')[0]?.name.split('.')?.pop() != 'pdf'?
                             <img width={250} height="auto" src={URL.createObjectURL(watch('checkFront')[0])} />
-                            :"pdf file successfully attached"
+                            :"pdf file successfully attached "
                             : ""
                         }
                         {
                             watch('checkBack')?.length ? 
                             watch('checkBack')[0]?.name.split('.')?.pop() != 'pdf'?
                             <img width={250} height="auto" src={URL.createObjectURL(watch('checkBack')[0])} />
-                            :"pdf file successfully attached"
+                            :" pdf file successfully attached"
                             : ""
                         }
                     </div>
