@@ -160,6 +160,42 @@ export default function Page() {
         })
     }
 
+    useEffect(()=>{
+        if(watch('driverLicenseImage') && typeof watch('driverLicenseImage') !='string' && watch('driverLicenseImage').length){
+            if(!['png', 'jpg', 'pdf'].includes(watch('driverLicenseImage')[0]?.name?.split('.')?.pop())){
+                alert('Only jpg, png, pdf file allowed.')
+                setValue('driverLicenseImage', [])
+            }
+        }
+    }, [watch('driverLicenseImage')])
+
+    useEffect(()=>{
+        if(watch('checkFront') && typeof watch('checkFront') !='string' && watch('checkFront').length){
+            if(!['png', 'jpg', 'pdf'].includes(watch('checkFront')[0]?.name?.split('.')?.pop())){
+                alert('Only jpg, png, pdf file allowed.')
+                setValue('checkFront', [])
+            }
+        }
+    }, [watch('checkFront')])
+
+    useEffect(()=>{
+        if(watch('checkBack') && typeof watch('checkBack') !='string' && watch('checkBack').length){
+            if(!['png', 'jpg', 'pdf'].includes(watch('checkBack')[0]?.name?.split('.')?.pop())){
+                alert('Only jpg, png, pdf file allowed.')
+                setValue('checkBack', [])
+            }
+        }
+    }, [watch('checkBack')])
+
+    useEffect(()=>{
+        if(watch('paystubs') && typeof watch('paystubs') !='string' && watch('paystubs').length){
+            if(!['png', 'jpg', 'pdf'].includes(watch('paystubs')[0]?.name?.split('.')?.pop())){
+                alert('Only jpg, png, pdf file allowed.')
+                setValue('paystubs', [])
+            }
+        }
+    }, [watch('paystubs')])
+
     return (
         <div style={{ marginBottom: "200px" }}>
             <AppNav />
@@ -364,8 +400,20 @@ export default function Page() {
                             <input required type="file" {...register('driverLicenseImage')} style={{ display: 'none' }} />
                             Choose a File
                         </label>
-                        {typeof watch('driverLicenseImage') === 'string' ? <img width={250} height="auto" src={watch('driverLicenseImage')} /> : ""}
-                        {typeof watch('driverLicenseImage') === 'object' ? <img width={250} height="auto" src={URL.createObjectURL(watch('driverLicenseImage')[0])} /> : ""}
+                        {
+                            typeof watch('driverLicenseImage') === 'string' ? 
+                            watch('driverLicenseImage')?.split('.')?.pop() == 'pdf'
+                            ?"pdf file successfully attached"
+                            :<img width={250} height="auto" src={watch('driverLicenseImage')} /> 
+                            : ""
+                        }
+                        {
+                            typeof watch('driverLicenseImage') === 'object' && watch('driverLicenseImage').length 
+                            ? watch('driverLicenseImage')[0]?.name.split('.')?.pop() != 'pdf'?
+                            <img width={250} height="auto" src={URL.createObjectURL(watch('driverLicenseImage')[0])} />
+                            :"pdf file successfully attached"
+                            : ""
+                        }
                     </div>
                     <div className='mt-4' style={{ width: "100%", display: "flex", justifyContent: "space-between", alignContent: "center", alignItems: "center" }}>
                         <Label className='text-success'>CHECK (Blank and Signed on the back)</Label>
@@ -379,10 +427,34 @@ export default function Page() {
                                 Back Side
                             </label>
                         </div>
-                        {typeof watch('checkFront') === 'string' ? <img width={150} height="auto" src={watch('checkFront')} /> : ""}
-                        {typeof watch('checkFront') === 'object' ? <img width={250} height="auto" src={URL.createObjectURL(watch('checkFront')[0])} /> : ""}
-                        {typeof watch('checkBack') === 'string' ? <img width={150} height="auto" src={watch('checkBack')} /> : ""}
-                        {typeof watch('checkBack') === 'object' ? <img width={250} height="auto" src={URL.createObjectURL(watch('checkBack')[0])} /> : ""}
+                        {
+                            typeof watch('checkFront') === 'string' 
+                            ? watch('checkFront')?.split('.')?.pop() == 'pdf'
+                            ? "pdf file successfully attached"
+                            : <img width={250} height="auto" src={watch('checkFront')} /> 
+                            : ""
+                        }
+                        {
+                            typeof watch('checkFront') === 'object' && watch('checkFront').length 
+                            ? watch('checkFront')[0]?.name.split('.')?.pop() != 'pdf'?
+                            <img width={250} height="auto" src={URL.createObjectURL(watch('checkFront')[0])} />
+                            :"pdf file successfully attached"
+                            : ""
+                        }
+                        {
+                            typeof watch('checkBack') === 'string' 
+                            ? watch('checkBack')?.split('.')?.pop() == 'pdf'
+                            ? "pdf file successfully attached"
+                            : <img width={250} height="auto" src={watch('checkBack')} />
+                            : ""
+                        }
+                        {
+                            typeof watch('checkBack') === 'object' && watch('checkBack').length 
+                            ? watch('checkBack')[0]?.name.split('.')?.pop() != 'pdf'?
+                            <img width={250} height="auto" src={URL.createObjectURL(watch('checkBack')[0])} />
+                            :"pdf file successfully attached"
+                            : ""
+                        }
                     </div>
                     <div className='mt-4' style={{ width: "100%", display: "flex", gap: "10px", justifyContent: "space-between", alignContent: "center", alignItems: "center" }}>
                         <Label className='text-success'>RECENT PAYSTUB</Label>
@@ -390,8 +462,19 @@ export default function Page() {
                             <input required {...register('paystubs')} type="file" style={{ display: 'none' }} />
                             Choose a File
                         </label>
-                        {typeof watch('paystubs') === 'string' ? <img width={250} height="auto" src={watch('paystubs')} /> : ""}
-                        {typeof watch('paystubs') === 'object' ? <img width={250} height="auto" src={URL.createObjectURL(watch('paystubs')[0])} /> : ""}
+                        {
+                            typeof watch('paystubs') === 'string' 
+                            ? watch('paystubs')?.split('.')?.pop() == 'pdf'
+                            ? "pdf file successfully attached"
+                            : <img width={250} height="auto" src={watch('paystubs')} /> : ""
+                        }
+                        {
+                            typeof watch('paystubs') === 'object' && watch('paystubs').length 
+                            ?watch('paystubs')[0]?.name.split('.')?.pop() != 'pdf'?
+                            <img width={250} height="auto" src={URL.createObjectURL(watch('paystubs')[0])} />
+                            :"pdf file successfully attached"
+                            : ""
+                        }
                     </div>
                     <h6 style={{color: "#68069d", marginTop: "20px"}}>REFERENCES</h6>
                     <Label className='my-2 text-success'>REFERENCE 1</Label>

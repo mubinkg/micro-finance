@@ -466,7 +466,7 @@ export default function Page() {
                             watch('driverLicenseImage')?.length ?
                             watch('driverLicenseImage')[0]?.name.split('.')?.pop() != 'pdf'?
                             <img width={250} height="auto" src={URL.createObjectURL(watch('driverLicenseImage')[0])} />
-                            :"Pdf file is attached successfully"
+                            :"pdf file successfully attached"
                             : ""
                         }
                     </div>
