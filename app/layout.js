@@ -31,13 +31,13 @@ export default function RootLayout({ children }) {
         <meta name="google-site-verification" content="ZU1VWY_mpCbIdH0IZEqzEAFwCy8j7xDd1TECex57P6M" />
         <meta property="og:image" content="/L-1.jpg" />
         <script dangerouslySetInnerHTML={{
-        __html: `window._mfq = window._mfq || [];
-          (function() {
-            var mf = document.createElement("script");
-            mf.type = "text/javascript"; mf.defer = true;
-            mf.src = "//cdn.mouseflow.com/projects/501d15bd-cda8-432a-9572-04a0f190eced.js";
-            document.getElementsByTagName("head")[0].appendChild(mf);
-          })();`}}>
+        __html: ` window._mfq = window._mfq || [];
+        (function() {
+          var mf = document.createElement("script");
+          mf.type = "text/javascript"; mf.defer = true;
+          mf.src = "//cdn.mouseflow.com/projects/0a52dccc-9f35-46b5-9313-3b785ae197f5.js";
+          document.getElementsByTagName("head")[0].appendChild(mf);
+        })();`}}>
       </script>
       </head>
       <body className={`${inter.className}`}>{children}</body>
