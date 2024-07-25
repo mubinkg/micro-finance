@@ -221,6 +221,43 @@ export default function Page() {
         })
     }
 
+    useEffect(()=>{
+        if(watch('driverLicenseImage') && watch('driverLicenseImage').length){
+            if(!['png', 'jpg', 'pdf'].includes(watch('driverLicenseImage')[0]?.name?.split('.')?.pop())){
+                alert('Only jpg, png, pdf file allowed.')
+                setValue('driverLicenseImage', [])
+            }
+        }
+    }, [watch('driverLicenseImage')])
+
+    useEffect(()=>{
+        if(watch('checkFront') && watch('checkFront').length){
+            if(!['png', 'jpg', 'pdf'].includes(watch('checkFront')[0]?.name?.split('.')?.pop())){
+                alert('Only jpg, png, pdf file allowed.')
+                setValue('checkFront', [])
+            }
+        }
+    }, [watch('checkFront')])
+
+    useEffect(()=>{
+        if(watch('checkBack') && watch('checkBack').length){
+            if(!['png', 'jpg', 'pdf'].includes(watch('checkBack')[0]?.name?.split('.')?.pop())){
+                alert('Only jpg, png, pdf file allowed.')
+                setValue('checkBack', [])
+            }
+        }
+    }, [watch('checkBack')])
+    
+    useEffect(()=>{
+        if(watch('paystubs') && watch('paystubs').length){
+            if(!['png', 'jpg', 'pdf'].includes(watch('paystubs')[0]?.name?.split('.')?.pop())){
+                alert('Only jpg, png, pdf file allowed.')
+                setValue('paystubs', [])
+            }
+        }
+    }, [watch('paystubs')])
+
+
     return (
         <div style={{marginBottom: "200px"}}>
             <AppNav />
@@ -418,14 +455,20 @@ export default function Page() {
                             )}
                         />
                     </div>
-                    <h6 style={{color: "#68069d", marginTop: "20px"}}>REQUIRED DOCUMENTS</h6>
+                    <h6 style={{color: "#68069d", marginTop: "20px"}}>REQUIRED DOCUMENTS [ jpg, png, pdf files only ]</h6>
                     <div className='mt-2' style={{ width: "100%", display: "flex", gap: "10px", justifyContent: "space-between", alignContent: "center", alignItems: "center" }}>
                         <Label className='text-success'>DRIVER&rsquo;S LICENSE / ID</Label>
                         <label style={{ cursor: "pointer", padding: '5px 10px', color: "white", background: "#62d0ab", border: 'none', outline: "none", borderRadius: "50px" }}>
                             <input required type="file" {...register('driverLicenseImage')} style={{ display: 'none' }} />
                             Choose a File
                         </label>
-                        {watch('driverLicenseImage')?.length ? <img width={250} height="auto" src={URL.createObjectURL(watch('driverLicenseImage')[0])} /> : ""}
+                        {
+                            watch('driverLicenseImage')?.length ?
+                            watch('driverLicenseImage')[0]?.name.split('.')?.pop() != 'pdf'?
+                            <img width={250} height="auto" src={URL.createObjectURL(watch('driverLicenseImage')[0])} />
+                            :"Pdf file is attached successfully"
+                            : ""
+                        }
                     </div>
                     <div className='mt-4' style={{ width: "100%", display: "flex", justifyContent: "space-between", alignContent: "center", alignItems: "center" }}>
                         <Label className='text-success'>CHECK (Blank and Signed on the back)</Label>
@@ -439,8 +482,20 @@ export default function Page() {
                                 Back Side
                             </label>
                         </div>
-                        {watch('checkFront')?.length ? <img width={150} height="auto" src={URL.createObjectURL(watch('checkFront')[0])} /> : ""}
-                        {watch('checkBack')?.length ? <img width={150} height="auto" src={URL.createObjectURL(watch('checkBack')[0])} /> : ""}
+                        {
+                            watch('checkFront')?.length ? 
+                            watch('checkFront')[0]?.name.split('.')?.pop() != 'pdf'?
+                            <img width={250} height="auto" src={URL.createObjectURL(watch('checkFront')[0])} />
+                            :"Pdf file is attached successfully"
+                            : ""
+                        }
+                        {
+                            watch('checkBack')?.length ? 
+                            watch('checkBack')[0]?.name.split('.')?.pop() != 'pdf'?
+                            <img width={250} height="auto" src={URL.createObjectURL(watch('checkBack')[0])} />
+                            :"Pdf file is attached successfully"
+                            : ""
+                        }
                     </div>
                     <div className='mt-4' style={{ width: "100%", display: "flex", gap: "10px", justifyContent: "space-between", alignContent: "center", alignItems: "center" }}>
                         <Label className='text-success'>RECENT PAYSTUB</Label>
@@ -448,7 +503,13 @@ export default function Page() {
                             <input required {...register('paystubs')} type="file" style={{ display: 'none' }} />
                             Choose a File
                         </label>
-                        {watch('paystubs')?.length ? <img width={250} height="auto" src={URL.createObjectURL(watch('paystubs')[0])} /> : ""}
+                        {
+                            watch('paystubs')?.length ? 
+                            watch('paystubs')[0]?.name.split('.')?.pop() != 'pdf'?
+                            <img width={250} height="auto" src={URL.createObjectURL(watch('paystubs')[0])} />
+                            :"Pdf file is attached successfully" 
+                            : ""
+                        }
                     </div>
                     <h6 style={{color: "#68069d", marginTop: "20px"}}>REFERENCES</h6>
                     <Label className='my-2 text-success'>REFERENCE 1</Label>

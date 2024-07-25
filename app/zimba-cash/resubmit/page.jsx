@@ -357,7 +357,7 @@ export default function Page() {
                             )}
                         />
                     </div>
-                    <h6 style={{color: "#68069d", marginTop: "20px"}}>REQUIRED DOCUMENTS</h6>
+                    <h6 style={{color: "#68069d", marginTop: "20px"}}>REQUIRED DOCUMENTS [ jpg, png, pdf files only ]</h6>
                     <div className='mt-2' style={{ width: "100%", display: "flex", gap: "10px", justifyContent: "space-between", alignContent: "center", alignItems: "center" }}>
                         <Label className='text-success'>DRIVER&rsquo;S LICENSE / ID</Label>
                         <label style={{ cursor: "pointer", padding: '5px 10px', color: "white", background: "#62d0ab", border: 'none', outline: "none", borderRadius: "50px" }}>
