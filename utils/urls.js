@@ -1,6 +1,6 @@
-const env = 'production';
+// const env = 'production';
 // const env = 'dev';
-// const env = 'uat'
+const env = 'uat'
 
 export const logoutUrl = (
     env === 'dev' 
