@@ -223,7 +223,7 @@ export default function Page() {
 
     useEffect(()=>{
         if(watch('driverLicenseImage') && watch('driverLicenseImage').length){
-            if(!['png', 'jpg', 'pdf'].includes(watch('driverLicenseImage')[0]?.name?.split('.')?.pop())){
+            if(!['png', 'jpg','jpeg', 'pdf'].includes(watch('driverLicenseImage')[0]?.name?.split('.')?.pop())){
                 alert('Only jpg, png, pdf file allowed.')
                 setValue('driverLicenseImage', [])
             }
