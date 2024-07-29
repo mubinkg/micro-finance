@@ -221,10 +221,13 @@ export default function Page() {
         })
     }
 
+    const fileChecker = ['png', 'jpg','jpeg', 'pdf']
+    const checkerMessage = 'Only jpg, jpeg, png, pdf file allowed.'
+
     useEffect(()=>{
         if(watch('driverLicenseImage') && watch('driverLicenseImage').length){
-            if(!['png', 'jpg','jpeg', 'pdf'].includes(watch('driverLicenseImage')[0]?.name?.split('.')?.pop())){
-                alert('Only jpg, png, pdf file allowed.')
+            if(!fileChecker.includes(watch('driverLicenseImage')[0]?.name?.split('.')?.pop())){
+                alert(checkerMessage)
                 setValue('driverLicenseImage', [])
             }
         }
@@ -232,8 +235,8 @@ export default function Page() {
 
     useEffect(()=>{
         if(watch('checkFront') && watch('checkFront').length){
-            if(!['png', 'jpg', 'pdf'].includes(watch('checkFront')[0]?.name?.split('.')?.pop())){
-                alert('Only jpg, png, pdf file allowed.')
+            if(!fileChecker.includes(watch('checkFront')[0]?.name?.split('.')?.pop())){
+                alert(checkerMessage)
                 setValue('checkFront', [])
             }
         }
@@ -241,8 +244,8 @@ export default function Page() {
 
     useEffect(()=>{
         if(watch('checkBack') && watch('checkBack').length){
-            if(!['png', 'jpg','jpeg' 'pdf'].includes(watch('checkBack')[0]?.name?.split('.')?.pop())){
-                alert('Only jpg, jpeg, png, pdf file allowed.')
+            if(!fileChecker.includes(watch('checkBack')[0]?.name?.split('.')?.pop())){
+                alert(checkerMessage)
                 setValue('checkBack', [])
             }
         }
@@ -250,8 +253,8 @@ export default function Page() {
     
     useEffect(()=>{
         if(watch('paystubs') && watch('paystubs').length){
-            if(!['png', 'jpg', 'pdf'].includes(watch('paystubs')[0]?.name?.split('.')?.pop())){
-                alert('Only jpg, png, pdf file allowed.')
+            if(!fileChecker.includes(watch('paystubs')[0]?.name?.split('.')?.pop())){
+                alert(checkerMessage)
                 setValue('paystubs', [])
             }
         }
