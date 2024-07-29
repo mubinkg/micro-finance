@@ -180,8 +180,8 @@ export default function Page() {
 
     useEffect(()=>{
         if(watch('checkBack') && typeof watch('checkBack') !='string' && watch('checkBack').length){
-            if(!['png', 'jpg', 'pdf'].includes(watch('checkBack')[0]?.name?.split('.')?.pop())){
-                alert('Only jpg, png, pdf file allowed.')
+            if(!['png', 'jpg','jpeg', 'pdf'].includes(watch('checkBack')[0]?.name?.split('.')?.pop())){
+                alert('Only jpg, jpeg, png, pdf file allowed.')
                 setValue('checkBack', [])
             }
         }
