@@ -134,7 +134,7 @@ export default function Page() {
                     </Row>
                     <Row className='mt-4'>
                         <Col lg={12}>
-                            <Label className='text-success'>
+                            <Label className='text-success text-uppercase'>
                                 Old Password
                             </Label>
                             <Controller
@@ -154,7 +154,7 @@ export default function Page() {
                     </Row>
                     <Row className='mt-4'>
                         <Col lg={12}>
-                            <Label className='text-success'>
+                            <Label className='text-success text-uppercase'>
                                 New Password
                             </Label>
                             <Controller
@@ -174,7 +174,7 @@ export default function Page() {
                     </Row>
                     <Row className='mt-4'>
                         <Col lg={12}>
-                            <Label className='text-success'>
+                            <Label className='text-success text-uppercase'>
                                 Confirm New Password
                             </Label>
                             <Controller
@@ -193,7 +193,7 @@ export default function Page() {
                             />
                         </Col>
                     </Row>
-                    <Button onClick={handleSubmit(submitMail)} className='mt-4' color='primary'>Submit</Button>
+                    <Button onClick={handleSubmit(submitMail)} className='mt-4' color='primary'>SAVE</Button>
                 </div>
             </div>
         </div>
