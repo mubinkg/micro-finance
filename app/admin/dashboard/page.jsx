@@ -6,8 +6,9 @@ import DataTable from '../../../components/DataTable'
 import CartIcon from '../../../icons/CartIcon'
 import DocumentIcon from '../../../icons/DocumentIcon'
 import GroupIcon from '../../../icons/GroupIcon'
+import LoanIcon from '../../../icons/LoanIcon'
 import { Container, Row, Col ,Button} from 'reactstrap'
-import {getData} from '../../../utils/axiosUtils'
+import {getData, getDataWtihAuth} from '../../../utils/axiosUtils'
 import ApplicantsDataTable from '../../../components/ApplicantsDataTable'
 import logo from '../../../public/L-5.jpg'
 import Image from 'next/image'
@@ -15,6 +16,7 @@ import { removeItem } from '../../../utils/storageUtils'
 import { logoutUrl } from '../../../utils/urls'
 import AdminPaymentHistoryData from '../../../components/AdminPaymentHistoryData'
 import { logoutAction } from '../../action'
+import ClientDataTable from '../../../components/ClientDataTable'
 
 export default function Page() {
     const [loans, setLoans] = useState([])
@@ -59,6 +61,18 @@ export default function Page() {
         paymentHistoryData()
     }, [])
 
+    const [adminLoan, setAdminLoans] = useState([])
+    const getAdminLoanData = ()=>{
+        getDataWtihAuth('/loan/user-loan').then((res)=>{
+            setAdminLoans(res.data)
+        }).catch(err=>{
+            console.log(err)
+        })
+    }
+    useEffect(()=>{
+        getAdminLoanData()
+    }, [])
+
     return (
         <Container fluid className='mt-4'>
             <div className='d-flex justify-content-between align-items-center'>
@@ -68,16 +82,19 @@ export default function Page() {
             </div>
             <hr />
             <Row className='g-4'>
-                <Col lg={3}>
+                <Col>
                     <DashboardItem onClick={()=>setDashboardItem('loan')} count={countLoan} title="Loan Applications" icon={<DocumentIcon/>}/>
                 </Col>
-                <Col lg={3}>
+                <Col>
                     <DashboardItem count={userCount} onClick={()=>setDashboardItem('user')}  title="Applicants/User" icon={<GroupIcon/>} />
                 </Col>
-                <Col lg={3}>
+                <Col>
                     <DashboardItem onClick={()=>setDashboardItem('history')} count={paymentCount} title="Payment History" icon={<GroupIcon/>}/>
                 </Col>
-                <Col lg={3}>
+                <Col>
+                    <DashboardItem onClick={()=>setDashboardItem('loans')} title="Loans" count={adminLoan.length} icon={<LoanIcon/>} />
+                </Col>
+                <Col>
                     <DashboardItem onClick={()=>setDashboardItem('loan')} title="Bank Details" icon={<CartIcon/>} />
                 </Col>
             </Row>
@@ -86,6 +103,9 @@ export default function Page() {
             }
             {
                 dashboardItem === 'user' ? <ApplicantsDataTable data={data}/> : ""
+            }
+            {
+                dashboardItem === 'loans' ? <ClientDataTable data={adminLoan} getLoanData={getAdminLoanData}/> : ""
             }
             {
                 dashboardItem === 'history' ? <AdminPaymentHistoryData data={paymentHistory}/> : ""
