@@ -94,8 +94,6 @@ export default function Page() {
             })
         }
 
-        console.log(dirtyFields)
-
         const dirtyValues = Object.keys(dirtyFields)
             .reduce((acc, field) => {
                 acc[field] = data[field];

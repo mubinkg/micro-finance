@@ -51,6 +51,7 @@ function AppNav({ hideSideNav }) {
                     <>
                       <Nav.Link onClick={() => routerHandler('/zimba-cash/history')}>Loans List</Nav.Link>
                       <Nav.Link onClick={() => routerHandler('/zimba-cash/loan')}>Loan</Nav.Link>
+                      <Nav.Link onClick={() => routerHandler('/zimba-cash/profile')}>Profile</Nav.Link>
                       <Nav.Link onClick={() => routerHandler('/zimba-cash/contact')}>Contact</Nav.Link>
                       <Nav.Link onClick={logOutHandler}>Logout</Nav.Link>
                     </>
