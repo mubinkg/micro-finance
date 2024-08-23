@@ -2,13 +2,14 @@
 
 import { useForm, Controller } from 'react-hook-form'
 import { Input, Label, Button, Row, Col } from 'reactstrap'
-import { getDataWtihAuth, postData } from '../../../utils/axiosUtils'
+import { getDataWtihAuth, postDataWithAuth } from '../../../utils/axiosUtils'
 import Swal from 'sweetalert2'
-import { useRouter } from 'next/navigation'
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import AppNav from '../../../components/Navbar'
 import { useEffect } from 'react'
+import { logoutAction } from '../../action'
+import { removeItem } from '../../../utils/storageUtils'
 
 
 
@@ -17,32 +18,36 @@ export default function Page() {
         firstName: yup.string().required(),
         lastName: yup.string().required(),
         email: yup.string().email().required(),
+        oldPassword: yup.string().required(),
+        newPassword: yup.string().required().length(8),
+        confirmNewPassword: yup.string().test('test-confing',function(){
+            const {newPassword,confirmNewPassword} = this.parent
+            return newPassword === confirmNewPassword
+        } )
     });
 
-
-    const router = useRouter()
-
-    const { handleSubmit, reset, control, setValue, formState: { errors } } = useForm({
+    const { handleSubmit, control, setValue, formState: { errors } } = useForm({
         defaultValues: {
-            
+
         },
         resolver: yupResolver(schema),
     })
 
+    const logOutHandler = async () => {
+        await logoutAction()
+        removeItem('user')
+        removeItem('token')
+        window.location = '/authentication/login'
+    }
+
+
     function submitMail(values) {
-        postData('mail', values).then(res => {
-            Swal.fire({
-                title: 'Contact Us',
-                text: 'Mail sent successfully. Thank you!',
-                icon: "success"
-            }).then(() => {
-                reset()
-                router.push('/')
-            })
+        postDataWithAuth('/user/changePassword', { oldPassword: values.oldPassword, newPassword: values.newPassword }).then(res => {
+            logOutHandler()
         }).catch(err => {
             Swal.fire({
-                title: 'Contact Us',
-                text: 'Error on sending gmail',
+                title: 'Change Password',
+                text: 'Old password not matched',
                 icon: "error"
             })
         })
@@ -75,7 +80,7 @@ export default function Page() {
                             <Controller
                                 control={control}
                                 name='firstName'
-                                render={({ field}) => (
+                                render={({ field }) => (
                                     <Input
                                         style={{
                                             border: errors.firstName ? "1px solid red" : ""
@@ -120,13 +125,13 @@ export default function Page() {
                                 control={control}
                                 name='email'
                                 render={({ field }) => (
-                                    <Input 
+                                    <Input
                                         style={{
                                             border: errors.email ? "1px solid red" : ""
-                                        }} 
+                                        }}
                                         {...field}
                                         disabled
-                                        placeholder='Email' 
+                                        placeholder='Email'
                                     />
                                 )}
                             />
@@ -141,12 +146,12 @@ export default function Page() {
                                 control={control}
                                 name='oldPassword'
                                 render={({ field }) => (
-                                    <Input 
+                                    <Input
                                         style={{
-                                            border: errors.email ? "1px solid red" : ""
-                                        }} 
+                                            border: errors.oldPassword ? "1px solid red" : ""
+                                        }}
                                         {...field}
-                                        placeholder='Old Password' 
+                                        placeholder='Old Password'
                                     />
                                 )}
                             />
@@ -161,12 +166,12 @@ export default function Page() {
                                 control={control}
                                 name='newPassword'
                                 render={({ field }) => (
-                                    <Input 
+                                    <Input
                                         style={{
-                                            border: errors.email ? "1px solid red" : ""
-                                        }} 
+                                            border: errors.newPassword ? "1px solid red" : ""
+                                        }}
                                         {...field}
-                                        placeholder='New Password' 
+                                        placeholder='New Password'
                                     />
                                 )}
                             />
@@ -181,13 +186,13 @@ export default function Page() {
                                 control={control}
                                 name='confirmNewPassword'
                                 render={({ field }) => (
-                                    <Input 
+                                    <Input
                                         style={{
-                                            border: errors.email ? "1px solid red" : ""
-                                        }} 
+                                            border: errors.confirmNewPassword ? "1px solid red" : ""
+                                        }}
                                         {...field}
-                                    
-                                        placeholder='Confirm New Password' 
+
+                                        placeholder='Confirm New Password'
                                     />
                                 )}
                             />
