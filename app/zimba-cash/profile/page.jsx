@@ -19,7 +19,7 @@ export default function Page() {
         lastName: yup.string().required(),
         email: yup.string().email().required(),
         oldPassword: yup.string().required(),
-        newPassword: yup.string().required().length(8),
+        newPassword: yup.string().required().min(8),
         confirmNewPassword: yup.string().test('test-confing',function(){
             const {newPassword,confirmNewPassword} = this.parent
             return newPassword === confirmNewPassword

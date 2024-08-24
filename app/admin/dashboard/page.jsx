@@ -36,8 +36,8 @@ export default function Page() {
     
     function getUserData(){
         getDataWtihAuth('/user/user-list').then(res=>{
-            setData(res.users)
-            setUserCount(res.count)
+            setData(res.data.users)
+            setUserCount(res.data.count)
         }).catch()
     }
 
