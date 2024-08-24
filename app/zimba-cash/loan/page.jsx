@@ -474,7 +474,7 @@ export default function Page() {
                         }
                     </div>
                     <div className='mt-4' style={{ width: "100%", display: "flex", justifyContent: "space-between", alignContent: "center", alignItems: "center" }}>
-                        <Label className='text-success'>CHECK (Blank and Signed on the back)</Label>
+                        <Label className='text-success'>2 BANK STATEMENTS OR CHECK (Front & signed on back)</Label>
                         <div style={{ display: 'flex', gap: "10px" }}>
                             <label style={{ cursor: "pointer", padding: '5px 10px', color: "white", background: "#62d0ab", border: 'none', outline: "none", borderRadius: "50px" }}>
                                 <input required {...register('checkFront')} type="file" style={{ display: 'none' }} />
@@ -699,12 +699,12 @@ export default function Page() {
                                 />
                             )}
                         />
+                        <Label className='mt-3 text-success'>HOW YOU PAY BACK</Label>
                         <Controller
                             control={control}
                             name='signature'
                             render={({ field }) => (
                                 <Input
-                                    className='mt-3'
                                     {...field}
                                     style={{
                                         border: errors.signature ? "1px solid red":""
