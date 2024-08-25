@@ -19,7 +19,10 @@ export default function Page() {
         lastName: yup.string().required(),
         email: yup.string().email().required(),
         oldPassword: yup.string().required(),
-        newPassword: yup.string().required().min(8),
+        newPassword: yup.string()
+        .required()
+        .min(8)
+        .matches(/(?=.*[A-Z])(?=.*[!@#$%^&*()_+{}\[\]:;<>,.?/~-])/),
         confirmNewPassword: yup.string().test('test-confing',function(){
             const {newPassword,confirmNewPassword} = this.parent
             return newPassword === confirmNewPassword
@@ -159,9 +162,14 @@ export default function Page() {
                     </Row>
                     <Row className='mt-4'>
                         <Col lg={12}>
-                            <Label className='text-success text-uppercase'>
-                                New Password
-                            </Label>
+                            <div style={{display:'flex', gap: "20px", color: "green"}}>
+                                <Label className='text-success text-uppercase'>
+                                    New Password
+                                </Label>
+                                <span>
+                                    [ At least 8 characters, a capital letter, a special character ]
+                                </span>
+                            </div>
                             <Controller
                                 control={control}
                                 name='newPassword'
