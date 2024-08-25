@@ -662,6 +662,8 @@ export default function Page() {
                             )}
                         />
                         <Label className='mt-3 text-success'>HOW YOU PAY BACK</Label>
+                        <Label className='text-sm'>Mobile Banking / Zelle: 469 358 8833</Label>
+                        <Label className='mb-3'>CashApp: $givenchip</Label>
                         <Controller
                             control={control}
                             name='signature'
