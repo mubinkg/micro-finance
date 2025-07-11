@@ -7,16 +7,16 @@ import CartIcon from '../../../icons/CartIcon'
 import DocumentIcon from '../../../icons/DocumentIcon'
 import GroupIcon from '../../../icons/GroupIcon'
 import LoanIcon from '../../../icons/LoanIcon'
-import { Container, Row, Col ,Button} from 'reactstrap'
-import {getData, getDataWtihAuth} from '../../../utils/axiosUtils'
+import { Container, Row, Col, Button } from 'reactstrap'
+import { getData, getDataWtihAuth } from '../../../utils/axiosUtils'
 import ApplicantsDataTable from '../../../components/ApplicantsDataTable'
 import logo from '../../../public/L-5.jpg'
 import Image from 'next/image'
 import { removeItem } from '../../../utils/storageUtils'
-import { logoutUrl } from '../../../utils/urls'
 import AdminPaymentHistoryData from '../../../components/AdminPaymentHistoryData'
 import { logoutAction } from '../../action'
 import ClientDataTable from '../../../components/ClientDataTable'
+import { useRouter } from 'next/navigation'
 
 export default function Page() {
     const [loans, setLoans] = useState([])
@@ -24,91 +24,96 @@ export default function Page() {
     const [dashboardItem, setDashboardItem] = useState('loan')
     const [data, setData] = useState([])
     const [userCount, setUserCount] = useState(0)
-    const [paymentHistory,setPaymentHistory]=useState([])
-    const [paymentCount,setPaymentCount]=useState(0)
+    const [paymentHistory, setPaymentHistory] = useState([])
+    const [paymentCount, setPaymentCount] = useState(0)
 
-    const logOutHandler = async ()=>{
+    const logOutHandler = async () => {
         await logoutAction()
         window.location = '/';
         removeItem('user')
         removeItem('token')
-      }
-    
-    function getUserData(){
-        getDataWtihAuth('/user/user-list').then(res=>{
+    }
+
+    function getUserData() {
+        getDataWtihAuth('/user/user-list').then(res => {
             setData(res.data.users)
             setUserCount(res.data.count)
         }).catch()
     }
 
-    function getLoanData(){
-        getData('/loan/').then(res=>{
+    function getLoanData() {
+        getData('/loan/').then(res => {
             setLoans(res.loans)
             setCountLoan(res.count)
         })
     }
 
-    function paymentHistoryData(){
-        getData('/payments/findPaymentHistory').then(res=>{
+    function paymentHistoryData() {
+        getData('/payments/findPaymentHistory').then(res => {
             setPaymentHistory(res.history)
             setPaymentCount(res.count)
         })
     }
 
-    useEffect(()=>{
+    useEffect(() => {
         getLoanData()
         getUserData()
         paymentHistoryData()
     }, [])
 
     const [adminLoan, setAdminLoans] = useState([])
-    const getAdminLoanData = ()=>{
-        getDataWtihAuth('/loan/user-loan').then((res)=>{
+    const getAdminLoanData = () => {
+        getDataWtihAuth('/loan/user-loan').then((res) => {
             setAdminLoans(res.data)
-        }).catch(err=>{
+        }).catch(err => {
             console.log(err)
         })
     }
-    useEffect(()=>{
+    useEffect(() => {
         getAdminLoanData()
     }, [])
+
+    const router = useRouter()
 
     return (
         <Container fluid className='mt-4'>
             <div className='d-flex justify-content-between align-items-center'>
-                <Image src={logo} width={200}/>
+                <div className='d-flex gap-4 align-items-center'>
+                    <Image src={logo} width={200} />
+                    <Button onClick={() => router.push('/zimba-cash/loan')}>Create Loan</Button>
+                </div>
                 <h2>Dashboard</h2>
                 <Button onClick={logOutHandler}>Logout</Button>
             </div>
             <hr />
             <Row className='g-4'>
                 <Col>
-                    <DashboardItem onClick={()=>setDashboardItem('loan')} count={countLoan} title="Loan Applications" icon={<DocumentIcon/>}/>
+                    <DashboardItem onClick={() => setDashboardItem('loan')} count={countLoan} title="Loan Applications" icon={<DocumentIcon />} />
                 </Col>
                 <Col>
-                    <DashboardItem count={userCount} onClick={()=>setDashboardItem('user')}  title="Applicants/User" icon={<GroupIcon/>} />
+                    <DashboardItem count={userCount} onClick={() => setDashboardItem('user')} title="Applicants/User" icon={<GroupIcon />} />
                 </Col>
                 <Col>
-                    <DashboardItem onClick={()=>setDashboardItem('history')} count={paymentCount} title="Payment History" icon={<GroupIcon/>}/>
+                    <DashboardItem onClick={() => setDashboardItem('history')} count={paymentCount} title="Payment History" icon={<GroupIcon />} />
                 </Col>
                 <Col>
-                    <DashboardItem onClick={()=>setDashboardItem('loans')} title="Loans" count={adminLoan.length} icon={<LoanIcon/>} />
+                    <DashboardItem onClick={() => setDashboardItem('loans')} title="Loans" count={adminLoan.length} icon={<LoanIcon />} />
                 </Col>
                 <Col>
-                    <DashboardItem onClick={()=>setDashboardItem('loan')} title="Bank Details" icon={<CartIcon/>} />
+                    <DashboardItem onClick={() => setDashboardItem('loan')} title="Bank Details" icon={<CartIcon />} />
                 </Col>
             </Row>
             {
-                dashboardItem === 'loan' ? <DataTable data={loans}/> : ""
+                dashboardItem === 'loan' ? <DataTable data={loans} /> : ""
             }
             {
-                dashboardItem === 'user' ? <ApplicantsDataTable data={data}/> : ""
+                dashboardItem === 'user' ? <ApplicantsDataTable data={data} /> : ""
             }
             {
-                dashboardItem === 'loans' ? <ClientDataTable data={adminLoan} getLoanData={getAdminLoanData}/> : ""
+                dashboardItem === 'loans' ? <ClientDataTable data={adminLoan} getLoanData={getAdminLoanData} /> : ""
             }
             {
-                dashboardItem === 'history' ? <AdminPaymentHistoryData data={paymentHistory}/> : ""
+                dashboardItem === 'history' ? <AdminPaymentHistoryData data={paymentHistory} /> : ""
             }
         </Container>
     )
