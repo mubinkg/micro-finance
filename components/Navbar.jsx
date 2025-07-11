@@ -7,10 +7,8 @@ import logo from '../public/L-5.jpg'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import { getData } from '../utils/axiosUtils';
 import { removeItem } from '../utils/storageUtils';
-import {logoutUrl} from '../utils/urls'
-import {logoutAction} from '../app/action'
+import { logoutAction } from '../app/action'
 
 function AppNav({ hideSideNav }) {
   const [isAuth, setAuth] = useState(false)
@@ -34,12 +32,12 @@ function AppNav({ hideSideNav }) {
     window.location = '/';
     removeItem('user')
     removeItem('token')
-}
+  }
 
   return (
     <Navbar expand="lg">
       <Container>
-        <Navbar.Brand onClick={() => routerHandler('/')} style={{cursor: "pointer"}}>
+        <Navbar.Brand onClick={() => routerHandler('/')} style={{ cursor: "pointer" }}>
           <Image src={logo} width={100} />
         </Navbar.Brand>
         {

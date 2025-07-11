@@ -3,7 +3,7 @@
 import { cookies } from 'next/headers'
 import { postData } from '../utils/axiosUtils'
 
-export async function exampleAction(email, password) {
+export async function signin(email, password) {
     try {
         const getSignin = (email, password) => new Promise((resolve, reject) => {
             postData("/user/signin", { email, password }).then(res => resolve(res)).catch(err => reject(err))
@@ -16,6 +16,6 @@ export async function exampleAction(email, password) {
     }
 }
 
-export async function logoutAction(){
+export async function logoutAction() {
     cookies().delete('access_token')
 }
