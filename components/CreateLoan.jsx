@@ -3,7 +3,6 @@
 import { useForm, Controller } from 'react-hook-form'
 import { Input, Label, Button, Row, Col, FormGroup } from 'reactstrap'
 import { postDataWithAuth } from '../utils/axiosUtils'
-import AppNav from './Navbar'
 import { useEffect, useState } from 'react'
 import Swal from 'sweetalert2'
 import { isArray } from 'util'
