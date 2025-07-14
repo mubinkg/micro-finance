@@ -37,7 +37,7 @@ export default function Page() {
         paymentMethod: yup.string().min(2).required(),
     });
 
-    const {totalApprovedLoan} = useTotalApprovedLoan()
+    const { totalApprovedLoan } = useTotalApprovedLoan()
 
 
     const router = useRouter()
@@ -49,7 +49,7 @@ export default function Page() {
     const amoundRequestedDate = `${mm}/${dd}/${yyyy}`;
 
     const fourteenDaysInMilliseconds = 14 * 24 * 60 * 60 * 1000;
-    today =  new Date(today.getTime()+fourteenDaysInMilliseconds);
+    today = new Date(today.getTime() + fourteenDaysInMilliseconds);
     dd = String(today.getDate()).padStart(2, '0');
     mm = String(today.getMonth() + 1).padStart(2, '0'); // January is 0!
     yyyy = today.getFullYear();
@@ -78,7 +78,7 @@ export default function Page() {
 
     function submitHandler(data) {
 
-        if(data?.amountRequested>totalApprovedLoan){
+        if (data?.amountRequested > totalApprovedLoan) {
             return Swal.fire({
                 title: 'Request Loan',
                 text: `At this time, your max loan request amount is $${totalApprovedLoan}`,
@@ -117,7 +117,7 @@ export default function Page() {
         }
 
         formData.append('amountRequested', watch('amountRequested'))
-        formData.append('amountDue', watch('amountRequested')*1.25)
+        formData.append('amountDue', watch('amountRequested') * 1.25)
 
         putDataWtihAuth('loan', formData).then(res => {
             setLoading(false)
@@ -130,7 +130,7 @@ export default function Page() {
                 icon: "success"
             }).then(() => {
                 removeItem('loan')
-                router.push('/zimba-cash/history')
+                router.push('/history')
             })
         }).catch(err => {
             let errorHtml = ''
@@ -153,44 +153,44 @@ export default function Page() {
                 `,
                 icon: 'error'
             })
-        }).finally(()=>{
+        }).finally(() => {
             setLoading(false)
         })
     }
 
-    const fileChecker = ['png', 'jpg','jpeg', 'pdf']
+    const fileChecker = ['png', 'jpg', 'jpeg', 'pdf']
     const checkerMessage = 'Only jpg, jpeg, png, pdf file allowed.'
 
-    useEffect(()=>{
-        if(watch('driverLicenseImage') && typeof watch('driverLicenseImage') !='string' && watch('driverLicenseImage').length){
-            if(!fileChecker.includes(watch('driverLicenseImage')[0]?.name?.split('.')?.pop())){
+    useEffect(() => {
+        if (watch('driverLicenseImage') && typeof watch('driverLicenseImage') != 'string' && watch('driverLicenseImage').length) {
+            if (!fileChecker.includes(watch('driverLicenseImage')[0]?.name?.split('.')?.pop())) {
                 alert(checkerMessage)
                 setValue('driverLicenseImage', [])
             }
         }
     }, [watch('driverLicenseImage')])
 
-    useEffect(()=>{
-        if(watch('checkFront') && typeof watch('checkFront') !='string' && watch('checkFront').length){
-            if(!fileChecker.includes(watch('checkFront')[0]?.name?.split('.')?.pop())){
+    useEffect(() => {
+        if (watch('checkFront') && typeof watch('checkFront') != 'string' && watch('checkFront').length) {
+            if (!fileChecker.includes(watch('checkFront')[0]?.name?.split('.')?.pop())) {
                 alert(checkerMessage)
                 setValue('checkFront', [])
             }
         }
     }, [watch('checkFront')])
 
-    useEffect(()=>{
-        if(watch('checkBack') && typeof watch('checkBack') !='string' && watch('checkBack').length){
-            if(!fileChecker.includes(watch('checkBack')[0]?.name?.split('.')?.pop())){
+    useEffect(() => {
+        if (watch('checkBack') && typeof watch('checkBack') != 'string' && watch('checkBack').length) {
+            if (!fileChecker.includes(watch('checkBack')[0]?.name?.split('.')?.pop())) {
                 alert(checkerMessage)
                 setValue('checkBack', [])
             }
         }
     }, [watch('checkBack')])
 
-    useEffect(()=>{
-        if(watch('paystubs') && typeof watch('paystubs') !='string' && watch('paystubs').length){
-            if(!fileChecker.includes(watch('paystubs')[0]?.name?.split('.')?.pop())){
+    useEffect(() => {
+        if (watch('paystubs') && typeof watch('paystubs') != 'string' && watch('paystubs').length) {
+            if (!fileChecker.includes(watch('paystubs')[0]?.name?.split('.')?.pop())) {
                 alert(checkerMessage)
                 setValue('paystubs', [])
             }
@@ -210,7 +210,7 @@ export default function Page() {
                 <div className='container' style={{ maxWidth: "800px", display: "flex", flexDirection: "column", justifyContent: "center", alignContent: "center", }}>
                     <h5 style={{ textAlign: "center" }} className='my-4'>Emergency Loans: Life happens</h5>
                     <Row>
-                        <h6 style={{color: "#68069d"}}>PERSONAL INFORMATION</h6>
+                        <h6 style={{ color: "#68069d" }}>PERSONAL INFORMATION</h6>
                         <Col lg={6} md={12}>
                             <Label className='text-success'>
                                 FIRST NAME
@@ -394,7 +394,7 @@ export default function Page() {
                             )}
                         />
                     </div>
-                    <h6 style={{color: "#68069d", marginTop: "20px"}}>REQUIRED DOCUMENTS [ jpg, png, pdf files only ]</h6>
+                    <h6 style={{ color: "#68069d", marginTop: "20px" }}>REQUIRED DOCUMENTS [ jpg, png, pdf files only ]</h6>
                     <div className='mt-2' style={{ width: "100%", display: "flex", gap: "10px", justifyContent: "space-between", alignContent: "center", alignItems: "center" }}>
                         <Label className='text-success'>DRIVER&rsquo;S LICENSE / ID</Label>
                         <label style={{ cursor: "pointer", padding: '5px 10px', color: "white", background: "#62d0ab", border: 'none', outline: "none", borderRadius: "50px" }}>
@@ -402,18 +402,18 @@ export default function Page() {
                             Choose a File
                         </label>
                         {
-                            typeof watch('driverLicenseImage') === 'string' ? 
-                            watch('driverLicenseImage')?.split('.')?.pop() == 'pdf'
-                            ?"pdf file successfully attached"
-                            :<img width={250} height="auto" src={watch('driverLicenseImage')} /> 
-                            : ""
+                            typeof watch('driverLicenseImage') === 'string' ?
+                                watch('driverLicenseImage')?.split('.')?.pop() == 'pdf'
+                                    ? "pdf file successfully attached"
+                                    : <img width={250} height="auto" src={watch('driverLicenseImage')} />
+                                : ""
                         }
                         {
-                            typeof watch('driverLicenseImage') === 'object' && watch('driverLicenseImage').length 
-                            ? watch('driverLicenseImage')[0]?.name.split('.')?.pop() != 'pdf'?
-                            <img width={250} height="auto" src={URL.createObjectURL(watch('driverLicenseImage')[0])} />
-                            :"pdf file successfully attached"
-                            : ""
+                            typeof watch('driverLicenseImage') === 'object' && watch('driverLicenseImage').length
+                                ? watch('driverLicenseImage')[0]?.name.split('.')?.pop() != 'pdf' ?
+                                    <img width={250} height="auto" src={URL.createObjectURL(watch('driverLicenseImage')[0])} />
+                                    : "pdf file successfully attached"
+                                : ""
                         }
                     </div>
                     <div className='mt-4' style={{ width: "100%", display: "flex", justifyContent: "space-between", alignContent: "center", alignItems: "center" }}>
@@ -429,32 +429,32 @@ export default function Page() {
                             </label>
                         </div>
                         {
-                            typeof watch('checkFront') === 'string' 
-                            ? watch('checkFront')?.split('.')?.pop() == 'pdf'
-                            ? "pdf file successfully attached "
-                            : <img width={250} height="auto" src={watch('checkFront')} /> 
-                            : ""
+                            typeof watch('checkFront') === 'string'
+                                ? watch('checkFront')?.split('.')?.pop() == 'pdf'
+                                    ? "pdf file successfully attached "
+                                    : <img width={250} height="auto" src={watch('checkFront')} />
+                                : ""
                         }
                         {
-                            typeof watch('checkFront') === 'object' && watch('checkFront').length 
-                            ? watch('checkFront')[0]?.name.split('.')?.pop() != 'pdf'?
-                            <img width={250} height="auto" src={URL.createObjectURL(watch('checkFront')[0])} />
-                            :"pdf file successfully attached "
-                            : ""
+                            typeof watch('checkFront') === 'object' && watch('checkFront').length
+                                ? watch('checkFront')[0]?.name.split('.')?.pop() != 'pdf' ?
+                                    <img width={250} height="auto" src={URL.createObjectURL(watch('checkFront')[0])} />
+                                    : "pdf file successfully attached "
+                                : ""
                         }
                         {
-                            typeof watch('checkBack') === 'string' 
-                            ? watch('checkBack')?.split('.')?.pop() == 'pdf'
-                            ? " pdf file successfully attached"
-                            : <img width={250} height="auto" src={watch('checkBack')} />
-                            : ""
+                            typeof watch('checkBack') === 'string'
+                                ? watch('checkBack')?.split('.')?.pop() == 'pdf'
+                                    ? " pdf file successfully attached"
+                                    : <img width={250} height="auto" src={watch('checkBack')} />
+                                : ""
                         }
                         {
-                            typeof watch('checkBack') === 'object' && watch('checkBack').length 
-                            ? watch('checkBack')[0]?.name.split('.')?.pop() != 'pdf'?
-                            <img width={250} height="auto" src={URL.createObjectURL(watch('checkBack')[0])} />
-                            :" pdf file successfully attached"
-                            : ""
+                            typeof watch('checkBack') === 'object' && watch('checkBack').length
+                                ? watch('checkBack')[0]?.name.split('.')?.pop() != 'pdf' ?
+                                    <img width={250} height="auto" src={URL.createObjectURL(watch('checkBack')[0])} />
+                                    : " pdf file successfully attached"
+                                : ""
                         }
                     </div>
                     <div className='mt-4' style={{ width: "100%", display: "flex", gap: "10px", justifyContent: "space-between", alignContent: "center", alignItems: "center" }}>
@@ -464,20 +464,20 @@ export default function Page() {
                             Choose a File
                         </label>
                         {
-                            typeof watch('paystubs') === 'string' 
-                            ? watch('paystubs')?.split('.')?.pop() == 'pdf'
-                            ? "pdf file successfully attached"
-                            : <img width={250} height="auto" src={watch('paystubs')} /> : ""
+                            typeof watch('paystubs') === 'string'
+                                ? watch('paystubs')?.split('.')?.pop() == 'pdf'
+                                    ? "pdf file successfully attached"
+                                    : <img width={250} height="auto" src={watch('paystubs')} /> : ""
                         }
                         {
-                            typeof watch('paystubs') === 'object' && watch('paystubs').length 
-                            ?watch('paystubs')[0]?.name.split('.')?.pop() != 'pdf'?
-                            <img width={250} height="auto" src={URL.createObjectURL(watch('paystubs')[0])} />
-                            :"pdf file successfully attached"
-                            : ""
+                            typeof watch('paystubs') === 'object' && watch('paystubs').length
+                                ? watch('paystubs')[0]?.name.split('.')?.pop() != 'pdf' ?
+                                    <img width={250} height="auto" src={URL.createObjectURL(watch('paystubs')[0])} />
+                                    : "pdf file successfully attached"
+                                : ""
                         }
                     </div>
-                    <h6 style={{color: "#68069d", marginTop: "20px"}}>REFERENCES</h6>
+                    <h6 style={{ color: "#68069d", marginTop: "20px" }}>REFERENCES</h6>
                     <Label className='my-2 text-success'>REFERENCE 1</Label>
                     <div style={{ width: "100%", display: "flex", gap: "10px" }}>
                         <Controller
@@ -564,7 +564,7 @@ export default function Page() {
                             )}
                         />
                     </div>
-                    <h6 style={{color: "#68069d", marginTop: "20px"}}>PAYMENT INFORMATION</h6>
+                    <h6 style={{ color: "#68069d", marginTop: "20px" }}>PAYMENT INFORMATION</h6>
                     <Label className='my-2 text-success'>AMOUNT REQUESTED</Label>
                     <div style={{ width: "100%", display: "flex", gap: "10px" }}>
                         <Controller
@@ -588,23 +588,23 @@ export default function Page() {
                         <Button style={{ background: "#62d0ab", border: 'none', outline: "none", borderRadius: "50px" }}>{watch('amoundRequestedDate')}</Button>
                     </div>
                     <Label className='my-2 text-success'>AMOUNT DUE</Label>
-                    <div style={{ width: "100%", display: "flex", gap: "10px", justifyContent:"space-between" }}>
-                        <div style={{display:'flex', flexDirection:"column", width:"80%"}}>
+                    <div style={{ width: "100%", display: "flex", gap: "10px", justifyContent: "space-between" }}>
+                        <div style={{ display: 'flex', flexDirection: "column", width: "80%" }}>
                             <Controller
                                 control={control}
                                 name='amountDue'
                                 render={({ field }) => (
-                                    <Input 
-                                        disabled={true} 
+                                    <Input
+                                        disabled={true}
                                         type='number'
-                                        {...field} 
-                                        placeholder="0" 
+                                        {...field}
+                                        placeholder="0"
                                     />
                                 )}
                             />
-                            <span style={{fontSize:"small"}}>25% Interest. Additional fees can apply for late payments</span>
+                            <span style={{ fontSize: "small" }}>25% Interest. Additional fees can apply for late payments</span>
                         </div>
-                        <Button style={{ background: "#62d0ab", border: 'none', outline: "none", borderRadius: "50px" , height:"40px"}}>{watch('amountDueDate')}</Button>
+                        <Button style={{ background: "#62d0ab", border: 'none', outline: "none", borderRadius: "50px", height: "40px" }}>{watch('amountDueDate')}</Button>
                     </div>
                     <Label className='my-2 text-success'>CHOOSE HOW WE PAY YOU</Label>
                     <div style={{ width: "100%", display: "flex", flexDirection: "column" }}>
@@ -683,14 +683,14 @@ export default function Page() {
                             type="checkbox"
                             onChange={(e) => setAgree(e.target.checked)}
                         />
-                        <p>Check Box to Agree <span onClick={() => router.push('/zimba-cash/terms-conditions')} style={{ color: "blue", cursor: "pointer" }}>Terms ans Conditions</span></p>
+                        <p>Check Box to Agree <span onClick={() => router.push('/terms-conditions')} style={{ color: "blue", cursor: "pointer" }}>Terms ans Conditions</span></p>
                     </div>
-                    <div style={{ display: 'flex', gap: "9px",marginLeft: "-60px", justifyContent: "center" }}>
+                    <div style={{ display: 'flex', gap: "9px", marginLeft: "-60px", justifyContent: "center" }}>
                         <Input
                             type="checkbox"
                             onChange={(e) => setAgree(e.target.checked)}
                         />
-                        <p>Check Box to Agree to <a href="#" onClick={()=>router.push('/zimba-cash/sms-policy')} style={{textDecoration:"none"}}>SMS Policy</a></p>
+                        <p>Check Box to Agree to <a href="#" onClick={() => router.push('/sms-policy')} style={{ textDecoration: "none" }}>SMS Policy</a></p>
                     </div>
 
                     <Button

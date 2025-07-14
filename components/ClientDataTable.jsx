@@ -18,7 +18,7 @@ const statusMap = {
     paid: 'Paid'
 }
 
-export default function ClientDataTable({ data , getLoanData}) {
+export default function ClientDataTable({ data, getLoanData }) {
 
     const router = useRouter()
     const createQueryString = (name, value) => {
@@ -157,16 +157,16 @@ export default function ClientDataTable({ data , getLoanData}) {
                                 {d.ssn}
                             </td>
                             <td>
-                                {"$"+(formatNumber(d.amountRequested))}
+                                {"$" + (formatNumber(d.amountRequested))}
                             </td>
-                            <td>{"$"+(formatNumber(d.lateFee))}</td>
+                            <td>{"$" + (formatNumber(d.lateFee))}</td>
                             <td>
                                 {
-                                    <Button 
-                                        onClick={() => onlyInterestPay({ loanId: d._id, amount: d.intersetDue, lateFee: d.lateFee })} 
+                                    <Button
+                                        onClick={() => onlyInterestPay({ loanId: d._id, amount: d.intersetDue, lateFee: d.lateFee })}
                                         color={d?.isIntersetPays ? "success" : "primary"}
                                     >
-                                            {"$"+(formatNumber(d.intersetDue + d.lateFee))} PAY
+                                        {"$" + (formatNumber(d.intersetDue + d.lateFee))} PAY
                                     </Button>
                                 }
                             </td>
@@ -176,7 +176,7 @@ export default function ClientDataTable({ data , getLoanData}) {
                                         onClick={() => totalAmountPay({ loanId: d._id, amount: d.totalDue })}
                                         color={d?.isLoanPays ? "success" : "primary"}
                                     >
-                                        {"$"+(formatNumber(d.totalDue))} PAY
+                                        {"$" + (formatNumber(d.totalDue))} PAY
                                     </Button>
                                 }
                             </td>
@@ -184,7 +184,7 @@ export default function ClientDataTable({ data , getLoanData}) {
                                 <ViewText text={d?.comments} />
                             </td>
                             <td>
-                                {d.status === 'resubmit' ? <Button onClick={() => router.push('/zimba-cash/resubmit' + "?" + createQueryString('id', d._id))} color='primary'>{statusMap[d.status]}</Button> : statusMap[d.status]}
+                                {d.status === 'resubmit' ? <Button onClick={() => router.push('/resubmit' + "?" + createQueryString('id', d._id))} color='primary'>{statusMap[d.status]}</Button> : statusMap[d.status]}
                             </td>
                         </tr>
                     ))

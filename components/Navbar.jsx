@@ -47,15 +47,15 @@ function AppNav({ hideSideNav }) {
                 {
                   isAuth ? (
                     <>
-                      <Nav.Link onClick={() => routerHandler('/zimba-cash/history')}>Loans List</Nav.Link>
-                      <Nav.Link onClick={() => routerHandler('/zimba-cash/loan')}>Loan</Nav.Link>
-                      <Nav.Link onClick={() => routerHandler('/zimba-cash/profile')}>Profile</Nav.Link>
-                      <Nav.Link onClick={() => routerHandler('/zimba-cash/contact')}>Contact</Nav.Link>
+                      <Nav.Link onClick={() => routerHandler('/history')}>Loans List</Nav.Link>
+                      <Nav.Link onClick={() => routerHandler('/loan')}>Loan</Nav.Link>
+                      <Nav.Link onClick={() => routerHandler('/profile')}>Profile</Nav.Link>
+                      <Nav.Link onClick={() => routerHandler('/contact')}>Contact</Nav.Link>
                       <Nav.Link onClick={logOutHandler}>Logout</Nav.Link>
                     </>
                   ) : (
                     <>
-                      <Nav.Link onClick={() => routerHandler('/zimba-cash/contact')} >Contact</Nav.Link>
+                      <Nav.Link onClick={() => routerHandler('/contact')} >Contact</Nav.Link>
                       <Nav.Link onClick={() => routerHandler('/login')}>Login</Nav.Link>
                       <Nav.Link onClick={() => routerHandler('/registration')}>Register</Nav.Link>
                     </>

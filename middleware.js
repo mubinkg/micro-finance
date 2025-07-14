@@ -2,6 +2,8 @@ import { NextResponse } from 'next/server'
 var jwt = require('jsonwebtoken');
 
 const publicRoutes = ['/forget-password', '/login', '/registration', '/']
+const adminRoutes = ['/applicants', '/dashboard', '/history', '/load-details']
+const userRoutes = ['/contact', '/history', '/loan', '/privacy-policy', '/profile', '/resubmit', '/sms-policy', '/terms-conditions']
 
 // This function can be marked `async` if using `await` inside
 export function middleware(request) {
@@ -12,12 +14,22 @@ export function middleware(request) {
 
     if (!token && !publicRoutes.includes(pathName)) {
         return Response.redirect(new URL('/login', request.url))
+
     }
     if (token) {
         const decoded = jwt.decode(token.value);
         const userRole = decoded?.role || 'user';
+        console.log('User role ==== ', userRole)
         if (userRole === 'admin') {
-            return Response.redirect(new URL('/admin/dashboard', request.url))
+            if (!adminRoutes.includes(pathName)) {
+                return Response.redirect(new URL('/dashboard', request.url))
+            }
+            return NextResponse.next()
+        } else {
+            if (!userRoutes.includes(pathName)) {
+                return Response.redirect(new URL('/dashboard', request.url))
+            }
+            return NextResponse.next()
         }
     }
     return NextResponse.next()

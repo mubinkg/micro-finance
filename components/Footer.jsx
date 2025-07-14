@@ -11,14 +11,14 @@ export default function Footer() {
         setIsClient(true)
     }, [])
     return isClient ? (
-        <div style={{display:'flex', justifyContent: 'center', marginBottom: "20px"}}>
-            <p onClick={()=>router.push('/zimba-cash/contact')} style={{cursor: "pointer", marginRight: '10px'}}>Contact Us</p>
+        <div style={{ display: 'flex', justifyContent: 'center', marginBottom: "20px" }}>
+            <p onClick={() => router.push('/contact')} style={{ cursor: "pointer", marginRight: '10px' }}>Contact Us</p>
             <p>|</p>
-            <p onClick={()=>router.push('/zimba-cash/terms-conditions')} style={{marginLeft: '10px', cursor: "pointer",  marginRight: '10px'}}>Terms and Conditions</p>
+            <p onClick={() => router.push('/terms-conditions')} style={{ marginLeft: '10px', cursor: "pointer", marginRight: '10px' }}>Terms and Conditions</p>
             <p>|</p>
-            <p onClick={()=>router.push('/zimba-cash/sms-policy')} style={{marginLeft: '10px', cursor: "pointer", marginRight: '10px'}}>SMS Policy</p>
+            <p onClick={() => router.push('/sms-policy')} style={{ marginLeft: '10px', cursor: "pointer", marginRight: '10px' }}>SMS Policy</p>
             <p>|</p>
-            <p onClick={()=>router.push('/zimba-cash/privacy-policy')} style={{marginLeft: '10px', cursor: "pointer"}}>Privacy Policy</p>
+            <p onClick={() => router.push('/privacy-policy')} style={{ marginLeft: '10px', cursor: "pointer" }}>Privacy Policy</p>
         </div>
     ) : ""
 }

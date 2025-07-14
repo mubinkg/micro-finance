@@ -193,7 +193,7 @@ export default function CreateLoan() {
                 icon: "success"
             }).then(() => {
                 removeItem('loan')
-                router.push('/zimba-cash/history')
+                router.push('/history')
             })
         }).catch(err => {
             let errorHtml = ''
@@ -719,14 +719,14 @@ export default function CreateLoan() {
                             type="checkbox"
                             onChange={(e) => setAgree(e.target.checked)}
                         />
-                        <p>Check Box to Agree <span onClick={() => router.push('/zimba-cash/terms-conditions')} style={{ color: "#0569ed", cursor: "pointer" }}>Terms ans Conditions</span></p>
+                        <p>Check Box to Agree <span onClick={() => router.push('/terms-conditions')} style={{ color: "#0569ed", cursor: "pointer" }}>Terms ans Conditions</span></p>
                     </div>
                     <div style={{ display: 'flex', gap: "9px", marginLeft: "-60px", justifyContent: "center" }}>
                         <Input
                             type="checkbox"
                             onChange={(e) => setSmsPolicy(e.target.checked)}
                         />
-                        <p>Check Box to Agree to <a href="#" onClick={() => router.push('/zimba-cash/sms-policy')} style={{ textDecoration: "none" }}>SMS Policy</a></p>
+                        <p>Check Box to Agree to <a href="#" onClick={() => router.push('/sms-policy')} style={{ textDecoration: "none" }}>SMS Policy</a></p>
                     </div>
                     <Button onClick={handleSubmit(saveLoan)} style={{ background: "#62d0ab" }} className='mt-4'>Save</Button>
                     <Button

@@ -20,7 +20,7 @@ export default function Page() {
             setEmail('')
             setPassword('')
             setItem('token', JSON.stringify(res.token))
-            window.location = ('/zimba-cash/loan')
+            window.location = ('/loan')
         }
         catch (err) {
             Swal.fire({
