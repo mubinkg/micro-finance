@@ -80,7 +80,7 @@ export default function Page() {
             <div className='d-flex justify-content-between align-items-center'>
                 <div className='d-flex gap-4 align-items-center'>
                     <Image src={logo} width={200} />
-                    <Button onClick={() => router.push('/loan')}>Create Loan</Button>
+                    <Button onClick={() => router.push('/admin-loan')}>Create Loan</Button>
                 </div>
                 <h2>Dashboard</h2>
                 <Button onClick={logOutHandler}>Logout</Button>

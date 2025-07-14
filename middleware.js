@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server'
 var jwt = require('jsonwebtoken');
 
 const publicRoutes = ['/forget-password', '/login', '/registration', '/']
-const adminRoutes = ['/applicants', '/dashboard', '/loan-details']
+const adminRoutes = ['/applicants', '/dashboard', '/loan-details', '/admin-loan']
 const userRoutes = ['/contact', '/history', '/loan', '/privacy-policy', '/profile', '/resubmit', '/sms-policy', '/terms-conditions']
 
 // This function can be marked `async` if using `await` inside
