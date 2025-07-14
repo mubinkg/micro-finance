@@ -260,486 +260,484 @@ export default function CreateLoan() {
 
 
     return (
-        <div style={{ marginBottom: "200px" }}>
-            <AppNav />
-            <div style={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                alignContent: "center",
-                minHeight: "90vh"
-            }}>
-                <div className='container' style={{ maxWidth: "800px", display: "flex", flexDirection: "column", justifyContent: "center", alignContent: "center", }}>
-                    <h5 style={{ textAlign: "center" }} className='my-4'>Emergency Loans: Life happens</h5>
-                    <Row>
-                        <h6 style={{ color: "#68069d" }}>PERSONAL INFORMATION</h6>
-                        <Col lg={6} md={12}>
-                            <Label className='text-success'>
-                                FIRST NAME
-                            </Label>
-                            <Controller
-                                control={control}
-                                name='firstName'
-                                render={({ field }) => (
-                                    <Input style={{
-                                        border: errors.firstName ? "1px solid red" : ""
-                                    }} {...field} placeholder='First Name' />
-                                )}
+
+        <div style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            alignContent: "center",
+            minHeight: "90vh"
+        }}>
+            <div className='container' style={{ maxWidth: "800px", display: "flex", flexDirection: "column", justifyContent: "center", alignContent: "center", }}>
+                <h5 style={{ textAlign: "center" }} className='my-4'>Emergency Loans: Life happens</h5>
+                <Row>
+                    <h6 style={{ color: "#68069d" }}>PERSONAL INFORMATION</h6>
+                    <Col lg={6} md={12}>
+                        <Label className='text-success'>
+                            FIRST NAME
+                        </Label>
+                        <Controller
+                            control={control}
+                            name='firstName'
+                            render={({ field }) => (
+                                <Input style={{
+                                    border: errors.firstName ? "1px solid red" : ""
+                                }} {...field} placeholder='First Name' />
+                            )}
+                        />
+                    </Col>
+                    <Col lg={6} md={12}>
+                        <Label className='text-success'>
+                            LAST NAME
+                        </Label>
+                        <Controller
+                            control={control}
+                            name='lastName'
+                            render={({ field }) => (
+                                <Input
+                                    {...field}
+                                    placeholder='Last name'
+                                    style={{
+                                        border: errors.lastName ? "1px solid red" : ""
+                                    }}
+                                />
+                            )}
+                        />
+                    </Col>
+                </Row>
+                <div className='mt-2'>
+                    <Label className='text-success'>
+                        CURRENT ADDRESS
+                    </Label>
+                    <Controller
+                        control={control}
+                        name='currentAddress'
+                        render={({ field }) => (
+                            <Input
+                                {...field}
+                                style={{
+                                    border: errors.currentAddress ? "1px solid red" : ""
+                                }}
+                                placeholder='Current address'
                             />
-                        </Col>
-                        <Col lg={6} md={12}>
-                            <Label className='text-success'>
-                                LAST NAME
-                            </Label>
-                            <Controller
-                                control={control}
-                                name='lastName'
-                                render={({ field }) => (
-                                    <Input
-                                        {...field}
-                                        placeholder='Last name'
-                                        style={{
-                                            border: errors.lastName ? "1px solid red" : ""
-                                        }}
-                                    />
-                                )}
+                        )}
+                    />
+                </div>
+                <div style={{ width: "100%", marginTop: "10px" }} >
+                    <Controller
+                        control={control}
+                        name='currentAddress2'
+                        render={({ field }) => (
+                            <Input
+                                {...field}
+                                placeholder='Address line 2'
                             />
-                        </Col>
-                    </Row>
-                    <div className='mt-2'>
-                        <Label className='text-success'>
-                            CURRENT ADDRESS
-                        </Label>
-                        <Controller
-                            control={control}
-                            name='currentAddress'
-                            render={({ field }) => (
-                                <Input
-                                    {...field}
-                                    style={{
-                                        border: errors.currentAddress ? "1px solid red" : ""
-                                    }}
-                                    placeholder='Current address'
-                                />
-                            )}
-                        />
-                    </div>
-                    <div style={{ width: "100%", marginTop: "10px" }} >
-                        <Controller
-                            control={control}
-                            name='currentAddress2'
-                            render={({ field }) => (
-                                <Input
-                                    {...field}
-                                    placeholder='Address line 2'
-                                />
-                            )}
-                        />
-                    </div>
-                    <div style={{ width: "100%", marginTop: "10px" }} >
-                        <Controller
-                            control={control}
-                            name='city'
-                            render={({ field }) => (
-                                <Input
-                                    {...field}
-                                    style={{
-                                        border: errors.city ? "1px solid red" : ""
-                                    }}
-                                    placeholder='City'
-                                />
-                            )}
-                        />
-                    </div>
-                    <div style={{ width: "100%", marginTop: "10px" }} >
-                        <Controller
-                            control={control}
-                            name='state'
-                            render={({ field }) => (
-                                <Input
-                                    {...field}
-                                    placeholder='State'
-                                    style={{
-                                        border: errors.state ? "1px solid red" : ""
-                                    }}
-                                />
-                            )}
-                        />
-                    </div>
-                    <div style={{ width: "100%", marginTop: "10px" }} >
-                        <Controller
-                            control={control}
-                            name='zipCode'
-                            render={({ field }) => (
-                                <Input
-                                    type='number'
-                                    style={{
-                                        border: errors.zipCode ? "1px solid red" : ""
-                                    }}
-                                    {...field}
-                                    placeholder='Zip Code'
-                                />
-                            )}
-                        />
-                    </div>
-                    <div className='mt-2'>
-                        <Label className='text-success'>
-                            CELL PHONE
-                        </Label>
-                        <Controller
-                            control={control}
-                            name='cellPhone'
-                            render={({ field }) => (
-                                <Input
-                                    type='number'
-                                    style={{
-                                        border: errors.cellPhone ? "1px solid red" : ""
-                                    }}
-                                    {...field}
-                                    placeholder='Cell phone'
-                                />
-                            )}
-                        />
-                    </div>
-                    <div className='mt-2'>
-                        <Label className='text-success'>
-                            EMAIL
-                        </Label>
-                        <Controller
-                            control={control}
-                            name='email'
-                            render={({ field }) => (
-                                <Input
-                                    {...field}
-                                    style={{
-                                        border: errors.email ? "1px solid red" : ""
-                                    }}
-                                    placeholder='Email address'
-                                />
-                            )}
-                        />
-                    </div>
-                    <div className='mt-2'>
-                        <Label className='text-success'>
-                            DRIVER&rsquo;S LICENSE/ID
-                        </Label>
-                        <Controller
-                            control={control}
-                            name='driverLicense'
-                            render={({ field }) => (
-                                <Input
-                                    {...field}
-                                    style={{
-                                        border: errors.driverLicense ? "1px solid red" : ""
-                                    }}
-                                    placeholder="Driver&rsquo;s License / ID"
-                                />
-                            )}
-                        />
-                    </div>
-                    <div className='mt-2'>
-                        <Label className='text-success'>
-                            SSN
-                        </Label>
-                        <Controller
-                            control={control}
-                            name='ssn'
-                            render={({ field }) => (
-                                <Input
-                                    {...field}
-                                    type='number'
-                                    style={{
-                                        border: errors.ssn ? "1px solid red" : ""
-                                    }}
-                                    placeholder="XXX-XXX-XXX"
-                                />
-                            )}
-                        />
-                    </div>
-                    <h6 style={{ color: "#68069d", marginTop: "20px" }}>REQUIRED DOCUMENTS [ jpg, png, pdf files only ]</h6>
-                    <div className='mt-2' style={{ width: "100%", display: "flex", gap: "10px", justifyContent: "space-between", alignContent: "center", alignItems: "center" }}>
-                        <Label className='text-success'>DRIVER&rsquo;S LICENSE / ID</Label>
+                        )}
+                    />
+                </div>
+                <div style={{ width: "100%", marginTop: "10px" }} >
+                    <Controller
+                        control={control}
+                        name='city'
+                        render={({ field }) => (
+                            <Input
+                                {...field}
+                                style={{
+                                    border: errors.city ? "1px solid red" : ""
+                                }}
+                                placeholder='City'
+                            />
+                        )}
+                    />
+                </div>
+                <div style={{ width: "100%", marginTop: "10px" }} >
+                    <Controller
+                        control={control}
+                        name='state'
+                        render={({ field }) => (
+                            <Input
+                                {...field}
+                                placeholder='State'
+                                style={{
+                                    border: errors.state ? "1px solid red" : ""
+                                }}
+                            />
+                        )}
+                    />
+                </div>
+                <div style={{ width: "100%", marginTop: "10px" }} >
+                    <Controller
+                        control={control}
+                        name='zipCode'
+                        render={({ field }) => (
+                            <Input
+                                type='number'
+                                style={{
+                                    border: errors.zipCode ? "1px solid red" : ""
+                                }}
+                                {...field}
+                                placeholder='Zip Code'
+                            />
+                        )}
+                    />
+                </div>
+                <div className='mt-2'>
+                    <Label className='text-success'>
+                        CELL PHONE
+                    </Label>
+                    <Controller
+                        control={control}
+                        name='cellPhone'
+                        render={({ field }) => (
+                            <Input
+                                type='number'
+                                style={{
+                                    border: errors.cellPhone ? "1px solid red" : ""
+                                }}
+                                {...field}
+                                placeholder='Cell phone'
+                            />
+                        )}
+                    />
+                </div>
+                <div className='mt-2'>
+                    <Label className='text-success'>
+                        EMAIL
+                    </Label>
+                    <Controller
+                        control={control}
+                        name='email'
+                        render={({ field }) => (
+                            <Input
+                                {...field}
+                                style={{
+                                    border: errors.email ? "1px solid red" : ""
+                                }}
+                                placeholder='Email address'
+                            />
+                        )}
+                    />
+                </div>
+                <div className='mt-2'>
+                    <Label className='text-success'>
+                        DRIVER&rsquo;S LICENSE/ID
+                    </Label>
+                    <Controller
+                        control={control}
+                        name='driverLicense'
+                        render={({ field }) => (
+                            <Input
+                                {...field}
+                                style={{
+                                    border: errors.driverLicense ? "1px solid red" : ""
+                                }}
+                                placeholder="Driver&rsquo;s License / ID"
+                            />
+                        )}
+                    />
+                </div>
+                <div className='mt-2'>
+                    <Label className='text-success'>
+                        SSN
+                    </Label>
+                    <Controller
+                        control={control}
+                        name='ssn'
+                        render={({ field }) => (
+                            <Input
+                                {...field}
+                                type='number'
+                                style={{
+                                    border: errors.ssn ? "1px solid red" : ""
+                                }}
+                                placeholder="XXX-XXX-XXX"
+                            />
+                        )}
+                    />
+                </div>
+                <h6 style={{ color: "#68069d", marginTop: "20px" }}>REQUIRED DOCUMENTS [ jpg, png, pdf files only ]</h6>
+                <div className='mt-2' style={{ width: "100%", display: "flex", gap: "10px", justifyContent: "space-between", alignContent: "center", alignItems: "center" }}>
+                    <Label className='text-success'>DRIVER&rsquo;S LICENSE / ID</Label>
+                    <label style={{ cursor: "pointer", padding: '5px 10px', color: "white", background: "#62d0ab", border: 'none', outline: "none", borderRadius: "50px" }}>
+                        <input required type="file" {...register('driverLicenseImage')} style={{ display: 'none' }} />
+                        Choose a File
+                    </label>
+                    {
+                        watch('driverLicenseImage')?.length ?
+                            watch('driverLicenseImage')[0]?.name.split('.')?.pop() != 'pdf' ?
+                                <img width={250} height="auto" src={URL.createObjectURL(watch('driverLicenseImage')[0])} />
+                                : "pdf file successfully attached"
+                            : ""
+                    }
+                </div>
+                <div className='mt-4' style={{ width: "100%", display: "flex", justifyContent: "space-between", alignContent: "center", alignItems: "center" }}>
+                    <Label className='text-success'>2 BANK STATEMENTS OR CHECK (Front & signed on back)</Label>
+                    <div style={{ display: 'flex', gap: "10px" }}>
                         <label style={{ cursor: "pointer", padding: '5px 10px', color: "white", background: "#62d0ab", border: 'none', outline: "none", borderRadius: "50px" }}>
-                            <input required type="file" {...register('driverLicenseImage')} style={{ display: 'none' }} />
-                            Choose a File
+                            <input required {...register('checkFront')} type="file" style={{ display: 'none' }} />
+                            Front Side
                         </label>
-                        {
-                            watch('driverLicenseImage')?.length ?
-                                watch('driverLicenseImage')[0]?.name.split('.')?.pop() != 'pdf' ?
-                                    <img width={250} height="auto" src={URL.createObjectURL(watch('driverLicenseImage')[0])} />
-                                    : "pdf file successfully attached"
-                                : ""
-                        }
-                    </div>
-                    <div className='mt-4' style={{ width: "100%", display: "flex", justifyContent: "space-between", alignContent: "center", alignItems: "center" }}>
-                        <Label className='text-success'>2 BANK STATEMENTS OR CHECK (Front & signed on back)</Label>
-                        <div style={{ display: 'flex', gap: "10px" }}>
-                            <label style={{ cursor: "pointer", padding: '5px 10px', color: "white", background: "#62d0ab", border: 'none', outline: "none", borderRadius: "50px" }}>
-                                <input required {...register('checkFront')} type="file" style={{ display: 'none' }} />
-                                Front Side
-                            </label>
-                            <label style={{ cursor: "pointer", padding: '5px 10px', color: "white", background: "#62d0ab", border: 'none', outline: "none", borderRadius: "50px" }}>
-                                <input required {...register('checkBack')} type="file" style={{ display: 'none' }} />
-                                Back Side
-                            </label>
-                        </div>
-                        {
-                            watch('checkFront')?.length ?
-                                watch('checkFront')[0]?.name.split('.')?.pop() != 'pdf' ?
-                                    <img width={250} height="auto" src={URL.createObjectURL(watch('checkFront')[0])} />
-                                    : "pdf file successfully attached "
-                                : ""
-                        }
-                        {
-                            watch('checkBack')?.length ?
-                                watch('checkBack')[0]?.name.split('.')?.pop() != 'pdf' ?
-                                    <img width={250} height="auto" src={URL.createObjectURL(watch('checkBack')[0])} />
-                                    : " pdf file successfully attached"
-                                : ""
-                        }
-                    </div>
-                    <div className='mt-4' style={{ width: "100%", display: "flex", gap: "10px", justifyContent: "space-between", alignContent: "center", alignItems: "center" }}>
-                        <Label className='text-success'>RECENT PAYSTUB</Label>
                         <label style={{ cursor: "pointer", padding: '5px 10px', color: "white", background: "#62d0ab", border: 'none', outline: "none", borderRadius: "50px" }}>
-                            <input required {...register('paystubs')} type="file" style={{ display: 'none' }} />
-                            Choose a File
+                            <input required {...register('checkBack')} type="file" style={{ display: 'none' }} />
+                            Back Side
                         </label>
-                        {
-                            watch('paystubs')?.length ?
-                                watch('paystubs')[0]?.name.split('.')?.pop() != 'pdf' ?
-                                    <img width={250} height="auto" src={URL.createObjectURL(watch('paystubs')[0])} />
-                                    : "pdf file successfully attached"
-                                : ""
-                        }
                     </div>
-                    <h6 style={{ color: "#68069d", marginTop: "20px" }}>REFERENCES</h6>
-                    <Label className='my-2 text-success'>REFERENCE 1</Label>
-                    <div style={{ width: "100%", display: "flex", gap: "10px" }}>
+                    {
+                        watch('checkFront')?.length ?
+                            watch('checkFront')[0]?.name.split('.')?.pop() != 'pdf' ?
+                                <img width={250} height="auto" src={URL.createObjectURL(watch('checkFront')[0])} />
+                                : "pdf file successfully attached "
+                            : ""
+                    }
+                    {
+                        watch('checkBack')?.length ?
+                            watch('checkBack')[0]?.name.split('.')?.pop() != 'pdf' ?
+                                <img width={250} height="auto" src={URL.createObjectURL(watch('checkBack')[0])} />
+                                : " pdf file successfully attached"
+                            : ""
+                    }
+                </div>
+                <div className='mt-4' style={{ width: "100%", display: "flex", gap: "10px", justifyContent: "space-between", alignContent: "center", alignItems: "center" }}>
+                    <Label className='text-success'>RECENT PAYSTUB</Label>
+                    <label style={{ cursor: "pointer", padding: '5px 10px', color: "white", background: "#62d0ab", border: 'none', outline: "none", borderRadius: "50px" }}>
+                        <input required {...register('paystubs')} type="file" style={{ display: 'none' }} />
+                        Choose a File
+                    </label>
+                    {
+                        watch('paystubs')?.length ?
+                            watch('paystubs')[0]?.name.split('.')?.pop() != 'pdf' ?
+                                <img width={250} height="auto" src={URL.createObjectURL(watch('paystubs')[0])} />
+                                : "pdf file successfully attached"
+                            : ""
+                    }
+                </div>
+                <h6 style={{ color: "#68069d", marginTop: "20px" }}>REFERENCES</h6>
+                <Label className='my-2 text-success'>REFERENCE 1</Label>
+                <div style={{ width: "100%", display: "flex", gap: "10px" }}>
+                    <Controller
+                        control={control}
+                        name='referenceOneFirstName'
+                        render={({ field }) => (
+                            <Input
+                                {...field}
+                                style={{
+                                    border: errors.referenceOneFirstName ? "1px solid red" : ""
+                                }}
+                                placeholder="First Name"
+                            />
+                        )}
+                    />
+                    <Controller
+                        control={control}
+                        name='referenceOneLastName'
+                        render={({ field }) => (
+                            <Input
+                                {...field}
+                                style={{
+                                    border: errors.referenceOneLastName ? "1px solid red" : ""
+                                }}
+                                placeholder="Last Name"
+                            />
+                        )}
+                    />
+                    <Controller
+                        control={control}
+                        name='referenceOnePhone'
+                        render={({ field }) => (
+                            <Input
+                                {...field}
+                                placeholder="Phone"
+                                type='number'
+                                style={{
+                                    border: errors.referenceOnePhone ? "1px solid red" : ""
+                                }}
+                            />
+                        )}
+                    />
+                </div>
+                <Label className='my-2 text-success'>REFERENCE 2</Label>
+                <div style={{ width: "100%", display: "flex", gap: "10px" }}>
+                    <Controller
+                        control={control}
+                        name='referenceTwoFirstName'
+                        render={({ field }) => (
+                            <Input
+                                {...field}
+                                style={{
+                                    border: errors.referenceTwoFirstName ? "1px solid red" : ""
+                                }}
+                                placeholder="First Name"
+                            />
+                        )}
+                    />
+                    <Controller
+                        control={control}
+                        name='referenceTwoLastName'
+                        render={({ field }) => (
+                            <Input
+                                {...field}
+                                style={{
+                                    border: errors.referenceTwoLastName ? "1px solid red" : ""
+                                }}
+                                placeholder="Last Name"
+                            />
+                        )}
+                    />
+                    <Controller
+                        control={control}
+                        name='referenceTwoPhone'
+                        render={({ field }) => (
+                            <Input
+                                {...field}
+                                type='number'
+                                style={{
+                                    border: errors.referenceTwoPhone ? "1px solid red" : ""
+                                }}
+                                placeholder="Phone"
+                            />
+                        )}
+                    />
+                </div>
+                <h6 style={{ color: "#68069d", marginTop: "20px" }}>PAYMENT INFORMATION</h6>
+                <Label className='my-2 text-success'>AMOUNT REQUESTED</Label>
+                <div style={{ width: "100%", display: "flex", gap: "10px" }}>
+                    <Controller
+                        control={control}
+                        name='amountRequested'
+                        render={({ field }) => (
+                            <Input
+                                type='number'
+                                {...field}
+                                style={{
+                                    border: errors.amountRequested ? "1px solid red" : ""
+                                }}
+                                onChange={(e) => {
+                                    setAmountDate()
+                                    setValue('amountRequested', e.target.value)
+                                    setValue('amountDue', (formatNumber(e.target.value * 1.25)))
+                                }}
+                                placeholder="0"
+                            />
+                        )}
+                    />
+                    <Button style={{ background: "#62d0ab", border: 'none', outline: "none", borderRadius: "50px" }}>{amoundRequestedDate}</Button>
+                </div>
+                <Label className='my-2 text-success'>AMOUNT DUE</Label>
+                <div style={{ width: "100%", display: "flex", gap: "10px", justifyContent: "space-between" }}>
+                    <div style={{ display: 'flex', flexDirection: "column", width: "80%" }}>
                         <Controller
                             control={control}
-                            name='referenceOneFirstName'
+                            name='amountDue'
                             render={({ field }) => (
                                 <Input
-                                    {...field}
-                                    style={{
-                                        border: errors.referenceOneFirstName ? "1px solid red" : ""
-                                    }}
-                                    placeholder="First Name"
-                                />
-                            )}
-                        />
-                        <Controller
-                            control={control}
-                            name='referenceOneLastName'
-                            render={({ field }) => (
-                                <Input
-                                    {...field}
-                                    style={{
-                                        border: errors.referenceOneLastName ? "1px solid red" : ""
-                                    }}
-                                    placeholder="Last Name"
-                                />
-                            )}
-                        />
-                        <Controller
-                            control={control}
-                            name='referenceOnePhone'
-                            render={({ field }) => (
-                                <Input
-                                    {...field}
-                                    placeholder="Phone"
+                                    disabled={true}
                                     type='number'
-                                    style={{
-                                        border: errors.referenceOnePhone ? "1px solid red" : ""
-                                    }}
-                                />
-                            )}
-                        />
-                    </div>
-                    <Label className='my-2 text-success'>REFERENCE 2</Label>
-                    <div style={{ width: "100%", display: "flex", gap: "10px" }}>
-                        <Controller
-                            control={control}
-                            name='referenceTwoFirstName'
-                            render={({ field }) => (
-                                <Input
                                     {...field}
-                                    style={{
-                                        border: errors.referenceTwoFirstName ? "1px solid red" : ""
-                                    }}
-                                    placeholder="First Name"
-                                />
-                            )}
-                        />
-                        <Controller
-                            control={control}
-                            name='referenceTwoLastName'
-                            render={({ field }) => (
-                                <Input
-                                    {...field}
-                                    style={{
-                                        border: errors.referenceTwoLastName ? "1px solid red" : ""
-                                    }}
-                                    placeholder="Last Name"
-                                />
-                            )}
-                        />
-                        <Controller
-                            control={control}
-                            name='referenceTwoPhone'
-                            render={({ field }) => (
-                                <Input
-                                    {...field}
-                                    type='number'
-                                    style={{
-                                        border: errors.referenceTwoPhone ? "1px solid red" : ""
-                                    }}
-                                    placeholder="Phone"
-                                />
-                            )}
-                        />
-                    </div>
-                    <h6 style={{ color: "#68069d", marginTop: "20px" }}>PAYMENT INFORMATION</h6>
-                    <Label className='my-2 text-success'>AMOUNT REQUESTED</Label>
-                    <div style={{ width: "100%", display: "flex", gap: "10px" }}>
-                        <Controller
-                            control={control}
-                            name='amountRequested'
-                            render={({ field }) => (
-                                <Input
-                                    type='number'
-                                    {...field}
-                                    style={{
-                                        border: errors.amountRequested ? "1px solid red" : ""
-                                    }}
-                                    onChange={(e) => {
-                                        setAmountDate()
-                                        setValue('amountRequested', e.target.value)
-                                        setValue('amountDue', (formatNumber(e.target.value * 1.25)))
-                                    }}
                                     placeholder="0"
                                 />
                             )}
                         />
-                        <Button style={{ background: "#62d0ab", border: 'none', outline: "none", borderRadius: "50px" }}>{amoundRequestedDate}</Button>
+                        <span style={{ fontSize: "small" }}>25% Interest. Additional fees can apply for late payments</span>
                     </div>
-                    <Label className='my-2 text-success'>AMOUNT DUE</Label>
-                    <div style={{ width: "100%", display: "flex", gap: "10px", justifyContent: "space-between" }}>
-                        <div style={{ display: 'flex', flexDirection: "column", width: "80%" }}>
-                            <Controller
-                                control={control}
-                                name='amountDue'
-                                render={({ field }) => (
-                                    <Input
-                                        disabled={true}
-                                        type='number'
-                                        {...field}
-                                        placeholder="0"
-                                    />
-                                )}
-                            />
-                            <span style={{ fontSize: "small" }}>25% Interest. Additional fees can apply for late payments</span>
-                        </div>
-                        <Button style={{ background: "#62d0ab", border: 'none', outline: "none", borderRadius: "50px", height: "40px" }}>{amountDueDate}</Button>
-                    </div>
-                    <Label className='my-2 text-success'>CHOOSE HOW WE PAY YOU</Label>
-                    <div style={{ width: "100%", display: "flex", flexDirection: "column" }}>
-                        <Controller
-                            control={control}
-                            name='paymentMethod'
-                            render={({ field }) => (
-                                <>
-                                    <FormGroup check>
-                                        <Input
-                                            {...field}
-                                            style={{
-                                                border: errors.paymentMethod ? "1px solid red" : ""
-                                            }}
-                                            value="mobile"
-                                            name="paymentMethod"
-                                            type="radio"
-
-                                        />
-                                        {' '}
-                                        <Label check>
-                                            Mobile Banking (enter email or phone)
-                                        </Label>
-                                    </FormGroup>
-                                    <FormGroup check>
-                                        <Input
-                                            {...field}
-                                            style={{
-                                                border: errors.paymentMethod ? "1px solid red" : ""
-                                            }}
-                                            value="cashapp"
-                                            name="paymentMethod"
-                                            type="radio"
-                                        />
-                                        {' '}
-                                        <Label check>
-                                            Cash App (enter $cashtag or username)
-                                        </Label>
-                                    </FormGroup>
-                                </>
-                            )}
-                        />
-                        <Controller
-                            control={control}
-                            name='paymentDetails'
-                            render={({ field }) => (
-                                <Input
-                                    className='mt-3'
-                                    style={{
-                                        border: errors.paymentDetails ? "1px solid red" : ""
-                                    }}
-                                    {...field}
-                                    placeholder='Enter details of your prefered payment method'
-                                />
-                            )}
-                        />
-                        <Label className='mt-3 text-success'>HOW YOU PAY BACK</Label>
-                        <Label className='text-sm'>Mobile Banking / Zelle: 469 358 8833</Label>
-                        <Label className='mb-3'>CashApp: $givenchip</Label>
-                        <Controller
-                            control={control}
-                            name='signature'
-                            render={({ field }) => (
-                                <Input
-                                    {...field}
-                                    style={{
-                                        border: errors.signature ? "1px solid red" : ""
-                                    }}
-                                    placeholder='Signature'
-                                />
-                            )}
-                        />
-                    </div>
-                    <div className='mt-4' style={{ display: 'flex', gap: "9px", justifyContent: "center" }}>
-                        <Input
-                            type="checkbox"
-                            onChange={(e) => setAgree(e.target.checked)}
-                        />
-                        <p>Check Box to Agree <span onClick={() => router.push('/terms-conditions')} style={{ color: "#0569ed", cursor: "pointer" }}>Terms ans Conditions</span></p>
-                    </div>
-                    <div style={{ display: 'flex', gap: "9px", marginLeft: "-60px", justifyContent: "center" }}>
-                        <Input
-                            type="checkbox"
-                            onChange={(e) => setSmsPolicy(e.target.checked)}
-                        />
-                        <p>Check Box to Agree to <a href="#" onClick={() => router.push('/sms-policy')} style={{ textDecoration: "none" }}>SMS Policy</a></p>
-                    </div>
-                    <Button onClick={handleSubmit(saveLoan)} style={{ background: "#62d0ab" }} className='mt-4'>Save</Button>
-                    <Button
-                        style={{ background: "#68069d" }}
-                        className='my-4'
-                        onClick={handleSubmit(submitHandler)}
-                        disabled={loading}
-                    >
-                        {
-                            loading ? "Submitting...." : "Submit"
-                        }
-                    </Button>
+                    <Button style={{ background: "#62d0ab", border: 'none', outline: "none", borderRadius: "50px", height: "40px" }}>{amountDueDate}</Button>
                 </div>
+                <Label className='my-2 text-success'>CHOOSE HOW WE PAY YOU</Label>
+                <div style={{ width: "100%", display: "flex", flexDirection: "column" }}>
+                    <Controller
+                        control={control}
+                        name='paymentMethod'
+                        render={({ field }) => (
+                            <>
+                                <FormGroup check>
+                                    <Input
+                                        {...field}
+                                        style={{
+                                            border: errors.paymentMethod ? "1px solid red" : ""
+                                        }}
+                                        value="mobile"
+                                        name="paymentMethod"
+                                        type="radio"
+
+                                    />
+                                    {' '}
+                                    <Label check>
+                                        Mobile Banking (enter email or phone)
+                                    </Label>
+                                </FormGroup>
+                                <FormGroup check>
+                                    <Input
+                                        {...field}
+                                        style={{
+                                            border: errors.paymentMethod ? "1px solid red" : ""
+                                        }}
+                                        value="cashapp"
+                                        name="paymentMethod"
+                                        type="radio"
+                                    />
+                                    {' '}
+                                    <Label check>
+                                        Cash App (enter $cashtag or username)
+                                    </Label>
+                                </FormGroup>
+                            </>
+                        )}
+                    />
+                    <Controller
+                        control={control}
+                        name='paymentDetails'
+                        render={({ field }) => (
+                            <Input
+                                className='mt-3'
+                                style={{
+                                    border: errors.paymentDetails ? "1px solid red" : ""
+                                }}
+                                {...field}
+                                placeholder='Enter details of your prefered payment method'
+                            />
+                        )}
+                    />
+                    <Label className='mt-3 text-success'>HOW YOU PAY BACK</Label>
+                    <Label className='text-sm'>Mobile Banking / Zelle: 469 358 8833</Label>
+                    <Label className='mb-3'>CashApp: $givenchip</Label>
+                    <Controller
+                        control={control}
+                        name='signature'
+                        render={({ field }) => (
+                            <Input
+                                {...field}
+                                style={{
+                                    border: errors.signature ? "1px solid red" : ""
+                                }}
+                                placeholder='Signature'
+                            />
+                        )}
+                    />
+                </div>
+                <div className='mt-4' style={{ display: 'flex', gap: "9px", justifyContent: "center" }}>
+                    <Input
+                        type="checkbox"
+                        onChange={(e) => setAgree(e.target.checked)}
+                    />
+                    <p>Check Box to Agree <span onClick={() => router.push('/terms-conditions')} style={{ color: "#0569ed", cursor: "pointer" }}>Terms ans Conditions</span></p>
+                </div>
+                <div style={{ display: 'flex', gap: "9px", marginLeft: "-60px", justifyContent: "center" }}>
+                    <Input
+                        type="checkbox"
+                        onChange={(e) => setSmsPolicy(e.target.checked)}
+                    />
+                    <p>Check Box to Agree to <a href="#" onClick={() => router.push('/sms-policy')} style={{ textDecoration: "none" }}>SMS Policy</a></p>
+                </div>
+                <Button onClick={handleSubmit(saveLoan)} style={{ background: "#62d0ab" }} className='mt-4'>Save</Button>
+                <Button
+                    style={{ background: "#68069d" }}
+                    className='my-4'
+                    onClick={handleSubmit(submitHandler)}
+                    disabled={loading}
+                >
+                    {
+                        loading ? "Submitting...." : "Submit"
+                    }
+                </Button>
             </div>
         </div>
     )

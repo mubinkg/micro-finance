@@ -1,5 +1,10 @@
 import CreateLoan from '../../../components/CreateLoan'
 
 export default function page() {
-    return <CreateLoan />
+    return (
+        <div style={{ marginBottom: "200px" }}>
+            <AppNav />
+            <CreateLoan />
+        </div>
+    )
 }
