@@ -12,8 +12,13 @@ export function middleware(request) {
 
     if (!token && !publicRoutes.includes(pathName)) {
         return Response.redirect(new URL('/login', request.url))
-        // const decoded = jwt.decode(token.value);
-        // const userRole = decoded?.role || 'user';
+    }
+    if (token) {
+        const decoded = jwt.decode(token.value);
+        const userRole = decoded?.role || 'user';
+        if (userRole === 'admin') {
+            return Response.redirect(new URL('/admin/dashboard', request.url))
+        }
     }
     return NextResponse.next()
 }
