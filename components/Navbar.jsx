@@ -38,7 +38,7 @@ function AppNav({ hideSideNav }) {
     <Navbar expand="lg">
       <Container>
         <Navbar.Brand onClick={() => routerHandler('/')} style={{ cursor: "pointer" }}>
-          <Image src={logo} width={100} />
+          <Image src={logo} width={100} alt='Alt' />
         </Navbar.Brand>
         {
           !hideSideNav ? (<>        <Navbar.Toggle aria-controls="basic-navbar-nav" />
