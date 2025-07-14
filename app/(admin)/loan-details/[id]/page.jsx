@@ -58,10 +58,6 @@ export default function LoanDetils({ params }) {
     return (
         <Suspense fallback={<div>Loading...</div>}>
             <Container>
-                <div className="d-flex justify-content-between my-4">
-                    <h2>Loan Details</h2>
-                    <Button onClick={() => router.push('/admin/dashboard')}>Dashboard</Button>
-                </div>
                 <Row className="justify-content-center">
                     <Col lg={6} sm={12}>
                         <h5 style={{ marginBottom: "20px", fontSize: "25px", color: "blue", fontWeight: "bold" }}>Status : {statusMap[data?.status]}</h5>
