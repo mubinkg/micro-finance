@@ -9,6 +9,7 @@ import { useRouter } from 'next/navigation'
 export default function Page() {
     const router = useRouter()
     const [email, setEmail] = useState('')
+    const [loading, setLoading] = useState(false)
 
     const signupHandler = () => {
         if (!email) {
@@ -18,11 +19,12 @@ export default function Page() {
                 icon: "error"
             })
         }
+        setLoading(true)
         postData('user/reset-password', {
             email,
         }).then(data => {
             setEmail('')
-
+            setLoading(false)
             Swal.fire({
                 title: "Registration",
                 text: "Please check your email to complete the reset process. Check spam folder, if needed. Thank you!",
@@ -36,6 +38,8 @@ export default function Page() {
                 text: 'Error on registering new user.',
                 icon: "error"
             })
+        }).finally(() => {
+            setLoading(false)
         })
     }
 
@@ -57,7 +61,9 @@ export default function Page() {
                         </p>
                         <Input value={email} onChange={(e) => setEmail(e.target.value)} />
                     </div>
-                    <Button style={{ background: "#68069d" }} className='mt-4' onClick={signupHandler}>Reset</Button>
+                    <Button disabled={loading} style={{ background: "#68069d" }} className='mt-4' onClick={signupHandler}>
+                        {loading ? "Loading..." : "Reset"}
+                    </Button>
                 </div>
             </div>
         </div>
