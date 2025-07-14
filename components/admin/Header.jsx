@@ -5,8 +5,10 @@ import React from 'react'
 import { Button } from 'reactstrap'
 import { logoutAction } from '../../app/action'
 import { removeItem } from '../../utils/storageUtils'
+import { useRouter } from 'next/navigation'
 
 const Header = () => {
+    const router = useRouter()
     const logOutHandler = async () => {
         await logoutAction()
         window.location = '/';
