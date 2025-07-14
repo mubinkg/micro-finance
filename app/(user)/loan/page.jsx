@@ -1,4 +1,4 @@
-import AppNav from '@/components/Navbar'
+import AppNav from '../../../components/Navbar'
 import CreateLoan from '../../../components/CreateLoan'
 
 export default function page() {
