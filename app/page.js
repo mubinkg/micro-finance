@@ -21,7 +21,7 @@ export default function Home() {
           <h1 style={{ textAlign: "center", marginBottom: "100px" }}>How <span style={{ textDecoration: "underline" }}>We</span> Work</h1>
           <Col md={6} sm={12} lg={4} content="center">
             <Content
-              url="/authentication/registration"
+              url="/registration"
               icon={<LockIcon />}
               title="SIGN UP"
               body="Create a quick account. Joining ZimbaCash couldn't be more simple, just enter
@@ -39,7 +39,7 @@ export default function Home() {
           </Col>
           <Col md={6} sm={12} lg={4} content="center">
             <Content
-              url="/authentication/login"
+              url="/login"
               icon={<CardIcon />}
               title="GET YOUR MONEY"
               body="Receive your money within minutes. We offer different payment options to suit

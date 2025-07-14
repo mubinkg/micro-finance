@@ -53,7 +53,7 @@ export default function Page() {
                 text: "Please check your email to complete the sign up process. Check spam folder, if needed. Thank you!",
                 icon: "success"
             }).then(() => {
-                router.push('/authentication/login')
+                router.push('/login')
             })
         }).catch(err => {
             console.log(err)
@@ -103,8 +103,8 @@ export default function Page() {
                     </div>
                     <Button style={{ background: "#68069d" }} className='mt-4' onClick={signupHandler}>SIGN UP</Button>
                     <div style={{ display: 'flex', marginTop: "10px", justifyContent: "center" }}>
-                        <p style={{ cursor: "pointer" }} onClick={() => router.push('/authentication/forget-password')}>Already have an account?</p>
-                        <p style={{ cursor: "pointer", marginLeft: "10px", color: "blue" }} onClick={() => router.push('/authentication/login')}>Log In</p>
+                        <p style={{ cursor: "pointer" }} onClick={() => router.push('/forget-password')}>Already have an account?</p>
+                        <p style={{ cursor: "pointer", marginLeft: "10px", color: "blue" }} onClick={() => router.push('/login')}>Log In</p>
                     </div>
                 </div>
             </div>

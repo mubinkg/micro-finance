@@ -20,13 +20,13 @@ export default function Page() {
         email: yup.string().email().required(),
         oldPassword: yup.string().required(),
         newPassword: yup.string()
-        .required()
-        .min(8)
-        .matches(/(?=.*[A-Z])(?=.*[!@#$%^&*()_+{}\[\]:;<>,.?/~-])/),
-        confirmNewPassword: yup.string().test('test-confing',function(){
-            const {newPassword,confirmNewPassword} = this.parent
+            .required()
+            .min(8)
+            .matches(/(?=.*[A-Z])(?=.*[!@#$%^&*()_+{}\[\]:;<>,.?/~-])/),
+        confirmNewPassword: yup.string().test('test-confing', function () {
+            const { newPassword, confirmNewPassword } = this.parent
             return newPassword === confirmNewPassword
-        } )
+        })
     });
 
     const { handleSubmit, control, setValue, formState: { errors } } = useForm({
@@ -40,7 +40,7 @@ export default function Page() {
         await logoutAction()
         removeItem('user')
         removeItem('token')
-        window.location = '/authentication/login'
+        window.location = '/login'
     }
 
 
@@ -162,7 +162,7 @@ export default function Page() {
                     </Row>
                     <Row className='mt-4'>
                         <Col lg={12}>
-                            <div style={{display:'flex', gap: "20px", color: "green"}}>
+                            <div style={{ display: 'flex', gap: "20px", color: "green" }}>
                                 <Label className='text-success text-uppercase'>
                                     New Password
                                 </Label>
