@@ -17,12 +17,15 @@ const Header = () => {
     }
     return (
         <div className='d-flex justify-content-between align-items-center'>
-            <div className='d-flex gap-4 align-items-center'>
+            <div className='d-flex gap-4 align-self-center'>
                 <Image src={'/L-5.jpg'} width={200} alt='logo' height={40} />
-                <Button onClick={() => router.push('/admin-loan')}>Create Loan</Button>
+                <h2>Admin Panel</h2>
             </div>
-            <h2>Dashboard</h2>
-            <Button onClick={logOutHandler}>Logout</Button>
+            <div className='d-flex gap-4'>
+                <Button onClick={() => router.push('/dashboard')}>Dashboard</Button>
+                <Button onClick={() => router.push('/admin-loan')}>Create Loan</Button>
+                <Button onClick={logOutHandler}>Logout</Button>
+            </div>
         </div>
     )
 }
