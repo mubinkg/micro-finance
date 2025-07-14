@@ -7,14 +7,10 @@ import CartIcon from '../../../icons/CartIcon'
 import DocumentIcon from '../../../icons/DocumentIcon'
 import GroupIcon from '../../../icons/GroupIcon'
 import LoanIcon from '../../../icons/LoanIcon'
-import { Container, Row, Col, Button } from 'reactstrap'
+import { Row, Col } from 'reactstrap'
 import { getData, getDataWtihAuth } from '../../../utils/axiosUtils'
 import ApplicantsDataTable from '../../../components/ApplicantsDataTable'
-import logo from '../../../public/L-5.jpg'
-import Image from 'next/image'
-import { removeItem } from '../../../utils/storageUtils'
 import AdminPaymentHistoryData from '../../../components/AdminPaymentHistoryData'
-import { logoutAction } from '../../action'
 import ClientDataTable from '../../../components/ClientDataTable'
 import { useRouter } from 'next/navigation'
 
@@ -26,13 +22,6 @@ export default function Page() {
     const [userCount, setUserCount] = useState(0)
     const [paymentHistory, setPaymentHistory] = useState([])
     const [paymentCount, setPaymentCount] = useState(0)
-
-    const logOutHandler = async () => {
-        await logoutAction()
-        window.location = '/';
-        removeItem('user')
-        removeItem('token')
-    }
 
     function getUserData() {
         getDataWtihAuth('/user/user-list').then(res => {
@@ -76,15 +65,7 @@ export default function Page() {
     const router = useRouter()
 
     return (
-        <Container fluid className='mt-4'>
-            <div className='d-flex justify-content-between align-items-center'>
-                <div className='d-flex gap-4 align-items-center'>
-                    <Image src={logo} width={200} />
-                    <Button onClick={() => router.push('/admin-loan')}>Create Loan</Button>
-                </div>
-                <h2>Dashboard</h2>
-                <Button onClick={logOutHandler}>Logout</Button>
-            </div>
+        <>
             <hr />
             <Row className='g-4'>
                 <Col>
@@ -115,6 +96,6 @@ export default function Page() {
             {
                 dashboardItem === 'history' ? <AdminPaymentHistoryData data={paymentHistory} /> : ""
             }
-        </Container>
+        </>
     )
 }
