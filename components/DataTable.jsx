@@ -10,7 +10,7 @@ const statusMap = {
     approve: 'Approved',
     reject: "Rejected",
     resubmit: 'Resubmit',
-    process:'Processing',
+    process: 'Processing',
     pending: 'Pending',
     paid: 'Paid'
 }
@@ -22,12 +22,12 @@ export default function DataTable({ data }) {
         params.set(name, value);
         return params.toString();
     };
-    
+
     return (
         <Table hover className='mt-4'>
             <thead>
                 <tr>
-                <th>
+                    <th>
                         Date
                     </th>
                     <th>
@@ -66,9 +66,12 @@ export default function DataTable({ data }) {
             <tbody>
                 {
                     data?.map((d) => (
-                        <tr key={d._id} style={{cursor: "pointer"}} onClick={()=>router.push('/admin/loan-details'+ "?" + createQueryString('id',d._id))}>
+                        <tr
+                            key={d._id} style={{ cursor: "pointer" }}
+                            onClick={() => router.push(`/loan-details/${d._id}`)}
+                        >
                             <td>
-                            {convertUTCToCST(d.createdAt)}
+                                {convertUTCToCST(d.createdAt)}
                             </td>
                             <td>
                                 {d.amountDueDate}
@@ -86,19 +89,19 @@ export default function DataTable({ data }) {
                                 {d.ssn}
                             </td>
                             <td>
-                                {"$"+((formatNumber(d.amountRequested)))}
+                                {"$" + ((formatNumber(d.amountRequested)))}
                             </td>
                             <td>
-                                {"$"+(formatNumber(d.lateFee))}
+                                {"$" + (formatNumber(d.lateFee))}
                             </td>
                             <td>
-                                {"$"+(formatNumber(d.amountDue-d.amountRequested))}
+                                {"$" + (formatNumber(d.amountDue - d.amountRequested))}
                             </td>
                             <td>
-                                {"$"+(formatNumber(d.amountDue))}
+                                {"$" + (formatNumber(d.amountDue))}
                             </td>
                             <td>
-                                <ViewText text={d?.comments}/>
+                                <ViewText text={d?.comments} />
                             </td>
                             <td>
                                 {statusMap[d.status]}

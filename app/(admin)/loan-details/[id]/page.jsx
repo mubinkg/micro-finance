@@ -1,11 +1,12 @@
 'use client'
-import { useSearchParams, useRouter } from "next/navigation";
+
+import { useRouter } from "next/navigation";
 import { useEffect, useState, Suspense } from "react";
-import { getData, patchDataWtihAuth } from "../../../utils/axiosUtils";
+import { getData, patchDataWtihAuth } from "../../../../utils/axiosUtils";
 import { Container, Row, Col, Button, Input } from 'reactstrap'
 import Image from 'next/image'
 import Swal from 'sweetalert2'
-import {formatNumber} from "../../../utils/formatNumber"
+import { formatNumber } from "../../../../utils/formatNumber"
 
 const statusMap = {
     approve: 'Approved',
@@ -16,8 +17,7 @@ const statusMap = {
     paid: 'Paid'
 }
 
-export default function LoanDetils() {
-    const searchParams = useSearchParams();
+export default function LoanDetils({ params }) {
     const router = useRouter()
     const [data, setData] = useState({})
     const [comments, setComments] = useState("")
@@ -30,7 +30,7 @@ export default function LoanDetils() {
             showCancelButton: true,
         }).then((res) => {
             if (res.isConfirmed) {
-                patchDataWtihAuth('loan/' + searchParams.get('id'), { status, comments }).then(res => {
+                patchDataWtihAuth('loan/' + params.id, { status, comments }).then(res => {
                     Swal.fire({
                         title: 'Loan',
                         text: 'Loan status updated successfully',
@@ -49,11 +49,11 @@ export default function LoanDetils() {
     }
 
     useEffect(() => {
-        getData('/loan/' + searchParams.get('id')).then(res => {
+        getData('/loan/' + params.id).then(res => {
             setData(res)
             setComments(res?.comments)
         })
-    }, [searchParams.get('id')])
+    }, [params.id])
 
     return (
         <Suspense fallback={<div>Loading...</div>}>
@@ -102,33 +102,33 @@ export default function LoanDetils() {
                             <Col lg={6} sm={12}>
                                 <h5>Driver License Image</h5>
                                 {
-                                    data?.driverLicenseImage?.split('.').pop() !== 'pdf'?
-                                    <Image alt="Check Front" src={data?.driverLicenseImage || ""} width={300} height={200} />:
-                                    <embed type="application/pdf" frameborder="0" src={`https://docs.google.com/gview?url=${data?.driverLicenseImage}&embedded=true`} width={650} height={800}></embed>
+                                    data?.driverLicenseImage?.split('.').pop() !== 'pdf' ?
+                                        <Image alt="Check Front" src={data?.driverLicenseImage || ""} width={300} height={200} /> :
+                                        <embed type="application/pdf" frameborder="0" src={`https://docs.google.com/gview?url=${data?.driverLicenseImage}&embedded=true`} width={650} height={800}></embed>
                                 }
                             </Col>
                             <Col lg={6} sm={12}>
                                 <h5>Check Front</h5>
                                 {
-                                    data?.checkFront?.split('.').pop() !== 'pdf'?
-                                    <Image alt="Check Front" src={data?.checkFront || ""} width={300} height={200} />:
-                                    <embed type="application/pdf" frameborder="0" src={`https://docs.google.com/gview?url=${data?.checkFront}&embedded=true`} width={650} height={800}></embed>
+                                    data?.checkFront?.split('.').pop() !== 'pdf' ?
+                                        <Image alt="Check Front" src={data?.checkFront || ""} width={300} height={200} /> :
+                                        <embed type="application/pdf" frameborder="0" src={`https://docs.google.com/gview?url=${data?.checkFront}&embedded=true`} width={650} height={800}></embed>
                                 }
                             </Col>
                             <Col lg={6} sm={12}>
                                 <h5>Check Back</h5>
                                 {
-                                    data?.checkBack?.split('.').pop() !== 'pdf'?
-                                    <Image alt="Check Front" src={data?.checkBack || ""} width={300} height={200} />:
-                                    <embed frameborder="0" type="application/pdf" src={`https://docs.google.com/gview?url=${data?.checkBack}&embedded=true`} width={650} height={800}></embed>
+                                    data?.checkBack?.split('.').pop() !== 'pdf' ?
+                                        <Image alt="Check Front" src={data?.checkBack || ""} width={300} height={200} /> :
+                                        <embed frameborder="0" type="application/pdf" src={`https://docs.google.com/gview?url=${data?.checkBack}&embedded=true`} width={650} height={800}></embed>
                                 }
                             </Col>
                             <Col lg={6} sm={12}>
                                 <h5>Pay Stubs</h5>
                                 {
-                                    data?.paystubs?.split('.').pop() !== 'pdf'?
-                                    <Image alt="Pay Stubs" src={data?.paystubs || ""} height={200} width={300} />:
-                                    <embed frameborder="0" type="application/pdf" src={`https://docs.google.com/gview?url=${data?.paystubs}&embedded=true`} width={650} height={800}></embed>
+                                    data?.paystubs?.split('.').pop() !== 'pdf' ?
+                                        <Image alt="Pay Stubs" src={data?.paystubs || ""} height={200} width={300} /> :
+                                        <embed frameborder="0" type="application/pdf" src={`https://docs.google.com/gview?url=${data?.paystubs}&embedded=true`} width={650} height={800}></embed>
                                 }
                             </Col>
                         </Row>
@@ -138,7 +138,7 @@ export default function LoanDetils() {
                             id="exampleText"
                             name="text"
                             type="textarea"
-                            onChange={(e)=>setComments(e.target.value)}
+                            onChange={(e) => setComments(e.target.value)}
                             value={comments}
                         />
                         <div className="my-4">
