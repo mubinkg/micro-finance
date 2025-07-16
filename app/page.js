@@ -8,7 +8,7 @@ import { CardIcon } from "../icons/CardIcon";
 import Image from 'next/image'
 import mailLogo from '../public/l-5-t.png'
 
-export default function Home() {
+export default async function Home() {
 
   return (
     <main>
