@@ -6,12 +6,13 @@ import { postDataWithAuth } from '../utils/axiosUtils'
 import { useEffect, useState } from 'react'
 import Swal from 'sweetalert2'
 import { isArray } from 'util'
-import { useRouter } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { getItem, removeItem, setItem } from '../utils/storageUtils'
 import { useTotalApprovedLoan } from '../hooks/useTotalApprovedLoan'
 import { formatNumber } from '../utils/formatNumber'
+import AutoCompleteUser from './AutoCompleteUser'
 
 export default function CreateLoan() {
 
@@ -59,6 +60,7 @@ export default function CreateLoan() {
     const [loading, setLoading] = useState(false)
     const [aggree, setAgree] = useState(false)
     const [isSmsPolicy, setSmsPolicy] = useState(false)
+    const [selectedUser,setSelectedUser] = useState()
 
     const { handleSubmit, register, control, watch, reset, setValue, formState: { errors } } = useForm({
         defaultValues: {
@@ -74,7 +76,8 @@ export default function CreateLoan() {
             ssn: "",
             referenceOneFirstName: "",
             amountDueDate: amountDueDate,
-            amoundRequestedDate: amoundRequestedDate
+            amoundRequestedDate: amoundRequestedDate,
+            user:""
         },
         resolver: yupResolver(schema),
     })
@@ -257,6 +260,8 @@ export default function CreateLoan() {
         }
     }, [watch('paystubs')])
 
+    const path = usePathname()
+
 
     return (
 
@@ -269,8 +274,11 @@ export default function CreateLoan() {
         }}>
             <div className='container' style={{ maxWidth: "800px", display: "flex", flexDirection: "column", justifyContent: "center", alignContent: "center", }}>
                 <h5 style={{ textAlign: "center" }} className='my-4'>Emergency Loans: Life happens</h5>
+                
                 <Row>
                     <h6 style={{ color: "#68069d" }}>PERSONAL INFORMATION</h6>
+                    {path==="/admin-loan" && <AutoCompleteUser setUser={(value)=>{setSelectedUser(value), setValue('firstName',value?.firstName), setValue("lastName",value?.lastName),setValue("email",value?.email) , setValue("user",value?._id)}}/>}
+                    
                     <Col lg={6} md={12}>
                         <Label className='text-success'>
                             FIRST NAME
@@ -295,6 +303,7 @@ export default function CreateLoan() {
                             render={({ field }) => (
                                 <Input
                                     {...field}
+                                    
                                     placeholder='Last name'
                                     style={{
                                         border: errors.lastName ? "1px solid red" : ""

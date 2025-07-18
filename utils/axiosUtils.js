@@ -38,4 +38,5 @@ export const postDataWithAuth = privateRequest.post;
 export const getDataWtihAuth = privateRequest.get
 export const putDataWtihAuth = privateRequest.put
 export const patchDataWtihAuth = privateRequest.patch
+export const searchUserWithAuth = privateRequest.post
 
