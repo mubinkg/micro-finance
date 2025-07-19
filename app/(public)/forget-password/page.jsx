@@ -20,7 +20,7 @@ export default function Page() {
             })
         }
         setLoading(true)
-        postData('reset', {
+        postData('user/reset-password', {
             email,
         }).then(data => {
             setEmail('')
