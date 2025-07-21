@@ -14,7 +14,7 @@ export default function Page() {
     const signupHandler = () => {
         if (!email) {
             Swal.fire({
-                title: "Registration",
+                title: "Reset Password",
                 text: "Please give all the input values.",
                 icon: "error"
             })
@@ -26,7 +26,7 @@ export default function Page() {
             setEmail('')
             setLoading(false)
             Swal.fire({
-                title: "Registration",
+                title: "Reset Password",
                 text: "Please check your email to complete the reset process. Check spam folder, if needed. Thank you!",
                 icon: "success"
             }).then(() => {
@@ -34,8 +34,8 @@ export default function Page() {
             })
         }).catch(err => {
             Swal.fire({
-                title: 'Registration',
-                text: 'Error on registering new user.',
+                title: 'Reset Password',
+                text: 'Error on reset password.',
                 icon: "error"
             })
         }).finally(() => {
